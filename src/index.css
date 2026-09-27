@@ -1,0 +1,163 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-burgundy: #3D0A14;
+  --color-burgundy-dark: #23040A;
+  --color-gold: #D4AF37;
+  --color-gold-light: #FFF0BD;
+  --color-gold-dark: #AA8232;
+  --color-ivory: #FAF6EE;
+  --color-rose: #C97D73;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #23040A;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #D4AF37, #8B7020);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FFF0BD;
+}
+
+/* Metallic Gold Text */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 40%, #FFF0BD 65%, #AA8232 85%, #E5C158 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.gold-gradient-text-subtle {
+  background: linear-gradient(135deg, #ECC872 0%, #D4AF37 50%, #B8861E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Gold Metallic Foil Border */
+.gold-border {
+  border-image: linear-gradient(135deg, #F3E5AB, #D4AF37, #AA8232, #FFF0BD, #D4AF37) 1;
+}
+
+/* Traditional Paper Texture Effect */
+.bg-paper-texture {
+  background-color: #FAF6EE;
+  background-image: 
+    radial-gradient(circle at 100% 100%, rgba(212, 175, 55, 0.04) 0, transparent 40%),
+    radial-gradient(circle at 0% 0%, rgba(212, 175, 55, 0.04) 0, transparent 40%),
+    linear-gradient(rgba(35, 4, 10, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(35, 4, 10, 0.015) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+}
+
+.bg-burgundy-texture {
+  background-color: #23040A;
+  background-image: 
+    radial-gradient(ellipse at center, rgba(82, 14, 28, 0.7) 0%, rgba(35, 4, 10, 0.95) 70%, #140206 100%),
+    radial-gradient(circle at 50% 20%, rgba(212, 175, 55, 0.08) 0, transparent 60%);
+}
+
+/* Royal Glassmorphism */
+.royal-glass {
+  background: rgba(253, 251, 247, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.royal-glass-dark {
+  background: rgba(35, 4, 10, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+/* Diya Flicker Animation */
+@keyframes flame {
+  0%, 100% {
+    transform: scaleY(1) scaleX(1) rotate(-1deg);
+    filter: drop-shadow(0 0 8px #FFA500) drop-shadow(0 0 16px #FF4500);
+  }
+  30% {
+    transform: scaleY(1.1) scaleX(0.92) rotate(2deg);
+    filter: drop-shadow(0 0 12px #FFD700) drop-shadow(0 0 24px #FF6347);
+  }
+  60% {
+    transform: scaleY(0.95) scaleX(1.05) rotate(-2deg);
+    filter: drop-shadow(0 0 9px #FFA500) drop-shadow(0 0 18px #FF4500);
+  }
+  85% {
+    transform: scaleY(1.05) scaleX(0.96) rotate(1deg);
+    filter: drop-shadow(0 0 14px #FFD700) drop-shadow(0 0 22px #FF8C00);
+  }
+}
+
+.animate-flame {
+  animation: flame 2.2s infinite ease-in-out;
+  transform-origin: bottom center;
+}
+
+/* Floating Petals/Particles */
+@keyframes floatGentle {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(4deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 5s ease-in-out infinite;
+}
+
+/* Light ray sweep */
+@keyframes lightRay {
+  0% {
+    transform: translateX(-150%) rotate(25deg);
+  }
+  100% {
+    transform: translateX(250%) rotate(25deg);
+  }
+}
+
+.light-sweep::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 40%,
+    rgba(255, 240, 189, 0.25) 50%,
+    transparent 60%
+  );
+  animation: lightRay 6s infinite ease-in-out;
+  pointer-events: none;
+}
+
+/* Accessibility: Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
