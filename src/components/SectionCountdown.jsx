@@ -42,7 +42,12 @@ export const SectionCountdown = () => {
   ];
 
   return (
-    <section className="relative py-24 px-4 sm:px-6 md:px-12 bg-burgundy-texture text-ivory-100 overflow-hidden">
+    <section
+      className="relative py-24 px-4 sm:px-6 md:px-12 text-ivory-100 overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #1C0207 0%, #3B0A14 50%, #150205 100%)',
+      }}
+    >
       <div className="max-w-4xl mx-auto relative z-10 text-center">
         {/* Header */}
         <div className="max-w-2xl mx-auto mb-16 space-y-3">
@@ -58,12 +63,15 @@ export const SectionCountdown = () => {
           </p>
         </div>
 
-        {/* Countdown Dials */}
+        {/* Countdown Dials with Diagonal Burgundy-Maroon Linear Gradients */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto">
           {timeUnits.map((unit, idx) => (
             <div
               key={idx}
-              className="relative p-6 sm:p-8 rounded-3xl bg-gradient-to-b from-burgundy-900 via-burgundy-950 to-burgundy-950 border border-gold-400/50 shadow-gold-glow flex flex-col items-center justify-center group hover:border-gold-400 transition-all duration-300"
+              className="relative p-6 sm:p-8 rounded-3xl border border-gold-400/50 shadow-gold-glow flex flex-col items-center justify-center group hover:border-gold-400 transition-all duration-300"
+              style={{
+                background: 'linear-gradient(135deg, #3D0A14 0%, #29040C 60%, #170206 100%)',
+              }}
             >
               {/* Corner accent */}
               <span className="absolute top-2 right-2 text-gold-500/40 text-xs">✦</span>

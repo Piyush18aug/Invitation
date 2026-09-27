@@ -7,7 +7,13 @@ export const SectionDateReveal = () => {
   const { event } = invitationData;
 
   return (
-    <section id="date" className="relative py-24 px-4 sm:px-6 md:px-12 bg-paper-texture overflow-hidden">
+    <section
+      id="date"
+      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #FDF9F3 0%, #F6ECE0 50%, #ECE0CF 100%)',
+      }}
+    >
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
@@ -20,8 +26,13 @@ export const SectionDateReveal = () => {
           <FloralDivider className="my-3" />
         </div>
 
-        {/* Date Calendar Monumental Card */}
-        <div className="relative p-8 sm:p-12 md:p-16 rounded-3xl bg-gradient-to-b from-[#FFFDF9] via-[#FAF5EC] to-[#F5EFEB] border-2 border-gold-400 shadow-royal-card text-center">
+        {/* Date Calendar Monumental Card with Champagne Gradient */}
+        <div
+          className="relative p-8 sm:p-12 md:p-16 rounded-3xl border-2 border-gold-400 shadow-royal-card text-center"
+          style={{
+            background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F3EAE0 100%)',
+          }}
+        >
           {/* Corner Ornaments */}
           <div className="absolute top-3 left-3">
             <CornerOrnament className="w-12 h-12" />
@@ -37,14 +48,24 @@ export const SectionDateReveal = () => {
           </div>
 
           {/* Sanskrit Header Tag */}
-          <div className="inline-block px-5 py-1.5 rounded-full bg-gold-500/10 border border-gold-500/30 text-gold-700 font-sanskrit text-sm mb-6">
+          <div
+            className="inline-block px-5 py-1.5 rounded-full border border-gold-500/30 text-gold-700 font-sanskrit text-sm mb-6"
+            style={{
+              background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(245, 230, 167, 0.3) 100%)',
+            }}
+          >
             ॥ शुभ विवाह निश्चिती / वाङ्निश्चय ॥
           </div>
 
           {/* Date Grid Presentation */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center my-6">
             {/* Day */}
-            <div className="p-4 rounded-2xl bg-white/60 border border-gold-300/40">
+            <div
+              className="p-4 rounded-2xl border border-gold-300/40"
+              style={{
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #FAF6EE 100%)',
+              }}
+            >
               <span className="font-serif text-xs uppercase tracking-widest text-burgundy-800/70 block">
                 Day
               </span>
@@ -53,8 +74,13 @@ export const SectionDateReveal = () => {
               </span>
             </div>
 
-            {/* Giant Number */}
-            <div className="relative p-6 rounded-3xl bg-gradient-to-b from-burgundy-900 to-burgundy-950 border-2 border-gold-400 text-gold-200 shadow-gold-glow">
+            {/* Giant Number Dial with Deep Burgundy Gradient */}
+            <div
+              className="relative p-6 rounded-3xl border-2 border-gold-400 text-gold-200 shadow-gold-glow"
+              style={{
+                background: 'linear-gradient(135deg, #3D0A14 0%, #54111E 50%, #200308 100%)',
+              }}
+            >
               <span className="font-serif text-xs uppercase tracking-widest text-gold-400 block mb-1">
                 Auspicious Day
               </span>
@@ -67,7 +93,12 @@ export const SectionDateReveal = () => {
             </div>
 
             {/* Time */}
-            <div className="p-4 rounded-2xl bg-white/60 border border-gold-300/40">
+            <div
+              className="p-4 rounded-2xl border border-gold-300/40"
+              style={{
+                background: 'linear-gradient(135deg, #FFFFFF 0%, #FAF6EE 100%)',
+              }}
+            >
               <span className="font-serif text-xs uppercase tracking-widest text-burgundy-800/70 block">
                 Muhurat Time
               </span>

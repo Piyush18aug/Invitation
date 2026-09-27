@@ -4,16 +4,16 @@ export const invitationData = {
       name: "Prathamesh",
       fullName: "Prathamesh Navangul",
       role: "The Groom",
-      image: "/assets/images/photo_19.jpeg",
+      image: "/assets/images/maingroomimage.png",
       altImage: "/assets/images/photo_19.jpeg",
       bio: "Thoughtful, passionate, and steadfast, finding his true happiness in her laughter."
     },
     bride: {
       name: "Revati",
-      fullName: "Revati Deshmukh",
+      fullName: "Revati Erande",
       role: "The Bride",
-      image: "/assets/images/photo_02.jpeg",
-      altImage: "/assets/images/photo_05.jpeg",
+      image: "/assets/images/mainbrideimage.png",
+      altImage: "/assets/images/photo_02.jpeg",
       bio: "Graceful, vibrant, and full of warmth, bringing endless smiles and joy to every moment."
     },
     coupleHeroImage: "/assets/images/photo_01.jpeg",
@@ -36,6 +36,7 @@ export const invitationData = {
     time: "11:00 AM",
     timeDetail: "11:00 AM IST onwards (शुभ मुहूर्त)",
     venue: "Royal Palace",
+    venueImage: "/assets/images/royal_palace_venue.jpg",
     city: "Sangli, Maharashtra",
     address: "Haripur Road, Near CV Steel, Haripur, Sangli, Maharashtra 416416, India",
     landmark: "Near CV Steel, Haripur Road",
@@ -48,7 +49,7 @@ export const invitationData = {
     fallbackSrc: "/assets/music/videoplayback.mp4",
     title: "Sacred Engagement Symphony",
     autoplayAfterInteraction: true,
-    volume: 0.3
+    volume: 0.28
   },
 
   story: [
@@ -99,104 +100,118 @@ export const invitationData = {
   gallery: [
     {
       id: 1,
+      src: "/assets/images/maingroomimage.png",
+      title: "Prathamesh — Royal Elegance",
+      category: "Portraits",
+      orientation: "portrait"
+    },
+    {
+      id: 2,
+      src: "/assets/images/mainbrideimage.png",
+      title: "Revati — Traditional Grace",
+      category: "Portraits",
+      orientation: "portrait"
+    },
+    {
+      id: 3,
       src: "/assets/images/photo_01.jpeg",
       title: "Together in Harmony",
       category: "Celebration",
       orientation: "portrait"
     },
     {
-      id: 2,
+      id: 4,
       src: "/assets/images/photo_17.jpeg",
       title: "Golden Smiles",
       category: "Editorial",
       orientation: "portrait"
     },
     {
-      id: 3,
-      src: "/assets/images/photo_19.jpeg",
-      title: "Prathamesh — Heartfelt Joy",
-      category: "Portraits",
-      orientation: "portrait"
-    },
-    {
-      id: 4,
+      id: 5,
       src: "/assets/images/photo_02.jpeg",
       title: "Revati — Radiant Grace",
       category: "Portraits",
       orientation: "portrait"
     },
     {
-      id: 5,
+      id: 6,
+      src: "/assets/images/photo_19.jpeg",
+      title: "Prathamesh — Heartfelt Joy",
+      category: "Portraits",
+      orientation: "portrait"
+    },
+    {
+      id: 7,
       src: "/assets/images/photo_04.jpeg",
       title: "Stolen Glances",
       category: "Moments",
       orientation: "portrait"
     },
     {
-      id: 6,
+      id: 8,
       src: "/assets/images/photo_08.jpeg",
       title: "Serene Landscapes",
       category: "Travel",
       orientation: "portrait"
     },
     {
-      id: 7,
+      id: 9,
       src: "/assets/images/photo_05.jpeg",
       title: "Warm Golden Sunlight",
       category: "Portraits",
       orientation: "portrait"
     },
     {
-      id: 8,
+      id: 10,
       src: "/assets/images/photo_09.jpeg",
       title: "Cherished Times",
       category: "Moments",
       orientation: "landscape"
     },
     {
-      id: 9,
+      id: 11,
       src: "/assets/images/photo_10.jpeg",
       title: "Pure Delight",
       category: "Joy",
       orientation: "portrait"
     },
     {
-      id: 10,
+      id: 12,
       src: "/assets/images/photo_11.jpeg",
       title: "Everyday Magic",
       category: "Memories",
       orientation: "portrait"
     },
     {
-      id: 11,
+      id: 13,
       src: "/assets/images/photo_12.jpeg",
       title: "Side by Side",
       category: "Together",
       orientation: "portrait"
     },
     {
-      id: 12,
+      id: 14,
       src: "/assets/images/photo_13.jpeg",
       title: "Laughter Unfiltered",
       category: "Candid",
       orientation: "portrait"
     },
     {
-      id: 13,
+      id: 15,
       src: "/assets/images/photo_14.jpeg",
       title: "Endless Conversations",
       category: "Moments",
       orientation: "portrait"
     },
     {
-      id: 14,
+      id: 16,
       src: "/assets/images/photo_15.jpeg",
       title: "Shared Dreams",
       category: "Together",
       orientation: "portrait"
     },
     {
-      id: 15,
+      id: 17,
       src: "/assets/images/photo_18.jpeg",
       title: "Celebration of Love",
       category: "Moments",
@@ -212,7 +227,7 @@ export const invitationData = {
     },
     brideFamily: {
       title: "Bride's Family",
-      names: ["Deshmukh Family", "Relatives & Well-Wishers"]
+      names: ["Erande Family", "Relatives & Well-Wishers"]
     },
     blessingQuote: "॥ वरं रूपं वरं तेजः वरं भाग्यं वरं यशः ॥\nMay their union be blessed with eternal love, health, prosperity, and joyous companionship."
   },

@@ -1,13 +1,19 @@
 import React from 'react';
 import { Heart, Sparkles } from 'lucide-react';
-import { GaneshaIcon, FloralDivider } from './OrnamentalIcons';
+import { DivineGanesha } from './DivineGanesha';
+import { FloralDivider } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
 
 export const SectionFinal = ({ onTriggerCelebration }) => {
   const { event, couple } = invitationData;
 
   return (
-    <section className="relative min-h-screen py-24 px-4 sm:px-6 md:px-12 bg-burgundy-texture text-ivory-100 flex items-center justify-center overflow-hidden">
+    <section
+      className="relative min-h-screen py-24 px-4 sm:px-6 md:px-12 text-ivory-100 flex items-center justify-center overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #180206 0%, #350810 40%, #4A0E1A 70%, #150205 100%)',
+      }}
+    >
       {/* Background Rotating Gold Mandala */}
       <div className="absolute inset-0 flex items-center justify-center opacity-15 pointer-events-none">
         <div className="w-[700px] h-[700px] md:w-[1000px] md:h-[1000px] rounded-full border-[1.5px] border-gold-400/40 animate-spin-mandala flex items-center justify-center">
@@ -16,11 +22,9 @@ export const SectionFinal = ({ onTriggerCelebration }) => {
       </div>
 
       <div className="max-w-3xl mx-auto relative z-10 text-center space-y-8 p-6 sm:p-12">
-        {/* Ganesh Icon */}
+        {/* Divine Ganesh Medallion */}
         <div className="flex justify-center">
-          <div className="p-3.5 rounded-full bg-gold-500/10 border border-gold-400/40 shadow-gold-glow">
-            <GaneshaIcon className="w-12 h-12 text-gold-300" />
-          </div>
+          <DivineGanesha variant="medallion" />
         </div>
 
         {/* Sanskrit Conclusion Shloka */}
@@ -60,8 +64,13 @@ export const SectionFinal = ({ onTriggerCelebration }) => {
           </h3>
         </div>
 
-        {/* Event Summary Stamp */}
-        <div className="inline-block p-6 rounded-2xl bg-burgundy-900/90 border border-gold-400/50 shadow-gold-glow max-w-md mx-auto">
+        {/* Event Summary Stamp with Deep Burgundy Gradient */}
+        <div
+          className="inline-block p-6 rounded-2xl border border-gold-400/50 shadow-gold-glow max-w-md mx-auto"
+          style={{
+            background: 'linear-gradient(135deg, rgba(61, 10, 20, 0.92) 0%, rgba(32, 3, 8, 0.95) 100%)',
+          }}
+        >
           <p className="font-royal text-lg sm:text-xl font-bold text-gold-200">
             {event.displayDate} • {event.time}
           </p>
@@ -70,11 +79,14 @@ export const SectionFinal = ({ onTriggerCelebration }) => {
           </p>
         </div>
 
-        {/* Celebration Button */}
+        {/* Celebration Button with Metallic Gold Gradient */}
         <div className="pt-4">
           <button
             onClick={onTriggerCelebration}
-            className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-4 rounded-full bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600 text-burgundy-950 font-royal font-bold text-sm sm:text-base tracking-widest shadow-gold-glow hover:shadow-gold-glow-lg active:scale-95 transition-all duration-300"
+            className="group relative inline-flex items-center justify-center px-8 sm:px-10 py-4 rounded-full text-burgundy-950 font-royal font-bold text-sm sm:text-base tracking-widest shadow-gold-glow hover:shadow-gold-glow-lg active:scale-95 transition-all duration-300"
+            style={{
+              background: 'linear-gradient(135deg, #C59B27 0%, #ECC872 30%, #FFF0BD 50%, #D4AF37 75%, #AA8232 100%)',
+            }}
           >
             <Sparkles className="w-5 h-5 text-burgundy-950 mr-2 animate-spin-slow" />
             <span>SHOWER BLESSINGS & CELEBRATE ✨</span>

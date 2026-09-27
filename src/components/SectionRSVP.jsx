@@ -21,7 +21,7 @@ export const SectionRSVP = () => {
       `*Engagement Ceremony RSVP*\n\n` +
       `*From:* ${name || 'Guest'}\n` +
       `*Status:* ${guestText}\n` +
-      `*Event:* ${couple.bride.name} & ${couple.groom.name} — Engagement Ceremony\n` +
+      `*Event:* ${couple.groom.name} & ${couple.bride.name} — Engagement Ceremony\n` +
       `*Date:* ${event.displayDate} at ${event.venue}, Sangli` +
       wishesText
     );
@@ -31,7 +31,13 @@ export const SectionRSVP = () => {
   };
 
   return (
-    <section id="rsvp" className="relative py-24 px-4 sm:px-6 md:px-12 bg-ivory-gradient overflow-hidden">
+    <section
+      id="rsvp"
+      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #FBF8F2 0%, #F5EAE0 50%, #ECE0CF 100%)',
+      }}
+    >
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
@@ -47,11 +53,21 @@ export const SectionRSVP = () => {
           </p>
         </div>
 
-        {/* RSVP Card */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-[#FFFDF9] border-2 border-gold-400 shadow-royal-card max-w-2xl mx-auto">
+        {/* RSVP Card with Champagne Sand Parchment Gradient */}
+        <div
+          className="p-8 sm:p-12 rounded-3xl border-2 border-gold-400 shadow-royal-card max-w-2xl mx-auto"
+          style={{
+            background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F3EAE0 100%)',
+          }}
+        >
           {submitted ? (
             <div className="text-center py-8 space-y-4">
-              <div className="w-16 h-16 rounded-full bg-gold-500/20 text-gold-700 mx-auto flex items-center justify-center border border-gold-400">
+              <div
+                className="w-16 h-16 rounded-full text-gold-700 mx-auto flex items-center justify-center border border-gold-400 shadow-sm"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(245, 230, 167, 0.4) 100%)',
+                }}
+              >
                 <CheckCircle2 className="w-10 h-10" />
               </div>
               <h3 className="font-royal text-2xl font-bold text-burgundy-950">
@@ -80,7 +96,10 @@ export const SectionRSVP = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Rajesh & Family"
-                  className="w-full px-4 py-3 rounded-xl bg-[#FAF6EE] border border-gold-300 focus:border-gold-500 focus:outline-none text-burgundy-950 font-serif text-sm transition-colors"
+                  className="w-full px-4 py-3 rounded-xl border border-gold-300 focus:border-gold-500 focus:outline-none text-burgundy-950 font-serif text-sm transition-colors"
+                  style={{
+                    background: 'linear-gradient(135deg, #FFFFFF 0%, #FAF6EE 100%)',
+                  }}
                 />
               </div>
 
@@ -95,9 +114,18 @@ export const SectionRSVP = () => {
                     onClick={() => setAttending('yes')}
                     className={`py-3 px-4 rounded-xl border font-serif text-xs uppercase tracking-wider font-semibold transition-all ${
                       attending === 'yes'
-                        ? 'bg-burgundy-900 text-gold-200 border-gold-400 shadow-sm'
-                        : 'bg-[#FAF6EE] text-burgundy-900/80 border-gold-300 hover:border-gold-400'
+                        ? 'text-gold-200 border-gold-400 shadow-sm'
+                        : 'text-burgundy-900/80 border-gold-300 hover:border-gold-400'
                     }`}
+                    style={
+                      attending === 'yes'
+                        ? {
+                            background: 'linear-gradient(135deg, #3D0A14 0%, #200308 100%)',
+                          }
+                        : {
+                            background: 'linear-gradient(135deg, #FFFFFF 0%, #FAF6EE 100%)',
+                          }
+                    }
                   >
                     Yes, Delighted to Attend! ✨
                   </button>
@@ -106,9 +134,18 @@ export const SectionRSVP = () => {
                     onClick={() => setAttending('no')}
                     className={`py-3 px-4 rounded-xl border font-serif text-xs uppercase tracking-wider font-semibold transition-all ${
                       attending === 'no'
-                        ? 'bg-burgundy-900 text-gold-200 border-gold-400 shadow-sm'
-                        : 'bg-[#FAF6EE] text-burgundy-900/80 border-gold-300 hover:border-gold-400'
+                        ? 'text-gold-200 border-gold-400 shadow-sm'
+                        : 'text-burgundy-900/80 border-gold-300 hover:border-gold-400'
                     }`}
+                    style={
+                      attending === 'no'
+                        ? {
+                            background: 'linear-gradient(135deg, #3D0A14 0%, #200308 100%)',
+                          }
+                        : {
+                            background: 'linear-gradient(135deg, #FFFFFF 0%, #FAF6EE 100%)',
+                          }
+                    }
                   >
                     Sending Warm Wishes From Afar
                   </button>
@@ -124,7 +161,10 @@ export const SectionRSVP = () => {
                   <select
                     value={guestCount}
                     onChange={(e) => setGuestCount(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl bg-[#FAF6EE] border border-gold-300 focus:border-gold-500 focus:outline-none text-burgundy-950 font-serif text-sm"
+                    className="w-full px-4 py-3 rounded-xl border border-gold-300 focus:border-gold-500 focus:outline-none text-burgundy-950 font-serif text-sm"
+                    style={{
+                      background: 'linear-gradient(135deg, #FFFFFF 0%, #FAF6EE 100%)',
+                    }}
                   >
                     <option value="1">1 Person</option>
                     <option value="2">2 Persons</option>
@@ -138,14 +178,17 @@ export const SectionRSVP = () => {
               {/* Warm Message / Wishes */}
               <div>
                 <label className="block font-serif text-xs uppercase tracking-wider text-burgundy-950 font-bold mb-2">
-                  Send Your Wishes to Revati & Prathamesh
+                  Send Your Wishes to Prathamesh & Revati
                 </label>
                 <textarea
                   rows="3"
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Share a heartfelt message, blessings, or memories..."
-                  className="w-full px-4 py-3 rounded-xl bg-[#FAF6EE] border border-gold-300 focus:border-gold-500 focus:outline-none text-burgundy-950 font-serif text-sm transition-colors resize-none"
+                  className="w-full px-4 py-3 rounded-xl border border-gold-300 focus:border-gold-500 focus:outline-none text-burgundy-950 font-serif text-sm transition-colors resize-none"
+                  style={{
+                    background: 'linear-gradient(135deg, #FFFFFF 0%, #FAF6EE 100%)',
+                  }}
                 />
               </div>
 
@@ -153,7 +196,10 @@ export const SectionRSVP = () => {
               <div className="pt-2 space-y-3">
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2.5 px-8 py-4 rounded-full bg-gradient-to-r from-gold-600 via-gold-500 to-amber-600 text-burgundy-950 font-royal font-bold text-sm tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg active:scale-98 transition-all duration-200"
+                  className="w-full flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-burgundy-950 font-royal font-bold text-sm tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg active:scale-98 transition-all duration-200"
+                  style={{
+                    background: 'linear-gradient(135deg, #C59B27 0%, #ECC872 30%, #FFF0BD 50%, #D4AF37 75%, #AA8232 100%)',
+                  }}
                 >
                   <MessageCircle className="w-5 h-5 text-burgundy-950" />
                   <span>CONFIRM VIA WHATSAPP</span>

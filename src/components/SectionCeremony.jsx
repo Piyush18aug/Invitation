@@ -1,13 +1,18 @@
 import React from 'react';
-import { Sparkles, Clock, Music2, HeartHandshake, Utensils } from 'lucide-react';
-import { FloralDivider, LotusIcon, DiyaIcon } from './OrnamentalIcons';
+import { FloralDivider, LotusIcon } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
 
 export const SectionCeremony = () => {
   const schedule = invitationData.schedule;
 
   return (
-    <section id="ceremony" className="relative py-24 px-4 sm:px-6 md:px-12 bg-ivory-gradient overflow-hidden">
+    <section
+      id="ceremony"
+      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #FAF5ED 0%, #F4EBE0 50%, #ECE0CF 100%)',
+      }}
+    >
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
@@ -28,11 +33,19 @@ export const SectionCeremony = () => {
           {schedule.map((item, idx) => (
             <div
               key={idx}
-              className="relative p-6 rounded-2xl bg-[#FFFDF9] border border-gold-400/50 shadow-royal-card hover:border-gold-500 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+              className="relative p-6 rounded-2xl border border-gold-400/50 shadow-royal-card hover:border-gold-500 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+              style={{
+                background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF6EE 50%, #F5EDE2 100%)',
+              }}
             >
-              {/* Top Time Pill */}
+              {/* Top Time Pill with Burgundy Gradient */}
               <div className="flex items-center justify-between mb-4">
-                <span className="px-3 py-1 rounded-full bg-burgundy-900 text-gold-200 font-mono text-xs font-bold shadow-sm">
+                <span
+                  className="px-3 py-1 rounded-full text-gold-200 font-mono text-xs font-bold shadow-sm border border-gold-400/30"
+                  style={{
+                    background: 'linear-gradient(135deg, #4A0E1A 0%, #25040A 100%)',
+                  }}
+                >
                   {item.time}
                 </span>
                 <LotusIcon className="w-5 h-5 text-gold-500 opacity-60 group-hover:opacity-100 transition-opacity" />

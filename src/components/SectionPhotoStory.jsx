@@ -3,7 +3,12 @@ import { FloralDivider, LotusIcon } from './OrnamentalIcons';
 
 export const SectionPhotoStory = () => {
   return (
-    <section className="relative py-24 px-4 sm:px-6 md:px-12 bg-burgundy-texture text-ivory-100 overflow-hidden">
+    <section
+      className="relative py-24 px-4 sm:px-6 md:px-12 text-ivory-100 overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #1A0207 0%, #350811 40%, #4A0E1A 70%, #150205 100%)',
+      }}
+    >
       {/* Background Mandala Watermark */}
       <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
         <div className="w-[800px] h-[800px] rounded-full border-[2px] border-gold-400/40 animate-spin-mandala" />
@@ -28,15 +33,31 @@ export const SectionPhotoStory = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Main Large Portrait (Photo 17) */}
           <div className="lg:col-span-7 relative group">
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden p-2 bg-gradient-to-tr from-gold-500 via-amber-400 to-gold-600 shadow-2xl">
-              <div className="w-full h-full rounded-2xl overflow-hidden bg-burgundy-950">
+            <div
+              className="relative aspect-[4/5] rounded-3xl overflow-hidden p-2 shadow-2xl"
+              style={{
+                background: 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 35%, #FFF0BD 65%, #946618 100%)',
+              }}
+            >
+              <div
+                className="w-full h-full rounded-2xl overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, #2D050D 0%, #140206 100%)',
+                }}
+              >
                 <img
                   src="/assets/images/photo_17.jpeg"
                   alt="Prathamesh and Revati"
                   loading="lazy"
                   className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-burgundy-950/80 via-transparent to-transparent" />
+                {/* Gradient Shadow Overlay */}
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(180deg, rgba(20, 2, 6, 0.1) 0%, transparent 40%, rgba(20, 2, 6, 0.9) 100%)',
+                  }}
+                />
                 <div className="absolute bottom-6 left-6 right-6">
                   <span className="font-serif italic text-xs uppercase tracking-widest text-gold-300 block">
                     Together Forever
@@ -52,8 +73,18 @@ export const SectionPhotoStory = () => {
           {/* Side Editorial Stack */}
           <div className="lg:col-span-5 space-y-6">
             {/* Top Secondary Photo */}
-            <div className="relative aspect-[16/10] rounded-2xl overflow-hidden p-1.5 bg-gradient-to-tr from-gold-400 to-amber-600 shadow-xl group">
-              <div className="w-full h-full rounded-xl overflow-hidden bg-burgundy-950">
+            <div
+              className="relative aspect-[16/10] rounded-2xl overflow-hidden p-1.5 shadow-xl group"
+              style={{
+                background: 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #946618 100%)',
+              }}
+            >
+              <div
+                className="w-full h-full rounded-xl overflow-hidden"
+                style={{
+                  background: 'linear-gradient(135deg, #2D050D 0%, #140206 100%)',
+                }}
+              >
                 <img
                   src="/assets/images/photo_01.jpeg"
                   alt="Joyful Moment"
@@ -63,8 +94,13 @@ export const SectionPhotoStory = () => {
               </div>
             </div>
 
-            {/* Quote Card */}
-            <div className="p-6 sm:p-8 rounded-2xl bg-burgundy-900/80 border border-gold-500/30 backdrop-blur-md space-y-3">
+            {/* Quote Card with Diagonal Burgundy to Wine Glass Gradient */}
+            <div
+              className="p-6 sm:p-8 rounded-2xl border border-gold-500/30 backdrop-blur-md space-y-3"
+              style={{
+                background: 'linear-gradient(135deg, rgba(74, 14, 26, 0.8) 0%, rgba(35, 4, 10, 0.95) 100%)',
+              }}
+            >
               <div className="flex items-center gap-2 text-gold-400">
                 <LotusIcon className="w-5 h-5" />
                 <span className="font-sanskrit text-sm">॥ शुभ मंगलम् ॥</span>

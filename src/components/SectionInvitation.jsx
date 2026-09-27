@@ -1,24 +1,42 @@
 import React from 'react';
-import { GaneshaIcon, DiyaIcon, CornerOrnament, FloralDivider, LotusIcon } from './OrnamentalIcons';
+import { DivineGanesha } from './DivineGanesha';
+import { DiyaIcon, CornerOrnament, FloralDivider, LotusIcon } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
 
 export const SectionInvitation = () => {
   return (
-    <section id="invitation" className="relative min-h-screen py-20 px-4 sm:px-6 md:px-12 flex items-center justify-center bg-paper-texture overflow-hidden">
+    <section
+      id="invitation"
+      className="relative min-h-screen py-20 px-4 sm:px-6 md:px-12 flex items-center justify-center overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, #FAF6EE 0%, #F6EFE6 50%, #EDE2D2 100%)',
+      }}
+    >
       {/* Decorative Traditional Toran at the top */}
       <div className="absolute top-0 inset-x-0 h-12 flex justify-center items-center pointer-events-none opacity-85 z-10">
         <div className="w-full max-w-4xl flex items-center justify-around">
           {[...Array(9)].map((_, i) => (
             <div key={i} className="flex flex-col items-center">
               <span className="w-[1.5px] h-6 bg-gradient-to-b from-gold-600 to-amber-500" />
-              <div className="w-3.5 h-3.5 rounded-full bg-gradient-to-tr from-amber-600 to-yellow-400 shadow-sm animate-float-gentle" style={{ animationDelay: `${i * 0.25}s` }} />
+              <div
+                className="w-3.5 h-3.5 rounded-full shadow-sm animate-float-gentle"
+                style={{
+                  background: 'linear-gradient(135deg, #D97706 0%, #F59E0B 50%, #FCD34D 100%)',
+                  animationDelay: `${i * 0.25}s`,
+                }}
+              />
             </div>
           ))}
         </div>
       </div>
 
-      {/* Main Royal Invitation Parchment Card */}
-      <div className="relative w-full max-w-3xl mx-auto p-6 sm:p-12 md:p-16 rounded-3xl bg-gradient-to-b from-[#FFFDF9] via-[#FAF5EC] to-[#F7EFE4] border-2 border-gold-400/60 shadow-royal-card overflow-hidden">
+      {/* Main Royal Invitation Parchment Card with Diagonal Champagne Gradient */}
+      <div
+        className="relative w-full max-w-3xl mx-auto p-6 sm:p-12 md:p-16 rounded-3xl border-2 border-gold-400/60 shadow-royal-card overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F3EAE0 100%)',
+        }}
+      >
         {/* Subtle Background Mandala Watermark */}
         <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
           <div className="w-[500px] h-[500px] rounded-full border-[30px] border-gold-600 animate-spin-mandala" />
@@ -40,16 +58,8 @@ export const SectionInvitation = () => {
 
         {/* Card Content */}
         <div className="relative z-10 text-center space-y-6">
-          {/* Ganesh Shloka */}
-          <div className="flex flex-col items-center justify-center">
-            <GaneshaIcon className="w-12 h-12 sm:w-14 sm:h-14 text-gold-600 mb-2 drop-shadow-sm" />
-            <p className="font-sanskrit text-gold-700 text-sm sm:text-base tracking-wider font-semibold">
-              {invitationData.event.sanskritMotto}
-            </p>
-            <p className="font-sanskrit text-burgundy-900/80 text-xs sm:text-sm mt-1 max-w-md mx-auto leading-relaxed">
-              ॥ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ । निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥
-            </p>
-          </div>
+          {/* Divine Ganpati Shrine & Shloka */}
+          <DivineGanesha variant="full" className="mb-2" />
 
           <FloralDivider className="my-3" />
 
@@ -80,8 +90,13 @@ export const SectionInvitation = () => {
             cordially invite you to grace the auspicious occasion of their
           </p>
 
-          {/* Event Badge */}
-          <div className="inline-block px-6 py-2.5 rounded-full bg-gradient-to-r from-burgundy-900 via-burgundy-800 to-burgundy-900 border border-gold-400/50 shadow-md">
+          {/* Event Badge with Deep Burgundy Linear Gradient */}
+          <div
+            className="inline-block px-6 py-2.5 rounded-full border border-gold-400/50 shadow-md"
+            style={{
+              background: 'linear-gradient(135deg, #3B0A14 0%, #520E1C 50%, #25040A 100%)',
+            }}
+          >
             <span className="font-royal text-base sm:text-xl font-bold tracking-wider gold-gradient-text uppercase">
               {invitationData.event.title}
             </span>
