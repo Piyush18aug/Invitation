@@ -8,12 +8,9 @@ export const SectionFamily = () => {
   return (
     <section
       id="family"
-      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #FDF9F2 0%, #F5EBE0 50%, #ECE0CF 100%)',
-      }}
+      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden bg-paper-texture-champagne"
     >
-      <div className="max-w-4xl mx-auto relative z-10 text-center">
+      <div className="max-w-5xl mx-auto relative z-10 text-center">
         {/* Header */}
         <div className="max-w-2xl mx-auto mb-16 space-y-3">
           <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold">
@@ -41,64 +38,131 @@ export const SectionFamily = () => {
         </div>
 
         {/* Families Grid with Subtle Diagonal Ivory-Sand Gradient */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-          {/* Groom's Family */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+          {/* Groom's Family: Navangul Family */}
           <div
-            className="p-8 rounded-3xl border-2 border-gold-400/60 shadow-royal-card space-y-4 hover:border-gold-500 transition-all duration-300"
+            className="group rounded-3xl border-2 border-gold-400/60 shadow-royal-card overflow-hidden hover:border-gold-500 transition-all duration-300 flex flex-col"
             style={{
               background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F5EDE2 100%)',
             }}
           >
-            <div className="flex justify-center">
-              <div
-                className="p-3 rounded-full border border-gold-400/40"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(245, 230, 167, 0.3) 100%)',
-                }}
-              >
-                <LotusIcon className="w-8 h-8 text-gold-600" />
+            {/* Family Photo Frame if available */}
+            {family.groomFamily.image ? (
+              <div className="p-4 pb-0">
+                <div
+                  className="relative aspect-[4/4.8] sm:aspect-[4/4.6] rounded-2xl overflow-hidden p-1 shadow-md"
+                  style={{
+                    background: 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 40%, #FFF0BD 70%, #946618 100%)',
+                  }}
+                >
+                  <div className="w-full h-full rounded-xl overflow-hidden relative bg-burgundy-950">
+                    <img
+                      src={family.groomFamily.image}
+                      alt={family.groomFamily.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                      style={{ objectPosition: 'center 0%' }}
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background: 'linear-gradient(180deg, transparent 65%, rgba(35, 4, 10, 0.4) 100%)',
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-            <h3 className="font-royal text-2xl font-bold text-burgundy-950">
-              {family.groomFamily.title}
-            </h3>
-            <div className="w-12 h-[1px] bg-gold-400 mx-auto" />
-            <div className="space-y-1.5 text-burgundy-900 font-serif">
-              {family.groomFamily.names.map((name, i) => (
-                <p key={i} className="text-base font-medium">
-                  {name}
-                </p>
-              ))}
+            ) : (
+              <div className="pt-8 flex justify-center">
+                <div
+                  className="p-3 rounded-full border border-gold-400/40"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(245, 230, 167, 0.3) 100%)',
+                  }}
+                >
+                  <LotusIcon className="w-8 h-8 text-gold-600" />
+                </div>
+              </div>
+            )}
+
+            {/* Details Content */}
+            <div className="p-6 sm:p-8 space-y-4 flex-1 flex flex-col justify-center">
+              <h3 className="font-royal text-2xl font-bold text-burgundy-950">
+                {family.groomFamily.title}
+              </h3>
+              <div className="w-12 h-[1px] bg-gold-400 mx-auto" />
+              <div className="space-y-1.5 text-burgundy-900 font-serif">
+                {family.groomFamily.names.map((name, i) => (
+                  <p key={i} className="text-base font-medium">
+                    {name}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
 
-          {/* Bride's Family */}
+          {/* Bride's Family: Erande Family */}
           <div
-            className="p-8 rounded-3xl border-2 border-gold-400/60 shadow-royal-card space-y-4 hover:border-gold-500 transition-all duration-300"
+            className="group rounded-3xl border-2 border-gold-400/60 shadow-royal-card overflow-hidden hover:border-gold-500 transition-all duration-300 flex flex-col"
             style={{
               background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F5EDE2 100%)',
             }}
           >
-            <div className="flex justify-center">
-              <div
-                className="p-3 rounded-full border border-gold-400/40"
-                style={{
-                  background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(245, 230, 167, 0.3) 100%)',
-                }}
-              >
-                <LotusIcon className="w-8 h-8 text-gold-600" />
+            {/* Family Photo Frame if available */}
+            {family.brideFamily.image ? (
+              <div className="p-4 pb-0">
+                <div
+                  className="relative aspect-[4/4.8] sm:aspect-[4/4.6] rounded-2xl overflow-hidden p-1 shadow-md"
+                  style={{
+                    background: 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 40%, #FFF0BD 70%, #946618 100%)',
+                  }}
+                >
+                  <div className="w-full h-full rounded-xl overflow-hidden relative bg-burgundy-950">
+                    <img
+                      src={family.brideFamily.image}
+                      alt={family.brideFamily.title}
+                      loading="lazy"
+                      className="w-full h-full object-cover transform scale-[1.22] group-hover:scale-[1.28] transition-transform duration-700 ease-out"
+                      style={{ objectPosition: 'center 26%' }}
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{
+                        background: 'linear-gradient(180deg, transparent 65%, rgba(35, 4, 10, 0.4) 100%)',
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-            <h3 className="font-royal text-2xl font-bold text-burgundy-950">
-              {family.brideFamily.title}
-            </h3>
-            <div className="w-12 h-[1px] bg-gold-400 mx-auto" />
-            <div className="space-y-1.5 text-burgundy-900 font-serif">
-              {family.brideFamily.names.map((name, i) => (
-                <p key={i} className="text-base font-medium">
-                  {name}
-                </p>
-              ))}
+            ) : (
+              <div className="py-16 flex flex-col items-center justify-center flex-1">
+                <div
+                  className="p-5 rounded-full border border-gold-400/40 mb-3"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(245, 230, 167, 0.3) 100%)',
+                  }}
+                >
+                  <LotusIcon className="w-12 h-12 text-gold-600" />
+                </div>
+                <span className="font-serif italic text-xs uppercase tracking-widest text-gold-700 font-semibold">
+                  Photo Coming Soon
+                </span>
+              </div>
+            )}
+
+            {/* Details Content */}
+            <div className="p-6 sm:p-8 space-y-4 flex-1 flex flex-col justify-center">
+              <h3 className="font-royal text-2xl font-bold text-burgundy-950">
+                {family.brideFamily.title}
+              </h3>
+              <div className="w-12 h-[1px] bg-gold-400 mx-auto" />
+              <div className="space-y-1.5 text-burgundy-900 font-serif">
+                {family.brideFamily.names.map((name, i) => (
+                  <p key={i} className="text-base font-medium">
+                    {name}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         </div>

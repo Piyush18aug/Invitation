@@ -46,10 +46,7 @@ export const SectionVenue = () => {
   return (
     <section
       id="venue"
-      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #FAF6EE 0%, #F3EAE0 50%, #ECE0D0 100%)',
-      }}
+      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden bg-royal-jaali-light"
     >
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}

@@ -8,10 +8,7 @@ export const SectionCeremony = () => {
   return (
     <section
       id="ceremony"
-      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #FAF5ED 0%, #F4EBE0 50%, #ECE0CF 100%)',
-      }}
+      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden bg-royal-jaali-light"
     >
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}

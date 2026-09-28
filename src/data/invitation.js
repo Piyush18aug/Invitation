@@ -6,6 +6,11 @@ export const invitationData = {
       role: "The Groom",
       image: "/assets/images/maingroomimage.png",
       altImage: "/assets/images/photo_19.jpeg",
+      photos: [
+        "/assets/images/maingroomimage.png",
+        "/assets/images/groom_portrait_white.png",
+        "/assets/images/groom_portrait_stage.png"
+      ],
       bio: "Thoughtful, passionate, and steadfast, finding his true happiness in her laughter."
     },
     bride: {
@@ -14,6 +19,11 @@ export const invitationData = {
       role: "The Bride",
       image: "/assets/images/mainbrideimage.png",
       altImage: "/assets/images/photo_02.jpeg",
+      photos: [
+        "/assets/images/mainbrideimage.png",
+        "/assets/images/photo_02.jpeg",
+        "/assets/images/photo_05.jpeg"
+      ],
       bio: "Graceful, vibrant, and full of warmth, bringing endless smiles and joy to every moment."
     },
     coupleHeroImage: "/assets/images/photo_01.jpeg",
@@ -79,7 +89,8 @@ export const invitationData = {
       date: "Two Hearts One Rhythm",
       title: "A Beautiful Bond",
       description: "Finding a best friend, confidant, and eternal companion in each other.",
-      image: "/assets/images/photo_03.jpeg"
+      image: "/assets/images/groom_portrait_white.png",
+      objectPosition: "center 0%"
     },
     {
       step: "05",
@@ -216,6 +227,20 @@ export const invitationData = {
       title: "Celebration of Love",
       category: "Moments",
       orientation: "landscape"
+    },
+    {
+      id: 18,
+      src: "/assets/images/groom_portrait_white.png",
+      title: "Prathamesh — Modern Elegance",
+      category: "Portraits",
+      orientation: "portrait"
+    },
+    {
+      id: 19,
+      src: "/assets/images/groom_portrait_stage.png",
+      title: "Prathamesh — Stage Presence",
+      category: "Moments",
+      orientation: "portrait"
     }
   ],
 
@@ -223,11 +248,13 @@ export const invitationData = {
     heading: "With the Love & Blessings of",
     groomFamily: {
       title: "Groom's Family",
-      names: ["Navangul Family", "Relatives & Well-Wishers"]
+      names: ["Navangul Family", "Relatives & Well-Wishers"],
+      image: "/assets/images/navangul_family.png"
     },
     brideFamily: {
       title: "Bride's Family",
-      names: ["Erande Family", "Relatives & Well-Wishers"]
+      names: ["Erande Family", "Relatives & Well-Wishers"],
+      image: "/assets/images/erande_family.png"
     },
     blessingQuote: "॥ वरं रूपं वरं तेजः वरं भाग्यं वरं यशः ॥\nMay their union be blessed with eternal love, health, prosperity, and joyous companionship."
   },
@@ -260,9 +287,9 @@ export const invitationData = {
   ],
 
   rsvp: {
-    phone: "+919876543210",
-    whatsappDisplay: "+91 98765 43210",
-    email: "celebrate@prathamesh-revati.in",
+    phone: "+919975257350",
+    whatsappDisplay: "+91 99752 57350",
+    email: "piyushnavangul12@gmail.com",
     whatsappMessage: "Hello Prathamesh & Revati! Heartiest congratulations! I/We will be delighted to attend your Engagement Ceremony on 24 October 2026 at Royal Palace, Sangli."
   }
 };

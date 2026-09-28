@@ -1,16 +1,68 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { FloralDivider, LotusIcon } from './OrnamentalIcons';
 
 export const SectionPhotoStory = () => {
+  const sectionRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'end start'],
+  });
+
+  // Smooth spring interpolation for fluid natural momentum with Lenis
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 85,
+    damping: 26,
+    restDelta: 0.001,
+  });
+
+  // 3D Rotations and translations linked to scroll progress
+  const rotateX = useTransform(
+    smoothProgress,
+    [0, 0.5, 1],
+    isMobile ? [4, 0, -4] : [8, 0, -8]
+  );
+  const rotateY = useTransform(
+    smoothProgress,
+    [0, 0.5, 1],
+    isMobile ? [-6, 0, 6] : [-12, 0, 12]
+  );
+  const scale = useTransform(
+    smoothProgress,
+    [0, 0.5, 1],
+    isMobile ? [1, 0.97, 0.92] : [1, 0.95, 0.88]
+  );
+  const y = useTransform(
+    smoothProgress,
+    [0, 0.5, 1],
+    isMobile ? [0, 25, 60] : [0, 50, 120]
+  );
+
+  // Dynamic light sheen reflecting 3D angle
+  const lightSheenOpacity = useTransform(
+    smoothProgress,
+    [0, 0.5, 1],
+    [0.2, 0.05, 0.25]
+  );
+  const lightSheenX = useTransform(smoothProgress, [0, 1], ['-40%', '140%']);
+
   return (
     <section
-      className="relative py-24 px-4 sm:px-6 md:px-12 text-ivory-100 overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #1A0207 0%, #350811 40%, #4A0E1A 70%, #150205 100%)',
-      }}
+      ref={sectionRef}
+      className="relative py-24 px-4 sm:px-6 md:px-12 text-ivory-100 overflow-hidden bg-royal-jaali-dark"
     >
-      {/* Background Mandala Watermark */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+      {/* Background Mandala & Ambient Radial Golden Flare */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-15 pointer-events-none">
+        <div className="absolute w-[600px] h-[600px] rounded-full bg-gold-500/10 blur-3xl animate-pulse" />
         <div className="w-[800px] h-[800px] rounded-full border-[2px] border-gold-400/40 animate-spin-mandala" />
       </div>
 
@@ -31,43 +83,70 @@ export const SectionPhotoStory = () => {
 
         {/* Editorial Composition */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          {/* Main Large Portrait (Photo 17) */}
-          <div className="lg:col-span-7 relative group">
-            <div
-              className="relative aspect-[4/5] rounded-3xl overflow-hidden p-2 shadow-2xl"
+          {/* Main Large Portrait (Photo 17) with Scroll-Driven 3D Perspective Tilt */}
+          <div
+            className="lg:col-span-7 relative"
+            style={{ perspective: '1200px' }}
+          >
+            <motion.div
               style={{
-                background: 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 35%, #FFF0BD 65%, #946618 100%)',
+                transformStyle: 'preserve-3d',
+                rotateX,
+                rotateY,
+                scale,
+                y,
               }}
+              className="relative group transition-shadow duration-500 will-change-transform"
             >
               <div
-                className="w-full h-full rounded-2xl overflow-hidden"
+                className="relative aspect-[4/5] rounded-3xl overflow-hidden p-2 shadow-[0_25px_60px_rgba(0,0,0,0.7)]"
                 style={{
-                  background: 'linear-gradient(135deg, #2D050D 0%, #140206 100%)',
+                  background: 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 35%, #FFF0BD 65%, #946618 100%)',
+                  transformStyle: 'preserve-3d',
                 }}
               >
-                <img
-                  src="/assets/images/photo_17.jpeg"
-                  alt="Prathamesh and Revati"
-                  loading="lazy"
-                  className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
-                />
-                {/* Gradient Shadow Overlay */}
                 <div
-                  className="absolute inset-0 pointer-events-none"
+                  className="w-full h-full rounded-2xl overflow-hidden relative"
                   style={{
-                    background: 'linear-gradient(180deg, rgba(20, 2, 6, 0.1) 0%, transparent 40%, rgba(20, 2, 6, 0.9) 100%)',
+                    background: 'linear-gradient(135deg, #2D050D 0%, #140206 100%)',
+                    transformStyle: 'preserve-3d',
                   }}
-                />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <span className="font-serif italic text-xs uppercase tracking-widest text-gold-300 block">
-                    Together Forever
-                  </span>
-                  <h3 className="font-royal text-2xl sm:text-3xl text-ivory-50 font-bold mt-1">
-                    Prathamesh & Revati
-                  </h3>
+                >
+                  <img
+                    src="/assets/images/photo_17.jpeg"
+                    alt="Prathamesh and Revati"
+                    loading="lazy"
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-1000 ease-out"
+                  />
+                  
+                  {/* Dynamic 3D Light Shimmer that tracks the rotation */}
+                  <motion.div
+                    className="absolute inset-0 pointer-events-none bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    style={{
+                      opacity: lightSheenOpacity,
+                      x: lightSheenX,
+                      transform: 'skewX(-20deg)',
+                    }}
+                  />
+
+                  {/* Gradient Shadow Overlay */}
+                  <div
+                    className="absolute inset-0 pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(180deg, rgba(20, 2, 6, 0.1) 0%, transparent 40%, rgba(20, 2, 6, 0.9) 100%)',
+                    }}
+                  />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <span className="font-serif italic text-xs uppercase tracking-widest text-gold-300 block">
+                      Together Forever
+                    </span>
+                    <h3 className="font-royal text-2xl sm:text-3xl text-ivory-50 font-bold mt-1">
+                      Prathamesh & Revati
+                    </h3>
+                  </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Side Editorial Stack */}

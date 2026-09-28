@@ -9,13 +9,11 @@ export const SectionFinal = ({ onTriggerCelebration }) => {
 
   return (
     <section
-      className="relative min-h-screen py-24 px-4 sm:px-6 md:px-12 text-ivory-100 flex items-center justify-center overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #180206 0%, #350810 40%, #4A0E1A 70%, #150205 100%)',
-      }}
+      className="relative min-h-screen py-24 px-4 sm:px-6 md:px-12 text-ivory-100 flex items-center justify-center overflow-hidden bg-royal-jaali-dark"
     >
-      {/* Background Rotating Gold Mandala */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-15 pointer-events-none">
+      {/* Background Rotating Gold Mandala & Ambient Radiance */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+        <div className="absolute w-[650px] h-[650px] rounded-full bg-gold-400/10 blur-3xl animate-pulse" />
         <div className="w-[700px] h-[700px] md:w-[1000px] md:h-[1000px] rounded-full border-[1.5px] border-gold-400/40 animate-spin-mandala flex items-center justify-center">
           <div className="w-[80%] h-[80%] rounded-full border border-dashed border-gold-300/30 animate-spin-mandala-rev" />
         </div>

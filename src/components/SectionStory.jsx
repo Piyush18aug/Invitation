@@ -9,11 +9,13 @@ export const SectionStory = () => {
   return (
     <section
       id="story"
-      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #FAF4EB 0%, #F4ECE0 50%, #ECE0D0 100%)',
-      }}
+      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden bg-paper-texture-sand"
     >
+      {/* Background Subtle Gold Mandala Watermark */}
+      <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none">
+        <div className="w-[650px] h-[650px] rounded-full border-[20px] border-gold-600 animate-spin-mandala" />
+      </div>
+
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-20 space-y-3">
@@ -89,7 +91,7 @@ export const SectionStory = () => {
                   {/* Image Side */}
                   <div className="w-full md:w-1/2 flex justify-center">
                     <div
-                      className="relative w-full max-w-sm aspect-[4/3] rounded-2xl overflow-hidden p-1.5 shadow-royal-card group"
+                      className="relative w-full max-w-sm aspect-[4/4.2] sm:aspect-[4/4] rounded-2xl overflow-hidden p-1.5 shadow-royal-card group"
                       style={{
                         background: 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #946618 100%)',
                       }}
@@ -105,6 +107,7 @@ export const SectionStory = () => {
                           alt={item.title}
                           loading="lazy"
                           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
+                          style={{ objectPosition: item.objectPosition || 'center 8%' }}
                         />
                       </div>
                     </div>

@@ -64,6 +64,111 @@ export const RingIcon = ({ className = "w-8 h-8 text-gold-400" }) => (
   </svg>
 );
 
+export const GoldenEngagementRings = ({ className = "w-16 h-16" }) => (
+  <div className={`relative inline-flex items-center justify-center ${className}`}>
+    <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible drop-shadow-[0_6px_16px_rgba(212,175,55,0.45)]">
+      <defs>
+        <linearGradient id="royalGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#FFF7D6" />
+          <stop offset="25%" stopColor="#ECC872" />
+          <stop offset="50%" stopColor="#D4AF37" />
+          <stop offset="75%" stopColor="#AA8232" />
+          <stop offset="100%" stopColor="#6E4815" />
+        </linearGradient>
+        <linearGradient id="ringHighlight" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="#FFFFFF" stopOpacity="0.9" />
+          <stop offset="50%" stopColor="#FFE57F" stopOpacity="0.4" />
+          <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.1" />
+        </linearGradient>
+        <linearGradient id="diamondGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="35%" stopColor="#E0F7FA" />
+          <stop offset="70%" stopColor="#B2EBF2" />
+          <stop offset="100%" stopColor="#4DD0E1" />
+        </linearGradient>
+        <radialGradient id="sparkleGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#FFFFFF" />
+          <stop offset="40%" stopColor="#FFE57F" stopOpacity="0.8" />
+          <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      {/* Background Soft Glow */}
+      <circle cx="50" cy="50" r="38" fill="url(#sparkleGlow)" opacity="0.2" />
+
+      {/* Groom's Classic Band (Left Ring) */}
+      <circle
+        cx="38"
+        cy="55"
+        r="22"
+        fill="none"
+        stroke="url(#royalGoldGrad)"
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      <circle
+        cx="38"
+        cy="55"
+        r="22"
+        fill="none"
+        stroke="url(#ringHighlight)"
+        strokeWidth="2"
+      />
+
+      {/* Bride's Solitaire Engagement Ring (Right Intertwined Ring) */}
+      <circle
+        cx="60"
+        cy="48"
+        r="22"
+        fill="none"
+        stroke="url(#royalGoldGrad)"
+        strokeWidth="6"
+        strokeLinecap="round"
+      />
+      <circle
+        cx="60"
+        cy="48"
+        r="22"
+        fill="none"
+        stroke="url(#ringHighlight)"
+        strokeWidth="2"
+      />
+
+      {/* Diamond Crown Setting / Prongs */}
+      <path
+        d="M56 26 L60 21 L64 26"
+        stroke="url(#royalGoldGrad)"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        fill="none"
+      />
+      
+      {/* Solitaire Diamond Gem */}
+      <polygon
+        points="60,10 69,19 60,28 51,19"
+        fill="url(#diamondGrad)"
+        stroke="#FFFFFF"
+        strokeWidth="0.75"
+      />
+      <polygon
+        points="60,10 69,19 60,21 51,19"
+        fill="#FFFFFF"
+        opacity="0.7"
+      />
+      <line x1="60" y1="10" x2="60" y2="28" stroke="#FFFFFF" strokeWidth="0.5" opacity="0.8" />
+
+      {/* Sparkling Light Ray Starburst */}
+      <g className="animate-pulse">
+        <path
+          d="M60 2 L61.8 8.5 L68.5 10 L61.8 11.5 L60 18 L58.2 11.5 L51.5 10 L58.2 8.5 Z"
+          fill="url(#sparkleGlow)"
+        />
+        <circle cx="60" cy="10" r="2.5" fill="#FFFFFF" />
+      </g>
+    </svg>
+  </div>
+);
+
 export const CornerOrnament = ({ className = "w-16 h-16 text-gold-500", style = {} }) => (
   <svg className={className} style={style} viewBox="0 0 100 100" fill="none" stroke="currentColor">
     <path d="M5 5 L95 5 M5 5 L5 95" strokeWidth="2" stroke="url(#goldDiyaGrad)" />

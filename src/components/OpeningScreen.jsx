@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Sparkles, Heart } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Sparkles, Heart, ArrowRight } from 'lucide-react';
 import { GaneshaIcon, LotusIcon, DiyaIcon, CornerOrnament } from './OrnamentalIcons';
 import { DivineGanesha } from './DivineGanesha';
 import { invitationData } from '../data/invitation';
@@ -7,6 +7,19 @@ import { invitationData } from '../data/invitation';
 export const OpeningScreen = ({ onOpenInvitation }) => {
   // Animation states: 'closed' -> 'unsealing' -> 'opening-flap' -> 'sliding-card' -> 'zooming-card' -> 'opened'
   const [animState, setAnimState] = useState('closed');
+  const timersRef = useRef([]);
+
+  useEffect(() => {
+    return () => {
+      timersRef.current.forEach((t) => clearTimeout(t));
+    };
+  }, []);
+
+  const triggerNextScreen = () => {
+    timersRef.current.forEach((t) => clearTimeout(t));
+    setAnimState('opened');
+    onOpenInvitation();
+  };
 
   const handleOpen = () => {
     if (animState !== 'closed') return;
@@ -14,26 +27,27 @@ export const OpeningScreen = ({ onOpenInvitation }) => {
     // Step 1: Release seal
     setAnimState('unsealing');
 
-    // Step 2: Open top flap 180 degrees upwards
-    setTimeout(() => {
+    // Step 2: Open top flap 180 degrees upwards smoothly
+    const t1 = setTimeout(() => {
       setAnimState('opening-flap');
-    }, 400);
+    }, 500);
 
     // Step 3: Slide card up out of the pocket
-    setTimeout(() => {
+    const t2 = setTimeout(() => {
       setAnimState('sliding-card');
-    }, 1100);
+    }, 1400);
 
-    // Step 4: Elevate card and zoom to fill screen
-    setTimeout(() => {
+    // Step 4: Elevate card and zoom to center screen
+    const t3 = setTimeout(() => {
       setAnimState('zooming-card');
-    }, 2000);
+    }, 2400);
 
-    // Step 5: Transition into website
-    setTimeout(() => {
-      setAnimState('opened');
-      onOpenInvitation();
-    }, 3000);
+    // Step 5: Screen remains displayed for 5 full seconds, then transitions into the website
+    const t4 = setTimeout(() => {
+      triggerNextScreen();
+    }, 7400);
+
+    timersRef.current = [t1, t2, t3, t4];
   };
 
   const isClosed = animState === 'closed';
@@ -377,9 +391,7 @@ export const OpeningScreen = ({ onOpenInvitation }) => {
           </div>
         </div>
 
-        {/* ========================================================================= */}
-        {/* "OPEN INVITATION" BUTTON                                                  */}
-        {/* ========================================================================= */}
+        {/* "OPEN INVITATION" BUTTON */}
         <div
           className={`mt-10 text-center transition-all duration-500 ${
             isOpening ? 'opacity-0 translate-y-6 pointer-events-none' : 'opacity-100 translate-y-0'
@@ -407,6 +419,23 @@ export const OpeningScreen = ({ onOpenInvitation }) => {
             Click the seal or button to open
           </p>
         </div>
+
+        {/* 5-Second Reveal Indicator Bar */}
+        {isCardZooming && animState !== 'opened' && (
+          <div className="fixed bottom-6 sm:bottom-8 inset-x-0 z-50 flex flex-col items-center justify-center px-4 animate-fade-in pointer-events-auto">
+            <button
+              onClick={triggerNextScreen}
+              className="group inline-flex items-center gap-2 px-5 py-2 rounded-full bg-burgundy-900/80 hover:bg-burgundy-800 border border-gold-400/50 text-gold-200 text-xs sm:text-sm font-royal tracking-widest backdrop-blur-md transition-all shadow-gold-glow cursor-pointer"
+            >
+              <span>Opening Royal Celebration</span>
+              <Sparkles className="w-4 h-4 text-gold-300 animate-spin" />
+              <ArrowRight className="w-3.5 h-3.5 text-gold-300 group-hover:translate-x-1 transition-transform" />
+            </button>
+            <div className="w-48 sm:w-56 h-1.5 bg-black/60 rounded-full mt-2.5 overflow-hidden border border-gold-500/40">
+              <div className="h-full bg-gradient-to-r from-gold-500 via-roseGold-400 to-gold-300 rounded-full animate-fill-5s" />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

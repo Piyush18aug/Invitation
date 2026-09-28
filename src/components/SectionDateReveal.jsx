@@ -9,11 +9,11 @@ export const SectionDateReveal = () => {
   return (
     <section
       id="date"
-      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #FDF9F3 0%, #F6ECE0 50%, #ECE0CF 100%)',
-      }}
+      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden bg-paper-texture-champagne"
     >
+      {/* Radiant Golden Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gold-400/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
+
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">

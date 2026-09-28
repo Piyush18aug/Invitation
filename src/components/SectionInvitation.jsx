@@ -7,11 +7,20 @@ export const SectionInvitation = () => {
   return (
     <section
       id="invitation"
-      className="relative min-h-screen py-20 px-4 sm:px-6 md:px-12 flex items-center justify-center overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #FAF6EE 0%, #F6EFE6 50%, #EDE2D2 100%)',
-      }}
+      className="relative min-h-screen py-20 px-4 sm:px-6 md:px-12 flex items-center justify-center overflow-hidden bg-royal-jaali-light"
     >
+      {/* Background Palace Arch & Mandala Ambient Watermark */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,_rgba(255,240,189,0.35)_0%,_transparent_70%)]" />
+        <img
+          src="/assets/images/palace_arch.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover opacity-[0.035] mix-blend-multiply filter contrast-125"
+        />
+        <div className="w-[700px] h-[700px] md:w-[950px] md:h-[950px] rounded-full border-[1.5px] border-gold-400/20 animate-spin-mandala flex items-center justify-center">
+          <div className="w-[80%] h-[80%] rounded-full border border-dashed border-gold-400/15 animate-spin-mandala-rev" />
+        </div>
+      </div>
       {/* Decorative Traditional Toran at the top */}
       <div className="absolute top-0 inset-x-0 h-12 flex justify-center items-center pointer-events-none opacity-85 z-10">
         <div className="w-full max-w-4xl flex items-center justify-around">

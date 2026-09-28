@@ -6,21 +6,17 @@ import { invitationData } from '../data/invitation';
 export const SectionRSVP = () => {
   const { rsvp, event, couple } = invitationData;
   const [name, setName] = useState('');
-  const [attending, setAttending] = useState('yes');
-  const [guestCount, setGuestCount] = useState('1');
   const [message, setMessage] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
   // Send RSVP directly via WhatsApp
   const handleWhatsAppRSVP = (e) => {
     e.preventDefault();
-    const guestText = attending === 'yes' ? `Yes, I/We will be attending (${guestCount} guest${guestCount > 1 ? 's' : ''})` : 'Regretfully, I/We will not be able to attend';
-    const wishesText = message.trim() ? `\nWishes: "${message.trim()}"` : '';
+    const wishesText = message.trim() ? `\n*Wishes & Blessings:* "${message.trim()}"` : '';
 
     const text = encodeURIComponent(
-      `*Engagement Ceremony RSVP*\n\n` +
+      `*Engagement Ceremony RSVP & Wishes*\n\n` +
       `*From:* ${name || 'Guest'}\n` +
-      `*Status:* ${guestText}\n` +
       `*Event:* ${couple.groom.name} & ${couple.bride.name} — Engagement Ceremony\n` +
       `*Date:* ${event.displayDate} at ${event.venue}, Sangli` +
       wishesText
@@ -33,10 +29,7 @@ export const SectionRSVP = () => {
   return (
     <section
       id="rsvp"
-      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #FBF8F2 0%, #F5EAE0 50%, #ECE0CF 100%)',
-      }}
+      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden bg-royal-jaali-light"
     >
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
@@ -103,77 +96,7 @@ export const SectionRSVP = () => {
                 />
               </div>
 
-              {/* Attendance Choice */}
-              <div>
-                <label className="block font-serif text-xs uppercase tracking-wider text-burgundy-950 font-bold mb-2">
-                  Will You Be Attending? *
-                </label>
-                <div className="grid grid-cols-2 gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setAttending('yes')}
-                    className={`py-3 px-4 rounded-xl border font-serif text-xs uppercase tracking-wider font-semibold transition-all ${
-                      attending === 'yes'
-                        ? 'text-gold-200 border-gold-400 shadow-sm'
-                        : 'text-burgundy-900/80 border-gold-300 hover:border-gold-400'
-                    }`}
-                    style={
-                      attending === 'yes'
-                        ? {
-                            background: 'linear-gradient(135deg, #3D0A14 0%, #200308 100%)',
-                          }
-                        : {
-                            background: 'linear-gradient(135deg, #FFFFFF 0%, #FAF6EE 100%)',
-                          }
-                    }
-                  >
-                    Yes, Delighted to Attend! ✨
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAttending('no')}
-                    className={`py-3 px-4 rounded-xl border font-serif text-xs uppercase tracking-wider font-semibold transition-all ${
-                      attending === 'no'
-                        ? 'text-gold-200 border-gold-400 shadow-sm'
-                        : 'text-burgundy-900/80 border-gold-300 hover:border-gold-400'
-                    }`}
-                    style={
-                      attending === 'no'
-                        ? {
-                            background: 'linear-gradient(135deg, #3D0A14 0%, #200308 100%)',
-                          }
-                        : {
-                            background: 'linear-gradient(135deg, #FFFFFF 0%, #FAF6EE 100%)',
-                          }
-                    }
-                  >
-                    Sending Warm Wishes From Afar
-                  </button>
-                </div>
-              </div>
 
-              {/* Number of Guests */}
-              {attending === 'yes' && (
-                <div>
-                  <label className="block font-serif text-xs uppercase tracking-wider text-burgundy-950 font-bold mb-2">
-                    Number of Guests
-                  </label>
-                  <select
-                    value={guestCount}
-                    onChange={(e) => setGuestCount(e.target.value)}
-                    className="w-full px-4 py-3 rounded-xl border border-gold-300 focus:border-gold-500 focus:outline-none text-burgundy-950 font-serif text-sm"
-                    style={{
-                      background: 'linear-gradient(135deg, #FFFFFF 0%, #FAF6EE 100%)',
-                    }}
-                  >
-                    <option value="1">1 Person</option>
-                    <option value="2">2 Persons</option>
-                    <option value="3">3 Persons</option>
-                    <option value="4">4 Persons</option>
-                    <option value="5+">5+ (Whole Family)</option>
-                  </select>
-                </div>
-              )}
 
               {/* Warm Message / Wishes */}
               <div>

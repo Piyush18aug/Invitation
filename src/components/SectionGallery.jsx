@@ -43,10 +43,7 @@ export const SectionGallery = () => {
   return (
     <section
       id="gallery"
-      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, #FAF7F0 0%, #F5EDE1 50%, #ECE1D1 100%)',
-      }}
+      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden bg-paper-texture-ivory"
     >
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Header */}
