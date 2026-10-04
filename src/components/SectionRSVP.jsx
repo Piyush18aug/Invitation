@@ -29,58 +29,58 @@ export const SectionRSVP = () => {
   return (
     <section
       id="rsvp"
-      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden bg-royal-jaali-light"
+      className="relative py-14 sm:py-24 px-3 sm:px-6 md:px-12 overflow-hidden bg-royal-jaali-light"
     >
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16 space-y-2 sm:space-y-3 px-2">
           <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold">
             Celebrate With Us
           </span>
-          <h2 className="font-royal text-3xl sm:text-5xl font-bold text-burgundy-950">
+          <h2 className="font-royal text-2xl sm:text-5xl font-bold text-burgundy-950">
             Will You Join Our Joy?
           </h2>
-          <FloralDivider className="my-3" />
-          <p className="font-serif italic text-burgundy-900/80 text-base sm:text-lg">
+          <FloralDivider className="my-2 sm:my-3" />
+          <p className="font-serif italic text-burgundy-900/80 text-sm sm:text-lg">
             "Your presence, love, and blessings will make our celebration truly complete."
           </p>
         </div>
 
         {/* RSVP Card with Champagne Sand Parchment Gradient */}
         <div
-          className="p-8 sm:p-12 rounded-3xl border-2 border-gold-400 shadow-royal-card max-w-2xl mx-auto"
+          className="p-5 sm:p-12 rounded-3xl border-2 border-gold-400 shadow-royal-card max-w-2xl mx-auto"
           style={{
             background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F3EAE0 100%)',
           }}
         >
           {submitted ? (
-            <div className="text-center py-8 space-y-4">
+            <div className="text-center py-6 sm:py-8 space-y-3 sm:space-y-4">
               <div
-                className="w-16 h-16 rounded-full text-gold-700 mx-auto flex items-center justify-center border border-gold-400 shadow-sm"
+                className="w-14 h-14 sm:w-16 sm:h-16 rounded-full text-gold-700 mx-auto flex items-center justify-center border border-gold-400 shadow-sm"
                 style={{
                   background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(245, 230, 167, 0.4) 100%)',
                 }}
               >
-                <CheckCircle2 className="w-10 h-10" />
+                <CheckCircle2 className="w-8 h-8 sm:w-10 sm:h-10" />
               </div>
-              <h3 className="font-royal text-2xl font-bold text-burgundy-950">
+              <h3 className="font-royal text-xl sm:text-2xl font-bold text-burgundy-950">
                 Thank You For Your Response!
               </h3>
-              <p className="font-serif text-burgundy-900/80 text-sm sm:text-base">
+              <p className="font-serif text-burgundy-900/80 text-xs sm:text-base">
                 We are thrilled and truly look forward to celebrating this beautiful day with you.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
-                className="mt-4 px-6 py-2 rounded-full border border-gold-500 text-gold-700 hover:bg-gold-50 font-serif text-xs uppercase tracking-widest"
+                className="mt-3 sm:mt-4 px-5 sm:px-6 py-2 rounded-full border border-gold-500 text-gold-700 hover:bg-gold-50 font-serif text-[11px] sm:text-xs uppercase tracking-widest active:scale-95"
               >
                 Send Another Note
               </button>
             </div>
           ) : (
-            <form onSubmit={handleWhatsAppRSVP} className="space-y-6">
+            <form onSubmit={handleWhatsAppRSVP} className="space-y-4 sm:space-y-6">
               {/* Full Name */}
               <div>
-                <label className="block font-serif text-xs uppercase tracking-wider text-burgundy-950 font-bold mb-2">
+                <label className="block font-serif text-[11px] sm:text-xs uppercase tracking-wider text-burgundy-950 font-bold mb-1.5 sm:mb-2">
                   Your Full Name / Family Name *
                 </label>
                 <input
@@ -89,18 +89,16 @@ export const SectionRSVP = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="e.g. Rajesh & Family"
-                  className="w-full px-4 py-3 rounded-xl border border-gold-300 focus:border-gold-500 focus:outline-none text-burgundy-950 font-serif text-sm transition-colors"
+                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-gold-300 focus:border-gold-500 focus:outline-none text-burgundy-950 font-serif text-base transition-colors"
                   style={{
                     background: 'linear-gradient(135deg, #FFFFFF 0%, #FAF6EE 100%)',
                   }}
                 />
               </div>
 
-
-
               {/* Warm Message / Wishes */}
               <div>
-                <label className="block font-serif text-xs uppercase tracking-wider text-burgundy-950 font-bold mb-2">
+                <label className="block font-serif text-[11px] sm:text-xs uppercase tracking-wider text-burgundy-950 font-bold mb-1.5 sm:mb-2">
                   Send Your Wishes to Prathamesh & Revati
                 </label>
                 <textarea
@@ -108,7 +106,7 @@ export const SectionRSVP = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Share a heartfelt message, blessings, or memories..."
-                  className="w-full px-4 py-3 rounded-xl border border-gold-300 focus:border-gold-500 focus:outline-none text-burgundy-950 font-serif text-sm transition-colors resize-none"
+                  className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-gold-300 focus:border-gold-500 focus:outline-none text-burgundy-950 font-serif text-base transition-colors resize-none"
                   style={{
                     background: 'linear-gradient(135deg, #FFFFFF 0%, #FAF6EE 100%)',
                   }}
@@ -116,20 +114,20 @@ export const SectionRSVP = () => {
               </div>
 
               {/* Submit Buttons */}
-              <div className="pt-2 space-y-3">
+              <div className="pt-2 space-y-2.5 sm:space-y-3">
                 <button
                   type="submit"
-                  className="w-full flex items-center justify-center gap-2.5 px-8 py-4 rounded-full text-burgundy-950 font-royal font-bold text-sm tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg active:scale-98 transition-all duration-200"
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 rounded-full text-burgundy-950 font-royal font-bold text-xs sm:text-sm tracking-wider shadow-gold-glow hover:shadow-gold-glow-lg active:scale-95 transition-all duration-200 touch-manipulation min-h-[48px]"
                   style={{
                     background: 'linear-gradient(135deg, #C59B27 0%, #ECC872 30%, #FFF0BD 50%, #D4AF37 75%, #AA8232 100%)',
                   }}
                 >
-                  <MessageCircle className="w-5 h-5 text-burgundy-950" />
+                  <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-burgundy-950" />
                   <span>CONFIRM VIA WHATSAPP</span>
-                  <Sparkles className="w-4 h-4 text-burgundy-950" />
+                  <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-burgundy-950" />
                 </button>
 
-                <p className="text-center font-serif text-xs text-burgundy-800/70 italic">
+                <p className="text-center font-serif text-[11px] sm:text-xs text-burgundy-800/70 italic">
                   Instant RSVP confirmation sent directly to the couple & family
                 </p>
               </div>
@@ -140,3 +138,5 @@ export const SectionRSVP = () => {
     </section>
   );
 };
+
+export default SectionRSVP;

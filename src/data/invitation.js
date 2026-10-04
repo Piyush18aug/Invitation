@@ -68,21 +68,24 @@ export const invitationData = {
       date: "The First Spark",
       title: "When Stars Aligned",
       description: "A conversation that started with pleasant greetings and quickly blossomed into hours of effortless laughter and shared perspectives.",
-      image: "/assets/images/photo_06.jpeg"
+      image: "/assets/images/photo_06.jpeg",
+      objectPosition: "center 42%"
     },
     {
       step: "02",
       date: "Growing Closer",
       title: "Countless Conversations",
       description: "From late-night stories to discussing our biggest dreams, we realized how naturally our worlds fit together.",
-      image: "/assets/images/photo_07.jpeg"
+      image: "/assets/images/photo_07.jpeg",
+      objectPosition: "center 50%"
     },
     {
       step: "03",
       date: "Exploring Life",
       title: "Adventures & Memories",
       description: "Every walk, journey, and quiet coffee became a treasured chapter in our story.",
-      image: "/assets/images/photo_16.jpeg"
+      image: "/assets/images/photo_16.jpeg",
+      objectPosition: "center 55%"
     },
     {
       step: "04",
@@ -90,21 +93,23 @@ export const invitationData = {
       title: "A Beautiful Bond",
       description: "Finding a best friend, confidant, and eternal companion in each other.",
       image: "/assets/images/groom_portrait_white.png",
-      objectPosition: "center 0%"
+      objectPosition: "center 15%"
     },
     {
       step: "05",
       date: "Families United",
       title: "Forever Begins",
       description: "With heartfelt blessings and joy from our families, we take the first step towards a lifetime of togetherness.",
-      image: "/assets/images/photo_17.jpeg"
+      image: "/assets/images/photo_17.jpeg",
+      objectPosition: "center 55%"
     },
     {
       step: "06",
       date: "24 October 2026",
       title: "The Engagement",
       description: "The auspicious day we exchange rings and pledge our hearts forever at Royal Palace, Sangli.",
-      image: "/assets/images/photo_01.jpeg"
+      image: "/assets/images/photo_01.jpeg",
+      objectPosition: "center 62%"
     }
   ],
 
@@ -133,14 +138,14 @@ export const invitationData = {
     {
       id: 4,
       src: "/assets/images/photo_17.jpeg",
-      title: "Golden Smiles",
+      title: "Golden Smiles & Laughter",
       category: "Editorial",
       orientation: "portrait"
     },
     {
       id: 5,
       src: "/assets/images/photo_02.jpeg",
-      title: "Revati — Radiant Grace",
+      title: "Revati — Radiant Elegance",
       category: "Portraits",
       orientation: "portrait"
     },
@@ -153,16 +158,16 @@ export const invitationData = {
     },
     {
       id: 7,
-      src: "/assets/images/photo_04.jpeg",
-      title: "Stolen Glances",
+      src: "/assets/images/photo_03.jpeg",
+      title: "Revati — Joyful Wanderer",
       category: "Moments",
       orientation: "portrait"
     },
     {
       id: 8,
-      src: "/assets/images/photo_08.jpeg",
-      title: "Serene Landscapes",
-      category: "Travel",
+      src: "/assets/images/photo_04.jpeg",
+      title: "Stolen Glances & Sunshine",
+      category: "Moments",
       orientation: "portrait"
     },
     {
@@ -174,69 +179,97 @@ export const invitationData = {
     },
     {
       id: 10,
+      src: "/assets/images/photo_06.jpeg",
+      title: "Lost in the Pages of Love",
+      category: "Moments",
+      orientation: "portrait"
+    },
+    {
+      id: 11,
+      src: "/assets/images/photo_07.jpeg",
+      title: "Adventures Across the Hills",
+      category: "Travel",
+      orientation: "landscape"
+    },
+    {
+      id: 12,
+      src: "/assets/images/photo_08.jpeg",
+      title: "Serene Landscapes & Heritage",
+      category: "Travel",
+      orientation: "portrait"
+    },
+    {
+      id: 13,
       src: "/assets/images/photo_09.jpeg",
-      title: "Cherished Times",
+      title: "Cherished Times Together",
       category: "Moments",
       orientation: "landscape"
     },
     {
-      id: 11,
+      id: 14,
       src: "/assets/images/photo_10.jpeg",
-      title: "Pure Delight",
+      title: "Pure Delight & Happiness",
       category: "Joy",
       orientation: "portrait"
     },
     {
-      id: 12,
+      id: 15,
       src: "/assets/images/photo_11.jpeg",
       title: "Everyday Magic",
       category: "Memories",
       orientation: "portrait"
     },
     {
-      id: 13,
+      id: 16,
       src: "/assets/images/photo_12.jpeg",
-      title: "Side by Side",
+      title: "Side by Side Forever",
       category: "Together",
       orientation: "portrait"
     },
     {
-      id: 14,
+      id: 17,
       src: "/assets/images/photo_13.jpeg",
       title: "Laughter Unfiltered",
       category: "Candid",
       orientation: "portrait"
     },
     {
-      id: 15,
+      id: 18,
       src: "/assets/images/photo_14.jpeg",
       title: "Endless Conversations",
       category: "Moments",
       orientation: "portrait"
     },
     {
-      id: 16,
+      id: 19,
       src: "/assets/images/photo_15.jpeg",
-      title: "Shared Dreams",
+      title: "Shared Dreams & Aspirations",
       category: "Together",
       orientation: "portrait"
     },
     {
-      id: 17,
+      id: 20,
+      src: "/assets/images/photo_16.jpeg",
+      title: "Sunset Reflections & Peace",
+      category: "Memories",
+      orientation: "landscape"
+    },
+    {
+      id: 21,
       src: "/assets/images/photo_18.jpeg",
-      title: "Celebration of Love",
+      title: "Celebration of Boundless Love",
       category: "Moments",
       orientation: "landscape"
     },
     {
-      id: 18,
+      id: 22,
       src: "/assets/images/groom_portrait_white.png",
       title: "Prathamesh — Modern Elegance",
       category: "Portraits",
       orientation: "portrait"
     },
     {
-      id: 19,
+      id: 23,
       src: "/assets/images/groom_portrait_stage.png",
       title: "Prathamesh — Stage Presence",
       category: "Moments",

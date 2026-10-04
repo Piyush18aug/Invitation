@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { FloralDivider, LotusIcon } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
 import { Sparkles, Heart } from 'lucide-react';
@@ -9,31 +10,31 @@ export const SectionStory = () => {
   return (
     <section
       id="story"
-      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden bg-paper-texture-sand"
+      className="relative py-14 sm:py-24 px-3 sm:px-6 md:px-12 overflow-hidden bg-paper-texture-sand"
     >
       {/* Background Subtle Gold Mandala Watermark */}
       <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none">
-        <div className="w-[650px] h-[650px] rounded-full border-[20px] border-gold-600 animate-spin-mandala" />
+        <div className="w-[500px] sm:w-[650px] h-[500px] sm:h-[650px] rounded-full border-[20px] border-gold-600 animate-spin-mandala" />
       </div>
 
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-20 space-y-3">
+        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-20 space-y-2 sm:space-y-3 px-2">
           <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold">
             Our Journey
           </span>
-          <h2 className="font-royal text-3xl sm:text-4xl md:text-5xl font-bold text-burgundy-950">
+          <h2 className="font-royal text-2xl sm:text-4xl md:text-5xl font-bold text-burgundy-950">
             How Forever Began
           </h2>
-          <FloralDivider className="my-3" />
-          <p className="font-serif italic text-burgundy-900/80 text-base sm:text-lg">
+          <FloralDivider className="my-2 sm:my-3" />
+          <p className="font-serif italic text-burgundy-900/80 text-sm sm:text-lg">
             "Every love story is beautiful, but ours is our favorite."
           </p>
         </div>
 
         {/* Timeline Container */}
         <div className="relative">
-          {/* Central Golden Thread Line with Vertical Gold Gradient */}
+          {/* Central Golden Thread Line for Desktop */}
           <div
             className="hidden md:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-[2px] shadow-[0_0_8px_rgba(212,175,55,0.4)]"
             style={{
@@ -42,56 +43,81 @@ export const SectionStory = () => {
           />
 
           {/* Timeline Milestones */}
-          <div className="space-y-16 md:space-y-24">
+          <div className="space-y-10 sm:space-y-16 md:space-y-24">
             {story.map((item, idx) => {
               const isEven = idx % 2 === 0;
 
               return (
-                <div
+                <motion.div
                   key={idx}
+                  initial={{ opacity: 0, y: 35 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                   className={`relative flex flex-col md:flex-row items-center ${
                     isEven ? 'md:flex-row-reverse' : ''
-                  } gap-8 md:gap-16`}
+                  } gap-4 sm:gap-8 md:gap-16`}
                 >
-                  {/* Central Node Badge with Burgundy to Wine linear gradient */}
-                  <div
-                    className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full border-2 border-gold-400 items-center justify-center text-gold-300 font-royal font-bold text-xs shadow-gold-glow z-20"
+                  {/* Central Node Badge with Ornamental Sacred Lotus Icon for Desktop */}
+                  <motion.div
+                    initial={{ scale: 0, rotate: -45 }}
+                    whileInView={{ scale: 1, rotate: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2, ease: 'backOut' }}
+                    className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full border-2 border-gold-400 items-center justify-center text-gold-300 shadow-gold-glow z-20"
                     style={{
                       background: 'linear-gradient(135deg, #4A0E1A 0%, #2D050D 100%)',
                     }}
                   >
-                    {item.step}
-                  </div>
+                    <LotusIcon className="w-5 h-5 text-gold-300" />
+                  </motion.div>
 
-                  {/* Card Content Side with Champagne Cream Gradient */}
-                  <div className="w-full md:w-1/2 text-center md:text-left">
+                  {/* Card Content Side */}
+                  <motion.div
+                    initial={{ opacity: 0, x: isEven ? 30 : -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
+                    className="w-full md:w-1/2 text-left"
+                  >
                     <div
-                      className="p-6 sm:p-8 rounded-2xl border border-gold-400/40 shadow-royal-card space-y-3 hover:border-gold-500 transition-all duration-300 group"
+                      className="p-5 sm:p-8 rounded-2xl border border-gold-400/40 shadow-royal-card space-y-2.5 sm:space-y-3 hover:border-gold-500 transition-all duration-300 group"
                       style={{
                         background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F5EDE2 100%)',
                       }}
                     >
-                      <div className="flex items-center justify-center md:justify-start gap-2 text-gold-600">
-                        <LotusIcon className="w-4 h-4" />
-                        <span className="font-serif text-xs uppercase tracking-widest font-semibold">
-                          {item.date}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1.5 sm:gap-2 text-gold-700">
+                          <LotusIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                          <span className="font-serif text-[11px] sm:text-xs uppercase tracking-widest font-semibold">
+                            {item.date}
+                          </span>
+                        </div>
+                        <span className="text-[10px] sm:text-xs font-mono font-bold px-2 py-0.5 rounded-full bg-gold-400/15 border border-gold-500/30 text-gold-800">
+                          CHAPTER {item.step}
                         </span>
                       </div>
 
-                      <h3 className="font-royal text-2xl font-bold text-burgundy-950 group-hover:text-gold-700 transition-colors">
+                      <h3 className="font-royal text-xl sm:text-2xl font-bold text-burgundy-950 group-hover:text-gold-700 transition-colors">
                         {item.title}
                       </h3>
 
-                      <p className="font-serif text-sm sm:text-base text-burgundy-900/80 leading-relaxed">
+                      <p className="font-serif text-xs sm:text-base text-burgundy-900/85 leading-relaxed">
                         {item.description}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Image Side */}
-                  <div className="w-full md:w-1/2 flex justify-center">
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+                    className="w-full md:w-1/2 flex justify-center"
+                  >
                     <div
-                      className="relative w-full max-w-sm aspect-[4/4.2] sm:aspect-[4/4] rounded-2xl overflow-hidden p-1.5 shadow-royal-card group"
+                      className="relative w-full max-w-sm aspect-[4/3] sm:aspect-[4/4] rounded-2xl overflow-hidden p-1 sm:p-1.5 shadow-royal-card group hover:shadow-2xl transition-all duration-500"
                       style={{
                         background: 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #946618 100%)',
                       }}
@@ -107,12 +133,12 @@ export const SectionStory = () => {
                           alt={item.title}
                           loading="lazy"
                           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                          style={{ objectPosition: item.objectPosition || 'center 8%' }}
+                          style={{ objectPosition: item.objectPosition || 'center center' }}
                         />
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               );
             })}
           </div>
@@ -121,3 +147,5 @@ export const SectionStory = () => {
     </section>
   );
 };
+
+export default SectionStory;

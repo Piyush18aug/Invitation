@@ -12,6 +12,36 @@
   --color-rose: #C97D73;
 }
 
+/* Mobile Safe Area and Touch Optimizations */
+html, body {
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@supports (padding-top: env(safe-area-inset-top)) {
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .pl-safe {
+    padding-left: env(safe-area-inset-left);
+  }
+  .pr-safe {
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Hide scrollbar on mobile horizontal carousels while keeping scrollable */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

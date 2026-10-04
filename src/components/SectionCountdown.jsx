@@ -43,36 +43,36 @@ export const SectionCountdown = () => {
 
   return (
     <section
-      className="relative py-24 px-4 sm:px-6 md:px-12 text-ivory-100 overflow-hidden bg-burgundy-texture"
+      className="relative py-14 sm:py-24 px-3 sm:px-6 md:px-12 text-ivory-100 overflow-hidden bg-burgundy-texture"
     >
       {/* Background Rotating Gold Mandala */}
       <div className="absolute inset-0 flex items-center justify-center opacity-15 pointer-events-none">
-        <div className="w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full border border-gold-400/30 animate-spin-mandala flex items-center justify-center">
+        <div className="w-[450px] sm:w-[600px] md:w-[800px] h-[450px] sm:h-[600px] md:h-[800px] rounded-full border border-gold-400/30 animate-spin-mandala flex items-center justify-center">
           <div className="w-[85%] h-[85%] rounded-full border border-dashed border-gold-300/20 animate-spin-mandala-rev" />
         </div>
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10 text-center">
         {/* Header */}
-        <div className="max-w-2xl mx-auto mb-16 space-y-3">
+        <div className="max-w-2xl mx-auto mb-10 sm:mb-16 space-y-2 sm:space-y-3 px-2">
           <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-300 font-semibold">
             The Countdown
           </span>
-          <h2 className="font-royal text-3xl sm:text-5xl font-bold gold-gradient-text">
+          <h2 className="font-royal text-2xl sm:text-5xl font-bold gold-gradient-text">
             Counting Every Sacred Moment
           </h2>
-          <FloralDivider className="my-3" />
-          <p className="font-serif italic text-ivory-200/80 text-base sm:text-lg">
+          <FloralDivider className="my-2 sm:my-3" />
+          <p className="font-serif italic text-ivory-200/80 text-sm sm:text-lg">
             "Until two souls embark on their eternal journey together."
           </p>
         </div>
 
         {/* Countdown Dials with Diagonal Burgundy-Maroon Linear Gradients */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-3xl mx-auto">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 max-w-3xl mx-auto">
           {timeUnits.map((unit, idx) => (
             <div
               key={idx}
-              className="relative p-6 sm:p-8 rounded-3xl border border-gold-400/50 shadow-gold-glow flex flex-col items-center justify-center group hover:border-gold-400 transition-all duration-300"
+              className="relative p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-gold-400/50 shadow-gold-glow flex flex-col items-center justify-center group hover:border-gold-400 transition-all duration-300"
               style={{
                 background: 'linear-gradient(135deg, #3D0A14 0%, #29040C 60%, #170206 100%)',
               }}
@@ -80,18 +80,18 @@ export const SectionCountdown = () => {
               {/* Corner accent */}
               <span className="absolute top-2 right-2 text-gold-500/40 text-xs">✦</span>
 
-              {/* Number with Rolling Transition */}
-              <span className="font-royal text-4xl sm:text-6xl font-black gold-gradient-text tracking-tight block">
+              {/* Number */}
+              <span className="font-royal text-3xl sm:text-6xl font-black gold-gradient-text tracking-tight block">
                 {String(unit.value).padStart(2, '0')}
               </span>
 
               {/* English Label */}
-              <span className="font-serif text-xs sm:text-sm uppercase tracking-widest text-gold-200/90 font-bold mt-2">
+              <span className="font-serif text-[10px] sm:text-sm uppercase tracking-widest text-gold-200/90 font-bold mt-1 sm:mt-2">
                 {unit.label}
               </span>
 
               {/* Marathi Sub-label */}
-              <span className="font-sanskrit text-xs text-gold-400/60 mt-0.5">
+              <span className="font-sanskrit text-[10px] sm:text-xs text-gold-400/60 mt-0.5">
                 {unit.marathi}
               </span>
             </div>
@@ -99,14 +99,16 @@ export const SectionCountdown = () => {
         </div>
 
         {/* Bottom Diya Accent */}
-        <div className="mt-12 flex justify-center items-center gap-4">
-          <DiyaIcon className="w-8 h-8" />
-          <span className="text-xs text-gold-300 uppercase tracking-widest font-serif font-medium">
+        <div className="mt-8 sm:mt-12 flex justify-center items-center gap-3 sm:gap-4 px-2">
+          <DiyaIcon className="w-6 h-6 sm:w-8 sm:h-8" />
+          <span className="text-[11px] sm:text-xs text-gold-300 uppercase tracking-widest font-serif font-medium">
             24 October 2026 • 11:00 AM IST
           </span>
-          <DiyaIcon className="w-8 h-8" />
+          <DiyaIcon className="w-6 h-6 sm:w-8 sm:h-8" />
         </div>
       </div>
     </section>
   );
 };
+
+export default SectionCountdown;

@@ -1,335 +1,461 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
-import { Sparkles, Layers, ChevronLeft, ChevronRight } from 'lucide-react';
-import { FloralDivider, DiyaIcon, GoldenEngagementRings } from './OrnamentalIcons';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
+import { ChevronDown } from 'lucide-react';
+import { DiyaIcon, GoldenEngagementRings, CornerOrnament } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
+import { introFrames } from '../data/introFrames';
 
 export const SectionCouple = () => {
-  const { bride, groom } = invitationData.couple;
-  const groomPhotos = groom.photos || [groom.image];
-  const bridePhotos = bride.photos || [bride.image];
-
-  const [groomIndex, setGroomIndex] = useState(0);
-  const [brideIndex, setBrideIndex] = useState(0);
-
-  const sectionRef = useRef(null);
+  const containerRef = useRef(null);
+  const canvasRef = useRef(null);
+  const lastDrawnIdxRef = useRef(-1);
+  const dimensionsRef = useRef({ w: 0, h: 0, dpr: 1 });
   const [isMobile, setIsMobile] = useState(false);
+  const imagesCacheRef = useRef([]);
 
+  // Direct Motion Value for robust scroll tracking across all devices
+  const scrollProgress = useMotionValue(0);
+
+  const groomName = invitationData.couple.groom.name.toUpperCase() || 'PRATHAMESH';
+  const brideName = (invitationData.couple.bride.name || 'REVATI').toUpperCase();
+
+  // Resize and Mobile Detection
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const handleResize = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      dimensionsRef.current = { w, h, dpr };
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+
+      // Trigger redraw
+      lastDrawnIdxRef.current = -1;
+      drawFrame(scrollProgress.get());
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [scrollProgress]);
+
+  // High-performance direct canvas frame renderer
+  const drawFrame = useCallback((progressVal) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const frames = imagesCacheRef.current;
+    const totalFrames = introFrames.length;
+    if (totalFrames === 0) return;
+
+    const clampedProgress = Math.max(0, Math.min(1, progressVal));
+    const targetIdx = Math.min(
+      totalFrames - 1,
+      Math.floor(clampedProgress * (totalFrames - 1))
+    );
+
+    // Skip redundant draws if the same frame is already rendered
+    if (targetIdx === lastDrawnIdxRef.current && lastDrawnIdxRef.current !== -1) {
+      return;
+    }
+
+    // Find requested frame, or closest available loaded frame
+    let img = frames[targetIdx];
+    if (!img) {
+      for (let offset = 1; offset < totalFrames; offset++) {
+        if (targetIdx - offset >= 0 && frames[targetIdx - offset]) {
+          img = frames[targetIdx - offset];
+          break;
+        }
+        if (targetIdx + offset < totalFrames && frames[targetIdx + offset]) {
+          img = frames[targetIdx + offset];
+          break;
+        }
+      }
+    }
+
+    if (!img || !img.complete || img.naturalWidth === 0) return;
+
+    const { w, h, dpr } = dimensionsRef.current;
+    if (w === 0 || h === 0) return;
+
+    ctx.save();
+    ctx.scale(dpr, dpr);
+    ctx.clearRect(0, 0, w, h);
+
+    const imgW = img.naturalWidth || 800;
+    const imgH = img.naturalHeight || 450;
+    const imgRatio = imgW / imgH;
+    const isMobileView = w < 768;
+
+    let drawW, drawH, posX, posY;
+
+    if (isMobileView) {
+      // Mobile / Portrait: Slightly bigger (1.22x) and centered in the middle
+      const mobileScale = 1.22;
+      drawW = w * mobileScale;
+      drawH = (w / imgRatio) * mobileScale;
+      posX = (w - drawW) / 2;
+      posY = Math.max(40, (h - drawH) / 2 - 25);
+    } else {
+      // Desktop / Widescreen: Full cinematic cover
+      const screenRatio = w / h;
+      if (screenRatio > imgRatio) {
+        drawW = w;
+        drawH = w / imgRatio;
+        posX = 0;
+        posY = (h - drawH) / 2;
+      } else {
+        drawH = h;
+        drawW = h * imgRatio;
+        posX = (w - drawW) / 2;
+        posY = 0;
+      }
+    }
+
+    ctx.drawImage(img, posX, posY, drawW, drawH);
+    ctx.restore();
+
+    lastDrawnIdxRef.current = targetIdx;
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
+  // Preload all 150 frames progressively
+  useEffect(() => {
+    let isMounted = true;
+    const total = introFrames.length;
+    const images = new Array(total);
 
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 85,
-    damping: 26,
-    restDelta: 0.001,
-  });
+    // 1. Frame 0 immediate load
+    const firstImg = new Image();
+    firstImg.src = introFrames[0];
+    firstImg.onload = () => {
+      if (!isMounted) return;
+      images[0] = firstImg;
+      drawFrame(scrollProgress.get());
+    };
+    if (firstImg.complete) {
+      images[0] = firstImg;
+      drawFrame(scrollProgress.get());
+    }
 
-  // Groom 3D Transforms (tilts inward from left)
-  const groomRotateX = useTransform(smoothProgress, [0, 0.5, 1], isMobile ? [3, 0, -3] : [6, 0, -6]);
-  const groomRotateY = useTransform(smoothProgress, [0, 0.5, 1], isMobile ? [-5, 0, 5] : [-10, 0, 10]);
-  const groomScale = useTransform(smoothProgress, [0, 0.5, 1], isMobile ? [1, 0.98, 0.93] : [1, 0.96, 0.90]);
-  const groomY = useTransform(smoothProgress, [0, 0.5, 1], isMobile ? [0, 20, 50] : [0, 35, 80]);
+    // 2. Progressive background preloading for remaining frames
+    introFrames.forEach((src, idx) => {
+      if (idx === 0) return;
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        if (!isMounted) return;
+        images[idx] = img;
+        const currentTarget = Math.floor(scrollProgress.get() * (total - 1));
+        if (Math.abs(currentTarget - idx) <= 2) {
+          drawFrame(scrollProgress.get());
+        }
+      };
+    });
 
-  // Bride 3D Transforms (tilts inward from right)
-  const brideRotateX = useTransform(smoothProgress, [0, 0.5, 1], isMobile ? [3, 0, -3] : [6, 0, -6]);
-  const brideRotateY = useTransform(smoothProgress, [0, 0.5, 1], isMobile ? [5, 0, -5] : [10, 0, -10]);
-  const brideScale = useTransform(smoothProgress, [0, 0.5, 1], isMobile ? [1, 0.98, 0.93] : [1, 0.96, 0.90]);
-  const brideY = useTransform(smoothProgress, [0, 0.5, 1], isMobile ? [0, 20, 50] : [0, 35, 80]);
+    imagesCacheRef.current = images;
 
-  const handleNextGroomPhoto = (e) => {
-    e?.stopPropagation();
-    setGroomIndex((prev) => (prev + 1) % groomPhotos.length);
-  };
+    return () => {
+      isMounted = false;
+    };
+  }, [drawFrame, scrollProgress]);
 
-  const handlePrevGroomPhoto = (e) => {
-    e?.stopPropagation();
-    setGroomIndex((prev) => (prev - 1 + groomPhotos.length) % groomPhotos.length);
-  };
+  // Robust Native & Lenis Scroll Listener
+  useEffect(() => {
+    let rafId = null;
+
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const totalScrollable = rect.height - window.innerHeight;
+      
+      if (totalScrollable <= 0) return;
+
+      // rect.top goes from 0 (at top of viewport) to -totalScrollable (at end)
+      const rawProgress = -rect.top / totalScrollable;
+      const progress = Math.max(0, Math.min(1, rawProgress));
+
+      scrollProgress.set(progress);
+
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        drawFrame(progress);
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial position check
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, [drawFrame, scrollProgress]);
+
+  // Timeline Transitions (Desktop):
+  const groomOpacity = useTransform(scrollProgress, [0.08, 0.25, 0.40, 0.50], [0, 1, 1, 0.2]);
+  const groomX = useTransform(scrollProgress, [0.08, 0.25], isMobile ? [-20, 0] : [-60, 0]);
+
+  const brideOpacity = useTransform(scrollProgress, [0.28, 0.45, 0.60, 0.70], [0, 1, 1, 0.2]);
+  const brideX = useTransform(scrollProgress, [0.28, 0.45], isMobile ? [20, 0] : [60, 0]);
+
+  // Mobile-specific Sequenced Overlays
+  const groomOpacityMobile = useTransform(scrollProgress, [0.06, 0.18, 0.38, 0.46], [0, 1, 1, 0]);
+  const groomYMobile = useTransform(scrollProgress, [0.06, 0.18, 0.38, 0.46], [20, 0, 0, -15]);
+
+  const brideOpacityMobile = useTransform(scrollProgress, [0.46, 0.58, 0.78, 0.86], [0, 1, 1, 0]);
+  const brideYMobile = useTransform(scrollProgress, [0.46, 0.58, 0.78, 0.86], [20, 0, 0, -15]);
+
+  // Central Sacred Emblem & Name Golden Glow
+  const centerEmblemOpacity = useTransform(scrollProgress, [0.38, 0.58], [0, 1]);
+  const centerEmblemScale = useTransform(scrollProgress, [0.38, 0.58], [0.85, 1]);
+
+  // Bottom Save-The-Date Banner
+  const bottomBannerOpacity = useTransform(scrollProgress, [0.65, 0.85], [0, 1]);
+  const bottomBannerY = useTransform(scrollProgress, [0.65, 0.85], [20, 0]);
+
+  // Initial scroll hint fades out quickly
+  const hintOpacity = useTransform(scrollProgress, [0, 0.08], [1, 0]);
 
   return (
-    <section
-      ref={sectionRef}
+    <div
+      ref={containerRef}
       id="couple"
-      className="relative py-24 px-4 sm:px-6 md:px-12 overflow-hidden bg-paper-texture-champagne"
+      className="relative h-[260vh] sm:h-[280vh] bg-[#140205] text-ivory-100"
     >
-      {/* Ambient Royal Spotlights & Floating Bokeh Glow */}
-      <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-gold-400/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
-      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-roseGold-400/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,240,189,0.25)_0%,_transparent_60%)] pointer-events-none" />
+      {/* Sticky Fullscreen Cinematic Viewport */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between select-none">
+        
+        {/* ========================================================================= */}
+        {/* 1. CINEMATIC VIDEO FRAME CANVAS (FULLSCREEN HD 60FPS SCRUB)               */}
+        {/* ========================================================================= */}
+        <div className="absolute inset-0 z-0 bg-[#140205]">
+          {/* Base poster frame fallback */}
+          <img
+            src={introFrames[0]}
+            alt="Prathamesh & Revati"
+            className="absolute inset-0 w-full h-full object-cover hidden md:block filter brightness-[0.96] contrast-[1.04]"
+          />
 
-      <div className="max-w-6xl mx-auto relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16 space-y-3">
-          <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold">
-            Meet The Couple
-          </span>
-          <h2 className="font-royal text-3xl sm:text-4xl md:text-5xl font-bold text-burgundy-950">
-            Two Hearts. One Journey.
-          </h2>
-          <FloralDivider className="my-3" />
-          <p className="font-serif italic text-burgundy-900/80 text-base sm:text-lg">
-            "In all the world, there is no heart for me like yours. In all the world, there is no love for you like mine."
-          </p>
+          <canvas
+            ref={canvasRef}
+            className="relative z-10 w-full h-full block filter brightness-[0.96] contrast-[1.04]"
+          />
+
+          {/* Elegant Translucent Vignette Overlays - Keeps the couple visible and bright */}
+          <div className="absolute inset-0 z-20 bg-gradient-to-b from-[#140205]/75 via-transparent to-[#140205]/80 pointer-events-none" />
+          <div className="absolute inset-0 z-20 bg-gradient-to-r from-[#140205]/60 via-transparent to-[#140205]/60 pointer-events-none hidden md:block" />
         </div>
 
-        {/* Couple Portraits Grid (Groom First, Bride Second) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 items-center relative">
-          {/* Center Golden Engagement Rings Medallion (Between the two photos) */}
-          <div className="hidden md:flex absolute top-[46%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 flex-col items-center pointer-events-none">
-            <motion.div
-              animate={{
-                y: [0, -6, 0],
-                rotate: [0, 1.5, 0, -1.5, 0],
-              }}
-              transition={{
-                duration: 6,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-              className="relative p-3.5 rounded-full backdrop-blur-md border border-gold-400/60 shadow-[0_12px_32px_rgba(212,175,55,0.35)] flex items-center justify-center group"
-              style={{
-                background: 'linear-gradient(135deg, rgba(255, 253, 249, 0.95) 0%, rgba(250, 245, 236, 0.98) 50%, rgba(245, 237, 226, 0.95) 100%)',
-              }}
-            >
-              <div className="absolute inset-0 rounded-full bg-gold-400/15 blur-md animate-pulse" />
-              <GoldenEngagementRings className="w-16 h-16" />
-            </motion.div>
-            <div className="mt-2.5 px-3.5 py-0.5 rounded-full border border-gold-400/50 backdrop-blur-sm bg-ivory-50/90 shadow-sm">
-              <span className="font-sanskrit text-xs font-bold text-gold-800 tracking-wider">
+        {/* Ambient Floating Gold Dust Glow */}
+        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-gold-400/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/4 right-1/4 w-80 h-80 bg-roseGold-400/10 rounded-full blur-3xl pointer-events-none" />
+
+        {/* Decorative Corner Filigree */}
+        <div className="absolute top-4 left-4 z-20 pointer-events-none opacity-50 sm:opacity-70">
+          <CornerOrnament className="w-8 h-8 sm:w-14 sm:h-14" />
+        </div>
+        <div className="absolute top-4 right-4 z-20 pointer-events-none opacity-50 sm:opacity-70 rotate-90">
+          <CornerOrnament className="w-8 h-8 sm:w-14 sm:h-14" />
+        </div>
+
+        {/* ========================================================================= */}
+        {/* 2. TOP AMBIENT SANSKRIT TITLE                                             */}
+        {/* ========================================================================= */}
+        <div className="relative z-20 pt-6 sm:pt-10 px-4 text-center">
+          <span className="inline-block font-sanskrit text-[11px] sm:text-xs tracking-[0.25em] text-gold-300/90 drop-shadow-md">
+            ॥ श्री गणेशाय नमः ॥
+          </span>
+        </div>
+
+        {/* ========================================================================= */}
+        {/* 3. MIDDLE OVERLAY: GROOM & BRIDE DETAILS                                  */}
+        {/* ========================================================================= */}
+
+        {/* Desktop Layout: Side-by-side Left & Right */}
+        <div className="hidden md:flex relative z-20 flex-1 items-center justify-between max-w-7xl mx-auto w-full px-8 md:px-16 my-auto">
+          {/* ------------ GROOM INTRO (LEFT SIDE) ------------ */}
+          <motion.div
+            style={{
+              opacity: groomOpacity,
+              x: groomX,
+            }}
+            className="flex-1 text-left max-w-xs sm:max-w-sm md:max-w-md"
+          >
+            <div className="space-y-1.5 sm:space-y-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full backdrop-blur-md bg-burgundy-950/75 border border-gold-400/50 shadow-md">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-ping" />
+                <span className="font-sanskrit text-[11px] sm:text-xs text-gold-300 font-bold tracking-wider">
+                  ॥ वर ॥
+                </span>
+              </div>
+
+              <h2 className="font-royal text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-wider gold-gradient-text drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+                {groomName}
+              </h2>
+
+              <div className="flex items-center gap-2 pt-0.5">
+                <span className="text-gold-400 text-sm">✦</span>
+                <span className="font-serif italic text-xs sm:text-base md:text-lg text-gold-100 tracking-widest uppercase font-semibold drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                  The Groom
+                </span>
+                <span className="text-gold-400 text-sm">✦</span>
+              </div>
+
+              <p className="font-serif italic text-xs sm:text-sm text-gold-200/85 leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] pt-1">
+                "{invitationData.couple.groom.bio}"
+              </p>
+            </div>
+          </motion.div>
+
+          {/* ------------ CENTER CONNECTING MEDALLION ------------ */}
+          <motion.div
+            style={{
+              opacity: centerEmblemOpacity,
+              scale: centerEmblemScale,
+            }}
+            className="flex flex-col items-center justify-center px-2 pointer-events-none"
+          >
+            <div className="p-3 sm:p-4 rounded-full backdrop-blur-md border border-gold-400/70 shadow-[0_0_30px_rgba(212,175,55,0.4)] bg-burgundy-950/80">
+              <GoldenEngagementRings className="w-8 h-8 sm:w-14 sm:h-14 md:w-16 md:h-16" />
+            </div>
+            <div className="mt-1.5 px-3 py-0.5 rounded-full border border-gold-400/60 backdrop-blur-md bg-burgundy-950/90 shadow-md">
+              <span className="font-sanskrit text-[10px] sm:text-xs font-bold text-gold-300 tracking-wider">
                 ॥ वाङ्निश्चय ॥
               </span>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Groom Card: Prathamesh with Photo Stack */}
-          <div
-            className="flex flex-col items-center text-center"
-            style={{ perspective: '1200px' }}
+          {/* ------------ BRIDE INTRO (RIGHT SIDE) ------------ */}
+          <motion.div
+            style={{
+              opacity: brideOpacity,
+              x: brideX,
+            }}
+            className="flex-1 text-right max-w-xs sm:max-w-sm md:max-w-md flex flex-col items-end"
           >
+            <div className="space-y-1.5 sm:space-y-2">
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full backdrop-blur-md bg-burgundy-950/75 border border-gold-400/50 shadow-md">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-ping" />
+                <span className="font-sanskrit text-[11px] sm:text-xs text-gold-300 font-bold tracking-wider">
+                  ॥ वधू ॥
+                </span>
+              </div>
+
+              <h2 className="font-royal text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-wider gold-gradient-text drop-shadow-[0_4px_16px_rgba(0,0,0,0.95)]">
+                {brideName}
+              </h2>
+
+              <div className="flex items-center justify-end gap-2 pt-0.5">
+                <span className="text-gold-400 text-sm">✦</span>
+                <span className="font-serif italic text-xs sm:text-base md:text-lg text-gold-100 tracking-widest uppercase font-semibold drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+                  The Bride
+                </span>
+                <span className="text-gold-400 text-sm">✦</span>
+              </div>
+
+              <p className="font-serif italic text-xs sm:text-sm text-gold-200/85 leading-relaxed drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)] pt-1">
+                "{invitationData.couple.bride.bio}"
+              </p>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Mobile Layout: Frosted Card in Lower-Third so Couple's Faces are Always Clear */}
+        <div className="md:hidden relative z-20 w-full px-4 text-center mt-auto mb-14">
+          <div className="relative min-h-[120px] flex items-center justify-center">
+            {/* Groom on Mobile */}
             <motion.div
               style={{
-                transformStyle: 'preserve-3d',
-                rotateX: groomRotateX,
-                rotateY: groomRotateY,
-                scale: groomScale,
-                y: groomY,
+                opacity: groomOpacityMobile,
+                y: groomYMobile,
               }}
-              className="w-full max-w-sm flex flex-col items-center group will-change-transform"
+              className="absolute inset-x-0 mx-auto max-w-xs p-4 rounded-2xl backdrop-blur-md bg-burgundy-950/75 border border-gold-400/40 shadow-2xl space-y-1.5"
             >
-              {/* Arch Portrait Frame with Metallic Antique Gold Linear Gradient */}
-              <div
-                onClick={handleNextGroomPhoto}
-                className="relative w-full aspect-[4/5] rounded-t-[140px] rounded-b-2xl overflow-hidden p-2.5 shadow-royal-card transition-transform duration-500 group-hover:-translate-y-2 cursor-pointer select-none"
-                style={{
-                  background: 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 35%, #FFF0BD 65%, #946618 100%)',
-                  transformStyle: 'preserve-3d',
-                }}
-              >
-                {/* Inner Frame with Dark Burgundy Gradient */}
-                <div
-                  className="relative w-full h-full rounded-t-[130px] rounded-b-xl overflow-hidden"
-                  style={{
-                    background: 'linear-gradient(135deg, #2D050D 0%, #170206 100%)',
-                    transformStyle: 'preserve-3d',
-                  }}
-                >
-                  <AnimatePresence mode="wait">
-                    <motion.img
-                      key={groomPhotos[groomIndex]}
-                      src={groomPhotos[groomIndex]}
-                      alt={groom.name}
-                      initial={{ opacity: 0, scale: 1.05 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.45, ease: 'easeOut' }}
-                      loading="lazy"
-                      className="w-full h-full object-cover transform filter contrast-[1.03]"
-                      style={{ objectPosition: 'center 0%' }}
-                    />
-                  </AnimatePresence>
-
-                  {/* Gradient Shadow Overlay */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background: 'linear-gradient(180deg, transparent 40%, rgba(35, 4, 10, 0.85) 100%)',
-                    }}
-                  />
-
-                  {/* Top Stack Counter Badge */}
-                  {groomPhotos.length > 1 && (
-                    <div className="absolute top-4 right-4 z-10 flex items-center gap-1 px-2.5 py-1 rounded-full backdrop-blur-md bg-burgundy-950/75 border border-gold-400/50 text-[11px] font-serif text-gold-200 shadow-md">
-                      <Layers className="w-3 h-3 text-gold-400" />
-                      <span>{groomIndex + 1}/{groomPhotos.length}</span>
-                    </div>
-                  )}
-
-                  {/* Arrow controls on hover */}
-                  {groomPhotos.length > 1 && (
-                    <>
-                      <button
-                        onClick={handlePrevGroomPhoto}
-                        aria-label="Previous photo"
-                        className="absolute left-2.5 top-1/2 -translate-y-1/2 p-1.5 rounded-full backdrop-blur-md bg-burgundy-950/60 border border-gold-400/40 text-gold-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-burgundy-950/90 z-10"
-                      >
-                        <ChevronLeft className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={handleNextGroomPhoto}
-                        aria-label="Next photo"
-                        className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 rounded-full backdrop-blur-md bg-burgundy-950/60 border border-gold-400/40 text-gold-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-burgundy-950/90 z-10"
-                      >
-                        <ChevronRight className="w-4 h-4" />
-                      </button>
-                    </>
-                  )}
-
-                  {/* Bottom Tag & Stack Indicator Dots */}
-                  <div className="absolute bottom-4 inset-x-0 text-center space-y-2 z-10">
-                    {/* Pagination Dots */}
-                    {groomPhotos.length > 1 && (
-                      <div className="flex justify-center items-center gap-1.5">
-                        {groomPhotos.map((_, i) => (
-                          <button
-                            key={i}
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setGroomIndex(i);
-                            }}
-                            className={`h-1.5 rounded-full transition-all duration-300 ${
-                              groomIndex === i ? 'w-5 bg-gold-300 shadow-sm' : 'w-1.5 bg-gold-400/40 hover:bg-gold-400/80'
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    )}
-                    <span
-                      className="inline-block px-4 py-1 rounded-full backdrop-blur-md border border-gold-400/40 text-xs font-serif uppercase tracking-widest text-gold-200 shadow-md"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(59, 10, 20, 0.4) 100%)',
-                      }}
-                    >
-                      {groom.role}
-                    </span>
-                  </div>
-                </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-burgundy-900/80 border border-gold-400/50">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
+                <span className="font-sanskrit text-[11px] text-gold-300 font-bold tracking-wider">
+                  ॥ वर ॥ The Groom
+                </span>
               </div>
-
-              {/* Details */}
-              <div className="mt-6 space-y-2 max-w-xs">
-                <h3 className="font-royal text-3xl font-bold text-burgundy-950 tracking-wide">
-                  {groom.name}
-                </h3>
-                <p className="font-serif text-sm text-burgundy-800/80 leading-relaxed italic">
-                  "{groom.bio}"
-                </p>
-              </div>
+              <h2 className="font-royal text-2xl font-extrabold tracking-wider gold-gradient-text drop-shadow-md">
+                {groomName}
+              </h2>
+              <p className="font-serif italic text-xs text-gold-200/90 leading-relaxed">
+                "{invitationData.couple.groom.bio}"
+              </p>
             </motion.div>
-          </div>
 
-          {/* Bride Card: Revati with 3D Perspective */}
-          <div
-            className="flex flex-col items-center text-center"
-            style={{ perspective: '1200px' }}
-          >
+            {/* Bride on Mobile */}
             <motion.div
               style={{
-                transformStyle: 'preserve-3d',
-                rotateX: brideRotateX,
-                rotateY: brideRotateY,
-                scale: brideScale,
-                y: brideY,
+                opacity: brideOpacityMobile,
+                y: brideYMobile,
               }}
-              className="w-full max-w-sm flex flex-col items-center group will-change-transform"
+              className="absolute inset-x-0 mx-auto max-w-xs p-4 rounded-2xl backdrop-blur-md bg-burgundy-950/75 border border-gold-400/40 shadow-2xl space-y-1.5"
             >
-              {/* Arch Portrait Frame with Metallic Antique Gold Linear Gradient */}
-              <div
-                className="relative w-full aspect-[4/5] rounded-t-[140px] rounded-b-2xl overflow-hidden p-2.5 shadow-royal-card transition-transform duration-500 group-hover:-translate-y-2"
-                style={{
-                  background: 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 35%, #FFF0BD 65%, #946618 100%)',
-                  transformStyle: 'preserve-3d',
-                }}
-              >
-                {/* Inner Frame */}
-                <div
-                  className="relative w-full h-full rounded-t-[130px] rounded-b-xl overflow-hidden"
-                  style={{
-                    background: 'linear-gradient(135deg, #2D050D 0%, #170206 100%)',
-                    transformStyle: 'preserve-3d',
-                  }}
-                >
-                  <img
-                    src={bride.image}
-                    alt={bride.name}
-                    loading="lazy"
-                    className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-out filter contrast-[1.03]"
-                    style={{ objectPosition: 'center 0%' }}
-                  />
-                  {/* Gradient Shadow Overlay */}
-                  <div
-                    className="absolute inset-0 pointer-events-none"
-                    style={{
-                      background: 'linear-gradient(180deg, transparent 40%, rgba(35, 4, 10, 0.85) 100%)',
-                    }}
-                  />
-
-                  {/* Bottom Tag */}
-                  <div className="absolute bottom-4 inset-x-0 text-center">
-                    <span
-                      className="inline-block px-4 py-1 rounded-full backdrop-blur-md border border-gold-400/40 text-xs font-serif uppercase tracking-widest text-gold-200"
-                      style={{
-                        background: 'linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(59, 10, 20, 0.4) 100%)',
-                      }}
-                    >
-                      {bride.role}
-                    </span>
-                  </div>
-                </div>
+              <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-burgundy-900/80 border border-gold-400/50">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
+                <span className="font-sanskrit text-[11px] text-gold-300 font-bold tracking-wider">
+                  ॥ वधू ॥ The Bride
+                </span>
               </div>
-
-              {/* Details */}
-              <div className="mt-6 space-y-2 max-w-xs">
-                <h3 className="font-royal text-3xl font-bold text-burgundy-950 tracking-wide">
-                  {bride.name}
-                </h3>
-                <p className="font-serif text-sm text-burgundy-800/80 leading-relaxed italic">
-                  "{bride.bio}"
-                </p>
-              </div>
+              <h2 className="font-royal text-2xl font-extrabold tracking-wider gold-gradient-text drop-shadow-md">
+                {brideName}
+              </h2>
+              <p className="font-serif italic text-xs text-gold-200/90 leading-relaxed">
+                "{invitationData.couple.bride.bio}"
+              </p>
             </motion.div>
           </div>
         </div>
 
-        {/* Center Connecting Motif with Golden Engagement Rings */}
-        <div className="mt-14 flex flex-col sm:flex-row justify-center items-center gap-4 text-gold-600">
-          <div className="flex items-center gap-3">
-            <DiyaIcon className="w-7 h-7" />
-            <span className="w-12 sm:w-20 h-[1px] bg-gradient-to-r from-transparent to-gold-400" />
-          </div>
-
-          <div className="flex items-center gap-2.5 px-5 py-2 rounded-full border border-gold-400/50 backdrop-blur-md bg-ivory-50/70 shadow-sm">
-            <GoldenEngagementRings className="w-8 h-8" />
-            <span className="font-serif italic text-xs uppercase tracking-widest text-burgundy-950 font-semibold">
-              Two Souls, One Sacred Promise
+        {/* ========================================================================= */}
+        {/* 4. BOTTOM BAR: SCROLL HINT & ROYAL EVENT BANNER                            */}
+        {/* ========================================================================= */}
+        <div className="relative z-20 pb-6 sm:pb-8 px-4 text-center">
+          
+          {/* Scroll Hint at Progress 0% */}
+          <motion.div
+            style={{
+              opacity: hintOpacity,
+            }}
+            className="flex flex-col items-center justify-center gap-1 text-gold-300 pointer-events-none"
+          >
+            <span className="font-serif italic text-xs sm:text-sm tracking-widest uppercase drop-shadow-md">
+              Scroll down to experience the journey
             </span>
-            <Sparkles className="w-4 h-4 text-gold-500 animate-pulse" />
-          </div>
+            <ChevronDown className="w-5 h-5 text-gold-400 animate-bounce" />
+          </motion.div>
 
-          <div className="flex items-center gap-3">
-            <span className="w-12 sm:w-20 h-[1px] bg-gradient-to-l from-transparent to-gold-400" />
-            <DiyaIcon className="w-7 h-7" />
-          </div>
+          {/* Reveal Event Banner at 65% - 100% */}
+          <motion.div
+            style={{
+              opacity: bottomBannerOpacity,
+              y: bottomBannerY,
+            }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-gold-300"
+          >
+            <DiyaIcon className="w-5 h-5" />
+            <span className="font-serif italic text-xs sm:text-sm text-gold-300/90">
+              Two Hearts • One Sacred Promise
+            </span>
+            <DiyaIcon className="w-5 h-5" />
+          </motion.div>
         </div>
+
       </div>
-    </section>
+    </div>
   );
 };
+
+export default SectionCouple;

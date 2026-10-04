@@ -17,11 +17,20 @@ import { SectionFamily } from './components/SectionFamily';
 import { SectionGallery } from './components/SectionGallery';
 import { SectionRSVP } from './components/SectionRSVP';
 import { SectionFinal } from './components/SectionFinal';
+import { introFrames } from './data/introFrames';
 
 export function App() {
   const [hasOpened, setHasOpened] = useState(false);
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
   const [isCelebration, setIsCelebration] = useState(false);
+
+  // Global early preloader for couple video frames (cached during opening screen)
+  useEffect(() => {
+    introFrames.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   // Initialize Lenis smooth scroll
   useEffect(() => {
@@ -61,14 +70,12 @@ export function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#FAF6EE] text-[#2A1B18] font-sans antialiased overflow-x-hidden selection:bg-gold-500/30 selection:text-burgundy-950">
+    <div className="relative min-h-screen bg-[#FAF6EE] text-[#2A1B18] font-sans antialiased selection:bg-gold-500/30 selection:text-burgundy-950">
       {/* Floating Petal & Gold Sparkle Canvas */}
       <PetalCanvas isCelebration={isCelebration} density={hasOpened ? 'normal' : 'high'} />
 
       {/* Opening Cinematic Screen */}
-      {!hasOpened && (
-        <OpeningScreen onOpenInvitation={handleOpenInvitation} />
-      )}
+      <OpeningScreen onOpenInvitation={handleOpenInvitation} hasOpened={hasOpened} />
 
       {/* Main Experience (Visible after opening) */}
       <div className={`transition-opacity duration-1000 ${hasOpened ? 'opacity-100' : 'opacity-0'}`}>
@@ -86,7 +93,7 @@ export function App() {
           {/* Section 01: The Luxury Invitation */}
           <SectionInvitation />
 
-          {/* Section 02: Couple Introduction */}
+          {/* Section 02: Couple Introduction Scroll-Driven Storytelling Animation */}
           <SectionCouple />
 
           {/* Section 03: Story Timeline */}
