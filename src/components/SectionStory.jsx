@@ -16,7 +16,7 @@ export const SectionStory = () => {
   return (
     <section
       id="story"
-      className="relative pt-4 sm:pt-8 pb-14 sm:pb-24 px-3 sm:px-6 md:px-12 overflow-hidden bg-paper-texture-sand"
+      className="relative -mt-10 sm:-mt-16 z-30 pt-8 sm:pt-12 pb-14 sm:pb-24 px-3 sm:px-6 md:px-12 overflow-hidden bg-paper-texture-sand rounded-t-[32px] sm:rounded-t-[48px] shadow-[0_-20px_50px_rgba(0,0,0,0.5)] border-t border-gold-400/40"
     >
       {/* Background Subtle Gold Mandala Watermark */}
       <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none">

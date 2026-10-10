@@ -28,7 +28,7 @@ export const SectionCouple = () => {
       const canvas = canvasRef.current;
       if (!canvas) return;
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       const w = window.innerWidth;
       const h = window.innerHeight;
 
@@ -147,19 +147,43 @@ export const SectionCouple = () => {
       drawFrame(scrollProgress.get());
     }
 
-    // 2. Progressive background preloading for remaining frames
-    introFrames.forEach((src, idx) => {
-      if (idx === 0) return;
-      const img = new Image();
-      img.src = src;
-      img.onload = () => {
-        if (!isMounted) return;
-        images[idx] = img;
-        const currentTarget = Math.floor(scrollProgress.get() * (total - 1));
-        if (Math.abs(currentTarget - idx) <= 2) {
-          drawFrame(scrollProgress.get());
-        }
-      };
+    // 2. Prioritized two-stage frame loading (keyframes first, then intermediate in-between frames)
+    const keyframeIndices = [];
+    const remainingIndices = [];
+    for (let i = 1; i < total; i++) {
+      if (i % 3 === 0 || i === total - 1) keyframeIndices.push(i);
+      else remainingIndices.push(i);
+    }
+
+    const loadBatch = (indices, onBatchDone) => {
+      let loaded = 0;
+      if (indices.length === 0) {
+        onBatchDone?.();
+        return;
+      }
+      indices.forEach((idx) => {
+        const img = new Image();
+        img.src = introFrames[idx];
+        img.onload = () => {
+          if (!isMounted) return;
+          images[idx] = img;
+          const currentTarget = Math.floor(scrollProgress.get() * (total - 1));
+          if (Math.abs(currentTarget - idx) <= 2) {
+            drawFrame(scrollProgress.get());
+          }
+          loaded++;
+          if (loaded === indices.length) onBatchDone?.();
+        };
+        img.onerror = () => {
+          loaded++;
+          if (loaded === indices.length) onBatchDone?.();
+        };
+      });
+    };
+
+    loadBatch(keyframeIndices, () => {
+      if (!isMounted) return;
+      loadBatch(remainingIndices);
     });
 
     imagesCacheRef.current = images;
@@ -233,7 +257,7 @@ export const SectionCouple = () => {
     <div
       ref={containerRef}
       id="couple"
-      className="relative h-[195vh] sm:h-[210vh] bg-[#140205] text-ivory-100"
+      className="relative h-[140vh] sm:h-[155vh] bg-[#140205] text-ivory-100"
     >
       {/* Sticky Fullscreen Cinematic Viewport */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between select-none">

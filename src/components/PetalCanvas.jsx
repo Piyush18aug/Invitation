@@ -55,7 +55,12 @@ export const PetalCanvas = ({ density = 'normal', isCelebration = false, active 
       { fill: '#F7D070', edge: '#D4AF37', type: 'goldDust', name: 'shimmer' },
     ];
 
-    const count = isCelebration ? 85 : density === 'high' ? 60 : 36;
+    const isMobileDevice = window.innerWidth < 768;
+    const count = isCelebration 
+      ? (isMobileDevice ? 40 : 85) 
+      : density === 'high' 
+        ? (isMobileDevice ? 24 : 60) 
+        : (isMobileDevice ? 16 : 36);
     const particles = [];
 
     for (let i = 0; i < count; i++) {

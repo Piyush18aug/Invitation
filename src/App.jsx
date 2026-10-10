@@ -17,7 +17,6 @@ import { SectionFamily } from './components/SectionFamily';
 import { SectionGallery } from './components/SectionGallery';
 import { SectionRSVP } from './components/SectionRSVP';
 import { SectionFinal } from './components/SectionFinal';
-import { introFrames } from './data/introFrames';
 
 export function App() {
   const [hasOpened, setHasOpened] = useState(false);
@@ -59,22 +58,25 @@ export function App() {
     }
   }, [hasOpened]);
 
-  // Global early preloader for couple video frames (cached during opening screen)
+  // Initialize Lenis smooth scroll (optimized: mouse wheel on desktop, native 120Hz GPU touch on mobile)
   useEffect(() => {
-    introFrames.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
+    const isTouchDevice = typeof window !== 'undefined' && (
+      window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window
+    );
 
-  // Initialize Lenis smooth scroll
-  useEffect(() => {
+    // On touch devices, native momentum scrolling is smoother and uses less battery/GPU
+    if (isTouchDevice) {
+      window.scrollTo(0, 0);
+      return;
+    }
+
     const lenis = new Lenis({
-      duration: 1.2,
+      duration: 1.0,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       smoothWheel: true,
-      wheelMultiplier: 0.9,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 0,
     });
     lenisRef.current = lenis;
 
@@ -82,13 +84,15 @@ export function App() {
     lenis.scrollTo(0, { immediate: true });
     window.scrollTo(0, 0);
 
+    let rafId;
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenisRef.current = null;
       lenis.destroy();
     };
