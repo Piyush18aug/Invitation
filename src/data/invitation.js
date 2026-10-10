@@ -121,7 +121,7 @@ export const invitationData = {
     },
     {
       step: "08",
-      date: "24 October 2026",
+      date: "",
       title: "The Engagement",
       description: "The auspicious day we exchange rings and pledge our hearts forever at Royal Palace, Sangli.",
       image: "/assets/images/revati_pink_saree.jpg",
