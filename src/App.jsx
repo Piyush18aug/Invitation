@@ -5,7 +5,6 @@ import { AudioPlayer } from './components/AudioPlayer';
 import { ScrollProgress } from './components/ScrollProgress';
 import { FloatingNavigation } from './components/FloatingNavigation';
 import { PetalCanvas } from './components/PetalCanvas';
-import { ScrollRevealSection } from './components/ScrollRevealSection';
 import { SectionInvitation } from './components/SectionInvitation';
 import { SectionCouple } from './components/SectionCouple';
 import { SectionStory } from './components/SectionStory';
@@ -172,63 +171,40 @@ export function App() {
         {/* Main Vertical Scrolling Sections */}
         <main className="relative">
           {/* Section 01: The Luxury Invitation */}
-          <ScrollRevealSection intensity="subtle">
-            <SectionInvitation />
-          </ScrollRevealSection>
+          <SectionInvitation />
 
           {/* Section 02: Couple Introduction Scroll-Driven Storytelling Animation */}
-          {/* SectionCouple contains full-screen sticky scrub canvas (260vh) so it handles its own internal scroll dynamics */}
           <SectionCouple />
 
           {/* Section 03: Story Timeline */}
-          <ScrollRevealSection intensity="subtle">
-            <SectionStory />
-          </ScrollRevealSection>
+          <SectionStory />
 
           {/* Section 04: Photo Spotlight */}
-          <ScrollRevealSection intensity="subtle">
-            <SectionPhotoStory />
-          </ScrollRevealSection>
+          <SectionPhotoStory />
 
           {/* Section 05: Date Reveal */}
-          <ScrollRevealSection intensity="normal">
-            <SectionDateReveal />
-          </ScrollRevealSection>
+          <SectionDateReveal />
 
           {/* Section 06: Ceremony & Day Schedule */}
-          <ScrollRevealSection intensity="hero">
-            <SectionCeremony />
-          </ScrollRevealSection>
+          <SectionCeremony />
 
           {/* Section 07: Live Countdown */}
-          <ScrollRevealSection intensity="hero">
-            <SectionCountdown />
-          </ScrollRevealSection>
+          <SectionCountdown />
 
           {/* Section 08: Venue & Navigation */}
-          <ScrollRevealSection intensity="normal">
-            <SectionVenue />
-          </ScrollRevealSection>
+          <SectionVenue />
 
           {/* Section 09: Family Blessings */}
-          <ScrollRevealSection intensity="normal">
-            <SectionFamily />
-          </ScrollRevealSection>
+          <SectionFamily />
 
           {/* Section 10: Luxury Editorial Gallery */}
-          <ScrollRevealSection intensity="normal">
-            <SectionGallery />
-          </ScrollRevealSection>
+          <SectionGallery />
 
           {/* Section 12: RSVP & Wishes */}
-          <ScrollRevealSection intensity="normal">
-            <SectionRSVP />
-          </ScrollRevealSection>
+          <SectionRSVP />
 
           {/* Section 13: Final Cinematic Blessing & Celebration */}
-          <ScrollRevealSection intensity="hero">
-            <SectionFinal onTriggerCelebration={triggerCelebration} />
-          </ScrollRevealSection>
+          <SectionFinal onTriggerCelebration={triggerCelebration} />
         </main>
       </div>
     </div>

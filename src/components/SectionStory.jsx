@@ -63,22 +63,18 @@ export const SectionStory = () => {
               const isEven = idx % 2 === 0;
 
               return (
-                <motion.div
+                <div
                   key={idx}
-                  initial={{ opacity: 0, y: 35, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: false, amount: 0.2 }}
-                  transition={{ duration: 0.8, ease: CINEMATIC_EASE }}
                   className={`relative flex flex-col md:flex-row items-center ${
                     isEven ? 'md:flex-row-reverse' : ''
-                  } gap-6 sm:gap-10 md:gap-16 transform-gpu`}
+                  } gap-6 sm:gap-10 md:gap-16`}
                 >
                   {/* Central Node Badge with Ornamental Sacred Lotus Icon for Desktop */}
                   <motion.div
                     initial={{ scale: 0, rotate: -45 }}
                     whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: false, amount: 0.3 }}
-                    transition={{ duration: 0.6, delay: 0.15, ease: 'backOut' }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    transition={{ duration: 0.5, delay: 0.1, ease: 'backOut' }}
                     className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-11 h-11 rounded-full border-2 border-gold-400 items-center justify-center text-gold-300 shadow-gold-glow z-20"
                     style={{
                       background: 'linear-gradient(135deg, #4A0E1A 0%, #2D050D 100%)',
@@ -87,12 +83,12 @@ export const SectionStory = () => {
                     <LotusIcon className="w-5 h-5 text-gold-300" />
                   </motion.div>
 
-                  {/* Card Content Side (Animation E: Horizontal Fly-In) */}
+                  {/* Card Content Side */}
                   <motion.div
-                    initial={{ opacity: 0, x: isEven ? 60 : -60, scale: 0.94 }}
-                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                    viewport={{ once: false, amount: 0.2 }}
-                    transition={{ duration: 0.85, delay: 0.1, ease: CINEMATIC_EASE }}
+                    initial={{ opacity: 0, y: 25 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    transition={{ duration: 0.7, delay: 0.1, ease: CINEMATIC_EASE }}
                     className="w-full md:w-1/2 text-left transform-gpu"
                   >
                     <div
@@ -123,12 +119,12 @@ export const SectionStory = () => {
                     </div>
                   </motion.div>
 
-                  {/* Image Side with Animation H: ImageMaskReveal */}
+                  {/* Image Side */}
                   <motion.div
-                    initial={{ opacity: 0, x: isEven ? -60 : 60, scale: 0.94 }}
-                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                    viewport={{ once: false, amount: 0.2 }}
-                    transition={{ duration: 0.85, delay: 0.18, ease: CINEMATIC_EASE }}
+                    initial={{ opacity: 0, y: 25 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.1 }}
+                    transition={{ duration: 0.7, delay: 0.15, ease: CINEMATIC_EASE }}
                     className="w-full md:w-1/2 flex justify-center transform-gpu"
                   >
                     <div className="relative w-full max-w-sm aspect-[4/5] sm:aspect-[4/5] max-h-[440px]">
@@ -138,11 +134,11 @@ export const SectionStory = () => {
                         shape="rect"
                         objectPosition={item.objectPosition || 'center center'}
                         className="w-full h-full shadow-royal-card hover:shadow-2xl transition-shadow duration-500"
-                        delay={0.2}
+                        delay={0.1}
                       />
                     </div>
                   </motion.div>
-                </motion.div>
+                </div>
               );
             })}
           </div>
