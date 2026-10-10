@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { FloralDivider, LotusIcon, CornerOrnament } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
+import { TextStagger, OrnamentReveal } from './motion/CinematicMotion';
 
 export const SectionGallery = () => {
   const photos = invitationData.gallery;
@@ -168,9 +169,12 @@ export const SectionGallery = () => {
         </div>
 
         <div className="hidden sm:block text-center">
-          <h2 className="font-royal text-xl md:text-2xl font-bold gold-gradient-text tracking-wide drop-shadow-md">
-            Moments in Eternal Bloom
-          </h2>
+          <TextStagger
+            text="Moments in Eternal Bloom"
+            as="h2"
+            className="font-royal text-xl md:text-2xl font-bold gold-gradient-text tracking-wide drop-shadow-md"
+            delay={0.1}
+          />
         </div>
 
         {/* Counter Badge */}

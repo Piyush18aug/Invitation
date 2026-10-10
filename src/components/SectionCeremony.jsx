@@ -1,6 +1,13 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { FloralDivider, LotusIcon } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
+import {
+  TextStagger,
+  RiseAndSettle,
+  Layered3DCard,
+  CINEMATIC_EASE,
+} from './motion/CinematicMotion';
 
 export const SectionCeremony = () => {
   const schedule = invitationData.schedule;
@@ -13,28 +20,43 @@ export const SectionCeremony = () => {
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16 space-y-2 sm:space-y-3 px-2">
-          <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold">
-            Order of Celebration
-          </span>
-          <h2 className="font-royal text-2xl sm:text-5xl font-bold text-burgundy-950">
-            Ceremony & Auspicious Schedule
-          </h2>
+          <RiseAndSettle delay={0.1}>
+            <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold">
+              Order of Celebration
+            </span>
+          </RiseAndSettle>
+
+          <TextStagger
+            text="Ceremony & Auspicious Schedule"
+            tag="h2"
+            className="font-royal text-2xl sm:text-5xl font-bold text-burgundy-950"
+            delay={0.2}
+          />
+
           <FloralDivider className="my-2 sm:my-3" />
-          <p className="font-serif italic text-burgundy-900/80 text-sm sm:text-lg">
-            "Join us as we perform sacred rituals and exchange promises of a lifetime."
-          </p>
+          <RiseAndSettle delay={0.35}>
+            <p className="font-serif italic text-burgundy-900/80 text-sm sm:text-lg">
+              "Join us as we perform sacred rituals and exchange promises of a lifetime."
+            </p>
+          </RiseAndSettle>
         </div>
 
-        {/* Schedule Grid */}
+        {/* Schedule Grid with Layered 3D Cards & Staggered Fly-In */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {schedule.map((item, idx) => (
-            <div
+            <Layered3DCard
               key={idx}
-              className="relative p-5 sm:p-6 rounded-2xl border border-gold-400/50 shadow-royal-card hover:border-gold-500 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
-              style={{
-                background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF6EE 50%, #F5EDE2 100%)',
-              }}
+              delay={idx * 0.12}
+              tilt={6}
+              duration={0.75}
+              className="h-full"
             >
+              <div
+                className="relative h-full p-5 sm:p-6 rounded-2xl border border-gold-400/50 shadow-royal-card hover:border-gold-500 hover:-translate-y-2 hover:shadow-gold-glow transition-all duration-300 flex flex-col justify-between group transform-gpu"
+                style={{
+                  background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF6EE 50%, #F5EDE2 100%)',
+                }}
+              >
               {/* Top Time Pill with Burgundy Gradient */}
               <div className="flex items-center justify-between mb-3 sm:mb-4">
                 <span
@@ -68,7 +90,8 @@ export const SectionCeremony = () => {
                 <span className="w-8 h-[1px] bg-gradient-to-l from-transparent to-gold-400/50" />
               </div>
             </div>
-          ))}
+          </Layered3DCard>
+        ))}
         </div>
       </div>
     </section>

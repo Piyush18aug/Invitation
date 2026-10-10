@@ -8,7 +8,7 @@ export const invitationData = {
       altImage: "/assets/images/photo_19.jpeg",
       photos: [
         "/assets/images/maingroomimage.png",
-        "/assets/images/groom_portrait_white.png",
+        "/assets/images/portrait_prathamesh.jpg",
         "/assets/images/groom_portrait_stage.png"
       ],
       bio: "Thoughtful, passionate, and steadfast, finding his true happiness in her laughter."
@@ -21,7 +21,7 @@ export const invitationData = {
       altImage: "/assets/images/photo_02.jpeg",
       photos: [
         "/assets/images/mainbrideimage.png",
-        "/assets/images/photo_02.jpeg",
+        "/assets/images/portrait_revati.jpg",
         "/assets/images/photo_05.jpeg"
       ],
       bio: "Graceful, vibrant, and full of warmth, bringing endless smiles and joy to every moment."
@@ -37,14 +37,14 @@ export const invitationData = {
     blessingText: "With the divine blessings of our ancestors and the love of our families",
     invitationQuote: "invite you to celebrate the beginning of their beautiful journey together",
     date: "2026-10-24",
-    isoDateTime: "2026-10-24T11:00:00+05:30",
+    isoDateTime: "2026-10-24T10:00:00+05:30",
     displayDate: "24 October 2026",
     day: "Saturday",
     dayNum: "24",
     month: "OCTOBER",
     year: "2026",
-    time: "11:00 AM",
-    timeDetail: "11:00 AM IST (शुभ मुहूर्त)",
+    time: "10:00 AM",
+    timeDetail: "10:00 AM IST (शुभ मुहूर्त 11:00 AM)",
     venue: "Royal Palace",
     venueImage: "/assets/images/royal_palace_venue.jpg",
     city: "Sangli, Maharashtra",
@@ -68,35 +68,51 @@ export const invitationData = {
       date: "The First Spark",
       title: "When Stars Aligned",
       description: "A conversation that started with pleasant greetings and quickly blossomed into hours of effortless laughter and shared perspectives.",
-      image: "/assets/images/photo_06.jpeg",
-      objectPosition: "center 42%"
+      image: "/assets/images/groom_portrait_stage.png",
+      objectPosition: "center 18%"
     },
     {
       step: "02",
       date: "Growing Closer",
       title: "Countless Conversations",
       description: "From late-night stories to discussing our biggest dreams, we realized how naturally our worlds fit together.",
-      image: "/assets/images/photo_07.jpeg",
-      objectPosition: "center 50%"
+      image: "/assets/images/revati_green_saree.jpg",
+      objectPosition: "center 88%"
     },
     {
       step: "03",
       date: "Exploring Life",
       title: "Adventures & Memories",
       description: "Every walk, journey, and quiet coffee became a treasured chapter in our story.",
-      image: "/assets/images/photo_16.jpeg",
-      objectPosition: "center 55%"
+      image: "/assets/images/story_exploring_life.jpg",
+      objectPosition: "center 25%"
     },
     {
       step: "04",
-      date: "Two Hearts One Rhythm",
-      title: "A Beautiful Bond",
-      description: "Finding a best friend, confidant, and eternal companion in each other.",
-      image: "/assets/images/groom_portrait_white.png",
-      objectPosition: "center 15%"
+      date: "Vintage Nostalgia",
+      title: "Old-School Charm",
+      description: "Channeling timeless retro melodies, boombox beats, and classic warmth that transcends decades.",
+      image: "/assets/images/retro_groom_1985.jpg",
+      objectPosition: "center 30%"
     },
     {
       step: "05",
+      date: "Timeless Romance",
+      title: "Golden Era Grace",
+      description: "A vintage soul with endless sweetness, bringing retro charm and effortless radiance into our journey.",
+      image: "/assets/images/retro_bride_1985.jpg",
+      objectPosition: "center 30%"
+    },
+    {
+      step: "06",
+      date: "Two Hearts One Rhythm",
+      title: "A Beautiful Bond",
+      description: "Finding a best friend, confidant, and eternal companion in each other.",
+      image: "/assets/images/story_2.jpg",
+      objectPosition: "center 45%"
+    },
+    {
+      step: "07",
       date: "Families United",
       title: "Forever Begins",
       description: "With heartfelt blessings and joy from our families, we take the first step towards a lifetime of togetherness.",
@@ -104,12 +120,12 @@ export const invitationData = {
       objectPosition: "center 55%"
     },
     {
-      step: "06",
+      step: "08",
       date: "24 October 2026",
       title: "The Engagement",
       description: "The auspicious day we exchange rings and pledge our hearts forever at Royal Palace, Sangli.",
-      image: "/assets/images/photo_01.jpeg",
-      objectPosition: "center 62%"
+      image: "/assets/images/revati_pink_saree.jpg",
+      objectPosition: "center 28%"
     }
   ],
 
@@ -228,9 +244,9 @@ export const invitationData = {
     },
     {
       id: 17,
-      src: "/assets/images/photo_13.jpeg",
-      title: "Laughter Unfiltered",
-      category: "Candid",
+      src: "/assets/images/revati_green_saree.jpg",
+      title: "Graceful Smile — Revati",
+      category: "Portraits",
       orientation: "portrait"
     },
     {
@@ -263,7 +279,7 @@ export const invitationData = {
     },
     {
       id: 22,
-      src: "/assets/images/groom_portrait_white.png",
+      src: "/assets/images/portrait_prathamesh.jpg",
       title: "Prathamesh — Modern Elegance",
       category: "Portraits",
       orientation: "portrait"
@@ -273,6 +289,20 @@ export const invitationData = {
       src: "/assets/images/groom_portrait_stage.png",
       title: "Prathamesh — Stage Presence",
       category: "Moments",
+      orientation: "portrait"
+    },
+    {
+      id: 24,
+      src: "/assets/images/retro_groom_1985.jpg",
+      title: "Prathamesh — Retro 1985",
+      category: "Vintage",
+      orientation: "portrait"
+    },
+    {
+      id: 25,
+      src: "/assets/images/retro_bride_1985.jpg",
+      title: "Revati — Retro 1985",
+      category: "Vintage",
       orientation: "portrait"
     }
   ],
@@ -287,14 +317,14 @@ export const invitationData = {
     brideFamily: {
       title: "Bride's Family",
       names: ["Erande Family", "Relatives & Well-Wishers"],
-      image: "/assets/images/erande_family.png"
+      image: "/assets/images/erande_family_new.jpg"
     },
     blessingQuote: "॥ वरं रूपं वरं तेजः वरं भाग्यं वरं यशः ॥\nMay their union be blessed with eternal love, health, prosperity, and joyous companionship."
   },
 
   schedule: [
     {
-      time: "10:30 AM",
+      time: "10:00 AM",
       title: "Swagat & Welcome",
       marathi: "शुभ स्वागत व सत्कार",
       desc: "Warm traditional Maharashtrian welcome with Shehnai & Dhol Tasha"
@@ -306,7 +336,7 @@ export const invitationData = {
       desc: "Sacred engagement rites, Ganesh Pujan, and exchange of rings (शुभ मुहूर्त)"
     },
     {
-      time: "12:30 PM",
+      time: "12:00 PM",
       title: "Blessings & Photos",
       marathi: "आशीर्वाद व छायाचित्रे",
       desc: "Stage greetings and candid photographs with friends & family"

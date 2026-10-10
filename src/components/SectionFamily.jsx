@@ -1,6 +1,16 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { FloralDivider, LotusIcon, DiyaIcon } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
+import {
+  TextStagger,
+  RiseAndSettle,
+  Layered3DCard,
+  ImageMaskReveal,
+  RoyalFlyIn,
+  OrnamentReveal,
+  CINEMATIC_EASE,
+} from './motion/CinematicMotion';
 
 export const SectionFamily = () => {
   const { family } = invitationData;
@@ -13,39 +23,50 @@ export const SectionFamily = () => {
       <div className="max-w-5xl mx-auto relative z-10 text-center">
         {/* Header */}
         <div className="max-w-2xl mx-auto mb-10 sm:mb-16 space-y-2 sm:space-y-3 px-2">
-          <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold">
-            Honored Families
-          </span>
-          <h2 className="font-royal text-2xl sm:text-5xl font-bold text-burgundy-950">
-            {family.heading}
-          </h2>
+          <RiseAndSettle delay={0.1}>
+            <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold">
+              Honored Families
+            </span>
+          </RiseAndSettle>
+
+          <TextStagger
+            text={family.heading}
+            tag="h2"
+            className="font-royal text-2xl sm:text-5xl font-bold text-burgundy-950"
+            delay={0.2}
+          />
+
           <FloralDivider className="my-2 sm:my-3" />
         </div>
 
         {/* Sanskrit Blessing Quote Box with Linear Gradient */}
-        <div
-          className="mb-8 sm:mb-14 p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-gold-400/60 shadow-royal-card max-w-2xl mx-auto space-y-2 sm:space-y-3"
-          style={{
-            background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F3EAE0 100%)',
-          }}
-        >
-          <p className="font-sanskrit text-gold-700 text-sm sm:text-lg font-bold">
-            ॥ वरं रूपं वरं तेजः वरं भाग्यं वरं यशः ॥
-          </p>
-          <p className="font-serif italic text-burgundy-900/80 text-xs sm:text-base leading-relaxed">
-            "May their union be blessed with eternal love, radiant joy, good fortune, and lifelong companionship."
-          </p>
-        </div>
-
-        {/* Families Grid with Subtle Diagonal Ivory-Sand Gradient */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-stretch">
-          {/* Groom's Family: Navangul Family */}
+        <RiseAndSettle delay={0.3} className="max-w-2xl mx-auto mb-8 sm:mb-14">
           <div
-            className="group rounded-3xl border-2 border-gold-400/60 shadow-royal-card overflow-hidden hover:border-gold-500 transition-all duration-300 flex flex-col"
+            className="p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-gold-400/60 shadow-royal-card space-y-2 sm:space-y-3"
             style={{
-              background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F5EDE2 100%)',
+              background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F3EAE0 100%)',
             }}
           >
+            <p className="font-sanskrit text-gold-700 text-sm sm:text-lg font-bold">
+              ॥ वरं रूपं वरं तेजः वरं भाग्यं वरं यशः ॥
+            </p>
+            <p className="font-serif italic text-burgundy-900/80 text-xs sm:text-base leading-relaxed">
+              "May their union be blessed with eternal love, radiant joy, good fortune, and lifelong companionship."
+            </p>
+          </div>
+        </RiseAndSettle>
+
+        {/* Families Grid: Horizontal Convergence (Groom from Left, Bride from Right) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-stretch">
+          {/* Groom's Family: Navangul Family (Fly-in from Left) */}
+          <RoyalFlyIn direction="left" distance={65} delay={0.15} className="h-full">
+            <Layered3DCard tilt={6} className="h-full">
+              <div
+                className="h-full group rounded-3xl border-2 border-gold-400/60 shadow-royal-card overflow-hidden hover:border-gold-500 hover:-translate-y-2 hover:shadow-gold-glow transition-all duration-300 flex flex-col transform-gpu"
+                style={{
+                  background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F5EDE2 100%)',
+                }}
+              >
             {/* Family Photo Frame if available */}
             {family.groomFamily.image ? (
               <div className="p-3 sm:p-4 pb-0">
@@ -100,10 +121,14 @@ export const SectionFamily = () => {
               </div>
             </div>
           </div>
+        </Layered3DCard>
+      </RoyalFlyIn>
 
-          {/* Bride's Family: Erande Family */}
+      {/* Bride's Family: Erande Family (Fly-in from Right) */}
+      <RoyalFlyIn direction="right" distance={65} delay={0.25} className="h-full">
+        <Layered3DCard tilt={-6} className="h-full">
           <div
-            className="group rounded-3xl border-2 border-gold-400/60 shadow-royal-card overflow-hidden hover:border-gold-500 transition-all duration-300 flex flex-col"
+            className="h-full group rounded-3xl border-2 border-gold-400/60 shadow-royal-card overflow-hidden hover:border-gold-500 hover:-translate-y-2 hover:shadow-gold-glow transition-all duration-300 flex flex-col transform-gpu"
             style={{
               background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F5EDE2 100%)',
             }}
@@ -165,16 +190,24 @@ export const SectionFamily = () => {
               </div>
             </div>
           </div>
-        </div>
+        </Layered3DCard>
+      </RoyalFlyIn>
+    </div>
 
-        {/* Diya Accent */}
-        <div className="mt-10 sm:mt-14 flex justify-center items-center gap-3 sm:gap-4 px-2">
-          <DiyaIcon className="w-6 h-6 sm:w-8 sm:h-8" />
-          <span className="font-sanskrit text-[11px] sm:text-xs text-gold-700 tracking-widest">
-            ॥ कृतज्ञता व सस्नेह निमंत्रण ॥
-          </span>
-          <DiyaIcon className="w-6 h-6 sm:w-8 sm:h-8" />
-        </div>
+    {/* Diya Accent */}
+    <div className="mt-10 sm:mt-14 flex justify-center items-center gap-3 sm:gap-4 px-2">
+      <OrnamentReveal type="scale-rotate" delay={0.35}>
+        <DiyaIcon className="w-6 h-6 sm:w-8 sm:h-8" />
+      </OrnamentReveal>
+      <RiseAndSettle delay={0.4}>
+        <span className="font-sanskrit text-[11px] sm:text-xs text-gold-700 tracking-widest">
+          ॥ कृतज्ञता व सस्नेह निमंत्रण ॥
+        </span>
+      </RiseAndSettle>
+      <OrnamentReveal type="scale-rotate" delay={0.35}>
+        <DiyaIcon className="w-6 h-6 sm:w-8 sm:h-8" />
+      </OrnamentReveal>
+    </div>
       </div>
     </section>
   );

@@ -31,11 +31,10 @@ export const OpeningScreen = ({ onOpenInvitation }) => {
     setStage('curtains_opening');
     onOpenInvitation();
 
-    // The curtains take 3 seconds to open.
-    // Give an extra 0.5s for everything to settle before unmounting.
+    // The curtains glide open smoothly in 2s
     setTimeout(() => {
       setStage('unmounted');
-    }, 3500);
+    }, 2200);
   };
 
   if (stage === 'unmounted') return null;
@@ -46,7 +45,7 @@ export const OpeningScreen = ({ onOpenInvitation }) => {
       {/* 1. PALACE ENTRANCE LAYER */}
       {/* Hide completely once curtains are closed to save performance */}
       <div 
-        className={`absolute inset-0 transition-opacity duration-1000 ${
+        className={`absolute inset-0 bg-[#1A030A] transition-opacity duration-1000 ${
           stage === 'idle' || stage === 'zooming' || stage === 'curtains_fading_in' ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
@@ -86,13 +85,11 @@ export const OpeningScreen = ({ onOpenInvitation }) => {
               You Are Cordially Invited
             </p>
             
-            <h1 className="font-royal text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-2 drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] tracking-wide">
+            <h1 className="font-royal text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-12 drop-shadow-[0_4px_12px_rgba(0,0,0,0.9)] tracking-wide">
               THE GRAND ROYAL PALACE
             </h1>
             
-            <p className="font-script text-3xl sm:text-4xl text-roseGold-300 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] mt-2 mb-12">
-              Our Engagement Ceremony
-            </p>
+
           </div>
 
           <div className="absolute bottom-16 sm:bottom-24 w-full flex justify-center z-10 px-4">
@@ -123,7 +120,7 @@ export const OpeningScreen = ({ onOpenInvitation }) => {
       >
         {/* Left Curtain */}
         <div 
-          className={`absolute top-0 left-0 w-1/2 h-full overflow-hidden transition-transform duration-[3s] ease-in-out ${
+          className={`absolute top-0 left-0 w-1/2 h-full overflow-hidden transition-transform duration-[2s] ease-out ${
             stage === 'curtains_opening' ? '-translate-x-full' : 'translate-x-0'
           }`}
           style={{ transformOrigin: 'left center' }}
@@ -139,7 +136,7 @@ export const OpeningScreen = ({ onOpenInvitation }) => {
 
         {/* Right Curtain */}
         <div 
-          className={`absolute top-0 right-0 w-1/2 h-full overflow-hidden transition-transform duration-[3s] ease-in-out ${
+          className={`absolute top-0 right-0 w-1/2 h-full overflow-hidden transition-transform duration-[2s] ease-out ${
             stage === 'curtains_opening' ? 'translate-x-full' : 'translate-x-0'
           }`}
           style={{ transformOrigin: 'right center' }}

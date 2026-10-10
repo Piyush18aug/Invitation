@@ -1,6 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { FloralDivider, DiyaIcon } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
+import {
+  TextStagger,
+  RiseAndSettle,
+  Layered3DCard,
+  OrnamentReveal,
+  CINEMATIC_EASE,
+} from './motion/CinematicMotion';
 
 export const SectionCountdown = () => {
   const [timeLeft, setTimeLeft] = useState({
@@ -61,56 +69,77 @@ export const SectionCountdown = () => {
       <div className="max-w-4xl mx-auto relative z-10 text-center">
         {/* Header */}
         <div className="max-w-2xl mx-auto mb-10 sm:mb-16 space-y-2 sm:space-y-3 px-2">
-          <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-300 font-semibold">
-            The Countdown
-          </span>
-          <h2 className="font-royal text-2xl sm:text-5xl font-bold gold-gradient-text">
-            Counting Every Sacred Moment
-          </h2>
+          <RiseAndSettle delay={0.1}>
+            <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-300 font-semibold">
+              The Countdown
+            </span>
+          </RiseAndSettle>
+
+          <TextStagger
+            text="Counting Every Sacred Moment"
+            tag="h2"
+            className="font-royal text-2xl sm:text-5xl font-bold gold-gradient-text"
+            delay={0.2}
+          />
+
           <FloralDivider className="my-2 sm:my-3" />
-          <p className="font-serif italic text-ivory-200/80 text-sm sm:text-lg">
-            "Until two souls embark on their eternal journey together."
-          </p>
+          <RiseAndSettle delay={0.35}>
+            <p className="font-serif italic text-ivory-200/80 text-sm sm:text-lg">
+              "Until two souls embark on their eternal journey together."
+            </p>
+          </RiseAndSettle>
         </div>
 
-        {/* Countdown Dials with Diagonal Burgundy-Maroon Linear Gradients */}
+        {/* Countdown Dials with Layered 3D Perspective Pop */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-6 max-w-3xl mx-auto">
           {timeUnits.map((unit, idx) => (
-            <div
+            <Layered3DCard
               key={idx}
-              className="relative p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-gold-400/50 shadow-gold-glow flex flex-col items-center justify-center group hover:border-gold-400 transition-all duration-300"
-              style={{
-                background: 'linear-gradient(135deg, #3D0A14 0%, #29040C 60%, #170206 100%)',
-              }}
+              delay={idx * 0.1}
+              tilt={idx < 2 ? 7 : -7}
+              duration={0.7}
             >
-              {/* Corner accent */}
-              <span className="absolute top-2 right-2 text-gold-500/40 text-xs">✦</span>
+              <div
+                className="relative p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-gold-400/50 shadow-gold-glow flex flex-col items-center justify-center group hover:border-gold-300 transition-all duration-300 transform-gpu"
+                style={{
+                  background: 'linear-gradient(135deg, #3D0A14 0%, #29040C 60%, #170206 100%)',
+                }}
+              >
+                {/* Corner accent */}
+                <span className="absolute top-2 right-2 text-gold-500/40 text-xs">✦</span>
 
-              {/* Number */}
-              <span className="font-royal text-3xl sm:text-6xl font-black gold-gradient-text tracking-tight block">
-                {String(unit.value).padStart(2, '0')}
-              </span>
+                {/* Number */}
+                <span className="font-royal text-3xl sm:text-6xl font-black gold-gradient-text tracking-tight block">
+                  {String(unit.value).padStart(2, '0')}
+                </span>
 
-              {/* English Label */}
-              <span className="font-serif text-[10px] sm:text-sm uppercase tracking-widest text-gold-200/90 font-bold mt-1 sm:mt-2">
-                {unit.label}
-              </span>
+                {/* English Label */}
+                <span className="font-serif text-[10px] sm:text-sm uppercase tracking-widest text-gold-200/90 font-bold mt-1 sm:mt-2">
+                  {unit.label}
+                </span>
 
-              {/* Marathi Sub-label */}
-              <span className="font-sanskrit text-[10px] sm:text-xs text-gold-400/60 mt-0.5">
-                {unit.marathi}
-              </span>
-            </div>
+                {/* Marathi Sub-label */}
+                <span className="font-sanskrit text-[10px] sm:text-xs text-gold-400/60 mt-0.5">
+                  {unit.marathi}
+                </span>
+              </div>
+            </Layered3DCard>
           ))}
         </div>
 
         {/* Bottom Diya Accent */}
         <div className="mt-8 sm:mt-12 flex justify-center items-center gap-3 sm:gap-4 px-2">
-          <DiyaIcon className="w-6 h-6 sm:w-8 sm:h-8" />
-          <span className="text-[11px] sm:text-xs text-gold-300 uppercase tracking-widest font-serif font-medium">
-            24 October 2026 • 11:00 AM IST
-          </span>
-          <DiyaIcon className="w-6 h-6 sm:w-8 sm:h-8" />
+          <OrnamentReveal type="scale-rotate" delay={0.4}>
+            <DiyaIcon className="w-6 h-6 sm:w-8 sm:h-8" />
+          </OrnamentReveal>
+          <RiseAndSettle delay={0.45}>
+            <span className="text-[11px] sm:text-xs text-gold-300 uppercase tracking-widest font-serif font-medium">
+              24 October 2026 • 10:00 AM IST (शुभ मुहूर्त 11:00 AM)
+            </span>
+          </RiseAndSettle>
+          <OrnamentReveal type="scale-rotate" delay={0.4}>
+            <DiyaIcon className="w-6 h-6 sm:w-8 sm:h-8" />
+          </OrnamentReveal>
         </div>
       </div>
     </section>

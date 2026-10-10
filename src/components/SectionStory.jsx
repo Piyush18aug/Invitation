@@ -3,6 +3,12 @@ import { motion } from 'framer-motion';
 import { FloralDivider, LotusIcon } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
 import { Sparkles, Heart } from 'lucide-react';
+import {
+  TextStagger,
+  RiseAndSettle,
+  ImageMaskReveal,
+  CINEMATIC_EASE,
+} from './motion/CinematicMotion';
 
 export const SectionStory = () => {
   const story = invitationData.story;
@@ -10,7 +16,7 @@ export const SectionStory = () => {
   return (
     <section
       id="story"
-      className="relative py-14 sm:py-24 px-3 sm:px-6 md:px-12 overflow-hidden bg-paper-texture-sand"
+      className="relative pt-4 sm:pt-8 pb-14 sm:pb-24 px-3 sm:px-6 md:px-12 overflow-hidden bg-paper-texture-sand"
     >
       {/* Background Subtle Gold Mandala Watermark */}
       <div className="absolute inset-0 flex items-center justify-center opacity-[0.04] pointer-events-none">
@@ -19,17 +25,26 @@ export const SectionStory = () => {
 
       <div className="max-w-5xl mx-auto relative z-10">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-12 sm:mb-20 space-y-2 sm:space-y-3 px-2">
-          <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold">
-            Our Journey
-          </span>
-          <h2 className="font-royal text-2xl sm:text-4xl md:text-5xl font-bold text-burgundy-950">
-            How Forever Began
-          </h2>
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2 sm:space-y-3 px-2">
+          <RiseAndSettle delay={0.1}>
+            <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold">
+              Our Journey
+            </span>
+          </RiseAndSettle>
+
+          <TextStagger
+            text="How Forever Began"
+            tag="h2"
+            className="font-royal text-2xl sm:text-4xl md:text-5xl font-bold text-burgundy-950"
+            delay={0.2}
+          />
+
           <FloralDivider className="my-2 sm:my-3" />
-          <p className="font-serif italic text-burgundy-900/80 text-sm sm:text-lg">
-            "Every love story is beautiful, but ours is our favorite."
-          </p>
+          <RiseAndSettle delay={0.35}>
+            <p className="font-serif italic text-burgundy-900/80 text-sm sm:text-lg">
+              "Every love story is beautiful, but ours is our favorite."
+            </p>
+          </RiseAndSettle>
         </div>
 
         {/* Timeline Container */}
@@ -50,21 +65,21 @@ export const SectionStory = () => {
               return (
                 <motion.div
                   key={idx}
-                  initial={{ opacity: 0, y: 35 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  initial={{ opacity: 0, y: 35, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.8, ease: CINEMATIC_EASE }}
                   className={`relative flex flex-col md:flex-row items-center ${
                     isEven ? 'md:flex-row-reverse' : ''
-                  } gap-4 sm:gap-8 md:gap-16`}
+                  } gap-6 sm:gap-10 md:gap-16 transform-gpu`}
                 >
                   {/* Central Node Badge with Ornamental Sacred Lotus Icon for Desktop */}
                   <motion.div
                     initial={{ scale: 0, rotate: -45 }}
                     whileInView={{ scale: 1, rotate: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2, ease: 'backOut' }}
-                    className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full border-2 border-gold-400 items-center justify-center text-gold-300 shadow-gold-glow z-20"
+                    viewport={{ once: false, amount: 0.3 }}
+                    transition={{ duration: 0.6, delay: 0.15, ease: 'backOut' }}
+                    className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-11 h-11 rounded-full border-2 border-gold-400 items-center justify-center text-gold-300 shadow-gold-glow z-20"
                     style={{
                       background: 'linear-gradient(135deg, #4A0E1A 0%, #2D050D 100%)',
                     }}
@@ -72,16 +87,16 @@ export const SectionStory = () => {
                     <LotusIcon className="w-5 h-5 text-gold-300" />
                   </motion.div>
 
-                  {/* Card Content Side */}
+                  {/* Card Content Side (Animation E: Horizontal Fly-In) */}
                   <motion.div
-                    initial={{ opacity: 0, x: isEven ? 30 : -30 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.7, delay: 0.1, ease: 'easeOut' }}
-                    className="w-full md:w-1/2 text-left"
+                    initial={{ opacity: 0, x: isEven ? 60 : -60, scale: 0.94 }}
+                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.85, delay: 0.1, ease: CINEMATIC_EASE }}
+                    className="w-full md:w-1/2 text-left transform-gpu"
                   >
                     <div
-                      className="p-5 sm:p-8 rounded-2xl border border-gold-400/40 shadow-royal-card space-y-2.5 sm:space-y-3 hover:border-gold-500 transition-all duration-300 group"
+                      className="p-5 sm:p-8 rounded-3xl border border-gold-400/40 shadow-royal-card space-y-2.5 sm:space-y-3 hover:border-gold-500 hover:-translate-y-1 hover:shadow-gold-glow transition-all duration-300 group"
                       style={{
                         background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F5EDE2 100%)',
                       }}
@@ -108,34 +123,23 @@ export const SectionStory = () => {
                     </div>
                   </motion.div>
 
-                  {/* Image Side */}
+                  {/* Image Side with Animation H: ImageMaskReveal */}
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                    className="w-full md:w-1/2 flex justify-center"
+                    initial={{ opacity: 0, x: isEven ? -60 : 60, scale: 0.94 }}
+                    whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.85, delay: 0.18, ease: CINEMATIC_EASE }}
+                    className="w-full md:w-1/2 flex justify-center transform-gpu"
                   >
-                    <div
-                      className="relative w-full max-w-sm aspect-[4/3] sm:aspect-[4/4] rounded-2xl overflow-hidden p-1 sm:p-1.5 shadow-royal-card group hover:shadow-2xl transition-all duration-500"
-                      style={{
-                        background: 'linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #946618 100%)',
-                      }}
-                    >
-                      <div
-                        className="w-full h-full rounded-xl overflow-hidden"
-                        style={{
-                          background: 'linear-gradient(135deg, #2D050D 0%, #150205 100%)',
-                        }}
-                      >
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          loading="lazy"
-                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
-                          style={{ objectPosition: item.objectPosition || 'center center' }}
-                        />
-                      </div>
+                    <div className="relative w-full max-w-sm aspect-[4/5] sm:aspect-[4/5] max-h-[440px]">
+                      <ImageMaskReveal
+                        src={item.image}
+                        alt={item.title}
+                        shape="rect"
+                        objectPosition={item.objectPosition || 'center center'}
+                        className="w-full h-full shadow-royal-card hover:shadow-2xl transition-shadow duration-500"
+                        delay={0.2}
+                      />
                     </div>
                   </motion.div>
                 </motion.div>

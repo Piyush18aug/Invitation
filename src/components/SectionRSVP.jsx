@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Send, CheckCircle2, MessageCircle, Calendar, Sparkles, Heart } from 'lucide-react';
 import { FloralDivider, LotusIcon, DiyaIcon } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
+import { TextStagger, Layered3DCard, OrnamentReveal } from './motion/CinematicMotion';
 
 export const SectionRSVP = () => {
   const { rsvp, event, couple } = invitationData;
@@ -32,23 +34,36 @@ export const SectionRSVP = () => {
       className="relative py-14 sm:py-24 px-3 sm:px-6 md:px-12 overflow-hidden bg-royal-jaali-light"
     >
       <div className="max-w-4xl mx-auto relative z-10">
-        {/* Header */}
+        {/* Header with TextStagger */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16 space-y-2 sm:space-y-3 px-2">
-          <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold">
-            Celebrate With Us
-          </span>
-          <h2 className="font-royal text-2xl sm:text-5xl font-bold text-burgundy-950">
-            Will You Join Our Joy?
-          </h2>
-          <FloralDivider className="my-2 sm:my-3" />
-          <p className="font-serif italic text-burgundy-900/80 text-sm sm:text-lg">
-            "Your presence, love, and blessings will make our celebration truly complete."
-          </p>
+          <TextStagger
+            text="CELEBRATE WITH US"
+            as="span"
+            className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold block"
+          />
+          <TextStagger
+            text="Will You Join Our Joy?"
+            as="h2"
+            className="font-royal text-2xl sm:text-5xl font-bold text-burgundy-950"
+            delay={0.15}
+          />
+          <OrnamentReveal delay={0.25}>
+            <FloralDivider className="my-2 sm:my-3" />
+          </OrnamentReveal>
+          <TextStagger
+            text='"Your presence, love, and blessings will make our celebration truly complete."'
+            as="p"
+            className="font-serif italic text-burgundy-900/80 text-sm sm:text-lg"
+            delay={0.35}
+          />
         </div>
 
-        {/* RSVP Card with Champagne Sand Parchment Gradient */}
-        <div
-          className="p-5 sm:p-12 rounded-3xl border-2 border-gold-400 shadow-royal-card max-w-2xl mx-auto"
+        {/* RSVP Card with 3D Layered Entrance */}
+        <Layered3DCard
+          rotateX={6}
+          rotateY={0}
+          delay={0.2}
+          className="p-5 sm:p-12 rounded-3xl border-2 border-gold-400 shadow-royal-card hover:border-gold-500 hover:shadow-gold-glow max-w-2xl mx-auto transition-all duration-300 transform-gpu"
           style={{
             background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F3EAE0 100%)',
           }}
@@ -133,7 +148,7 @@ export const SectionRSVP = () => {
               </div>
             </form>
           )}
-        </div>
+        </Layered3DCard>
       </div>
     </section>
   );

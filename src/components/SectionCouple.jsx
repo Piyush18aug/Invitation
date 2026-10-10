@@ -203,25 +203,28 @@ export const SectionCouple = () => {
 
   // Timeline Transitions (Desktop):
   const groomOpacity = useTransform(scrollProgress, [0.08, 0.25, 0.40, 0.50], [0, 1, 1, 0.2]);
-  const groomX = useTransform(scrollProgress, [0.08, 0.25], isMobile ? [-20, 0] : [-60, 0]);
+  const groomX = useTransform(scrollProgress, [0.08, 0.25], isMobile ? [-35, 0] : [-130, 0]);
+  const groomScale = useTransform(scrollProgress, [0.08, 0.25], [0.9, 1]);
 
   const brideOpacity = useTransform(scrollProgress, [0.28, 0.45, 0.60, 0.70], [0, 1, 1, 0.2]);
-  const brideX = useTransform(scrollProgress, [0.28, 0.45], isMobile ? [20, 0] : [60, 0]);
+  const brideX = useTransform(scrollProgress, [0.28, 0.45], isMobile ? [35, 0] : [130, 0]);
+  const brideScale = useTransform(scrollProgress, [0.28, 0.45], [0.9, 1]);
 
-  // Mobile-specific Sequenced Overlays
-  const groomOpacityMobile = useTransform(scrollProgress, [0.06, 0.18, 0.38, 0.46], [0, 1, 1, 0]);
-  const groomYMobile = useTransform(scrollProgress, [0.06, 0.18, 0.38, 0.46], [20, 0, 0, -15]);
+  // Mobile-specific Sequenced Overlays (converging from sides)
+  const groomOpacityMobile = useTransform(scrollProgress, [0.06, 0.18, 0.40, 0.48], [0, 1, 1, 0]);
+  const groomXMobile = useTransform(scrollProgress, [0.06, 0.18, 0.40, 0.48], [-40, 0, 0, -20]);
 
-  const brideOpacityMobile = useTransform(scrollProgress, [0.46, 0.58, 0.78, 0.86], [0, 1, 1, 0]);
-  const brideYMobile = useTransform(scrollProgress, [0.46, 0.58, 0.78, 0.86], [20, 0, 0, -15]);
+  const brideOpacityMobile = useTransform(scrollProgress, [0.48, 0.60, 0.82, 0.90], [0, 1, 1, 0]);
+  const brideXMobile = useTransform(scrollProgress, [0.48, 0.60, 0.82, 0.90], [40, 0, 0, 20]);
 
   // Central Sacred Emblem & Name Golden Glow
-  const centerEmblemOpacity = useTransform(scrollProgress, [0.38, 0.58], [0, 1]);
-  const centerEmblemScale = useTransform(scrollProgress, [0.38, 0.58], [0.85, 1]);
+  const centerEmblemOpacity = useTransform(scrollProgress, [0.35, 0.55], [0, 1]);
+  const centerEmblemScale = useTransform(scrollProgress, [0.35, 0.55], [0.65, 1]);
 
   // Bottom Save-The-Date Banner
-  const bottomBannerOpacity = useTransform(scrollProgress, [0.65, 0.85], [0, 1]);
-  const bottomBannerY = useTransform(scrollProgress, [0.65, 0.85], [20, 0]);
+  const bottomBannerOpacity = useTransform(scrollProgress, [0.65, 0.88], [0, 1]);
+  const bottomBannerY = useTransform(scrollProgress, [0.65, 0.88], [20, 0]);
+  const bottomBannerScale = useTransform(scrollProgress, [0.65, 0.88], [0.95, 1]);
 
   // Initial scroll hint fades out quickly
   const hintOpacity = useTransform(scrollProgress, [0, 0.08], [1, 0]);
@@ -230,7 +233,7 @@ export const SectionCouple = () => {
     <div
       ref={containerRef}
       id="couple"
-      className="relative h-[260vh] sm:h-[280vh] bg-[#140205] text-ivory-100"
+      className="relative h-[195vh] sm:h-[210vh] bg-[#140205] text-ivory-100"
     >
       {/* Sticky Fullscreen Cinematic Viewport */}
       <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between select-none">
@@ -288,8 +291,9 @@ export const SectionCouple = () => {
             style={{
               opacity: groomOpacity,
               x: groomX,
+              scale: groomScale,
             }}
-            className="flex-1 text-left max-w-xs sm:max-w-sm md:max-w-md"
+            className="flex-1 text-left max-w-xs sm:max-w-sm md:max-w-md transform-gpu"
           >
             <div className="space-y-1.5 sm:space-y-2">
               <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full backdrop-blur-md bg-burgundy-950/75 border border-gold-400/50 shadow-md">
@@ -323,9 +327,9 @@ export const SectionCouple = () => {
               opacity: centerEmblemOpacity,
               scale: centerEmblemScale,
             }}
-            className="flex flex-col items-center justify-center px-2 pointer-events-none"
+            className="flex flex-col items-center justify-center px-2 pointer-events-none transform-gpu"
           >
-            <div className="p-3 sm:p-4 rounded-full backdrop-blur-md border border-gold-400/70 shadow-[0_0_30px_rgba(212,175,55,0.4)] bg-burgundy-950/80">
+            <div className="p-3 sm:p-4 rounded-full backdrop-blur-md border border-gold-400/70 shadow-[0_0_35px_rgba(212,175,55,0.45)] bg-burgundy-950/80">
               <GoldenEngagementRings className="w-8 h-8 sm:w-14 sm:h-14 md:w-16 md:h-16" />
             </div>
             <div className="mt-1.5 px-3 py-0.5 rounded-full border border-gold-400/60 backdrop-blur-md bg-burgundy-950/90 shadow-md">
@@ -340,8 +344,9 @@ export const SectionCouple = () => {
             style={{
               opacity: brideOpacity,
               x: brideX,
+              scale: brideScale,
             }}
-            className="flex-1 text-right max-w-xs sm:max-w-sm md:max-w-md flex flex-col items-end"
+            className="flex-1 text-right max-w-xs sm:max-w-sm md:max-w-md flex flex-col items-end transform-gpu"
           >
             <div className="space-y-1.5 sm:space-y-2">
               <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full backdrop-blur-md bg-burgundy-950/75 border border-gold-400/50 shadow-md">
@@ -373,13 +378,13 @@ export const SectionCouple = () => {
         {/* Mobile Layout: Frosted Card in Lower-Third so Couple's Faces are Always Clear */}
         <div className="md:hidden relative z-20 w-full px-4 text-center mt-auto mb-14">
           <div className="relative min-h-[120px] flex items-center justify-center">
-            {/* Groom on Mobile */}
+            {/* Groom on Mobile - Fly in from left */}
             <motion.div
               style={{
                 opacity: groomOpacityMobile,
-                y: groomYMobile,
+                x: groomXMobile,
               }}
-              className="absolute inset-x-0 mx-auto max-w-xs p-4 rounded-2xl backdrop-blur-md bg-burgundy-950/75 border border-gold-400/40 shadow-2xl space-y-1.5"
+              className="absolute inset-x-0 mx-auto max-w-xs p-4 rounded-2xl backdrop-blur-md bg-burgundy-950/75 border border-gold-400/40 shadow-2xl space-y-1.5 transform-gpu"
             >
               <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-burgundy-900/80 border border-gold-400/50">
                 <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
@@ -395,13 +400,13 @@ export const SectionCouple = () => {
               </p>
             </motion.div>
 
-            {/* Bride on Mobile */}
+            {/* Bride on Mobile - Fly in from right */}
             <motion.div
               style={{
                 opacity: brideOpacityMobile,
-                y: brideYMobile,
+                x: brideXMobile,
               }}
-              className="absolute inset-x-0 mx-auto max-w-xs p-4 rounded-2xl backdrop-blur-md bg-burgundy-950/75 border border-gold-400/40 shadow-2xl space-y-1.5"
+              className="absolute inset-x-0 mx-auto max-w-xs p-4 rounded-2xl backdrop-blur-md bg-burgundy-950/75 border border-gold-400/40 shadow-2xl space-y-1.5 transform-gpu"
             >
               <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-burgundy-900/80 border border-gold-400/50">
                 <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-pulse" />
@@ -437,19 +442,22 @@ export const SectionCouple = () => {
             <ChevronDown className="w-5 h-5 text-gold-400 animate-bounce" />
           </motion.div>
 
-          {/* Reveal Event Banner at 65% - 100% */}
+          {/* Reveal Event Banner at 62% - 100%: Date, Venue & Couple Union */}
           <motion.div
             style={{
               opacity: bottomBannerOpacity,
               y: bottomBannerY,
+              scale: bottomBannerScale,
             }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6 text-gold-300"
+            className="flex flex-col items-center justify-center gap-1.5 sm:gap-2 text-gold-300 transform-gpu"
           >
-            <DiyaIcon className="w-5 h-5" />
-            <span className="font-serif italic text-xs sm:text-sm text-gold-300/90">
-              Two Hearts • One Sacred Promise
-            </span>
-            <DiyaIcon className="w-5 h-5" />
+            <div className="flex items-center justify-center gap-2 sm:gap-4">
+              <DiyaIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="font-royal text-xs sm:text-base font-bold tracking-widest gold-gradient-text">
+                PRATHAMESH ❤️ REVATI
+              </span>
+              <DiyaIcon className="w-4 h-4 sm:w-5 sm:h-5" />
+            </div>
           </motion.div>
         </div>
 

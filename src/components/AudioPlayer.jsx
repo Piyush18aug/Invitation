@@ -27,7 +27,13 @@ export const AudioPlayer = ({ isPlaying, setIsPlaying, hasInteracted }) => {
   };
 
   return (
-    <div className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 pb-safe z-50 flex items-center gap-2 sm:gap-3 select-none">
+    <div
+      className="fixed z-50 flex items-center gap-2 sm:gap-3 select-none pointer-events-auto"
+      style={{
+        bottom: 'max(26px, calc(env(safe-area-inset-bottom, 0px) + 20px))',
+        right: 'max(20px, calc(env(safe-area-inset-right, 0px) + 16px))',
+      }}
+    >
       {/* Tooltip (visible on desktop hover or brief interaction) */}
       <div
         className={`hidden sm:block transition-all duration-300 text-xs font-medium px-3 py-1.5 rounded-full bg-burgundy-900/90 border border-gold-500/40 text-gold-200 shadow-gold-glow backdrop-blur-md ${

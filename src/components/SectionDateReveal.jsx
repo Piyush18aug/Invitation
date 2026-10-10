@@ -322,7 +322,7 @@ export const SectionDateReveal = () => {
       'BEGIN:VEVENT',
       'UID:engagement-prathamesh-revati-20261024',
       'DTSTAMP:20261024T000000Z',
-      'DTSTART:20261024T053000Z',
+      'DTSTART:20261024T043000Z',
       'DTEND:20261024T103000Z',
       'SUMMARY:Prathamesh & Revati Engagement Ceremony',
       `DESCRIPTION:Join us for the Engagement Ceremony of Prathamesh & Revati at ${event.venue}.`,
@@ -352,7 +352,13 @@ export const SectionDateReveal = () => {
 
       <div className="max-w-4xl mx-auto relative z-10">
         {/* Header */}
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2 px-2">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-2 px-2"
+        >
           <span className="font-serif italic text-xs sm:text-sm uppercase tracking-widest text-gold-700 font-semibold">
             Sacred Auspicious Moment
           </span>
@@ -363,14 +369,18 @@ export const SectionDateReveal = () => {
           <p className="font-serif italic text-burgundy-900/80 text-xs sm:text-base">
             Rub and scratch the golden card below with your finger to reveal the auspicious engagement date.
           </p>
-        </div>
+        </motion.div>
 
         {/* ========================================================================= */}
         {/* GRAND ROYAL DATE REVEAL CARD CONTAINER                                    */}
         {/* ========================================================================= */}
-        <div
+        <motion.div
           ref={containerRef}
-          className="relative max-w-lg mx-auto rounded-3xl border-2 border-gold-400 shadow-royal-card overflow-hidden p-5 sm:p-9 text-center"
+          initial={{ opacity: 0, y: 45, scale: 0.92 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          className="relative max-w-lg mx-auto rounded-3xl border-2 border-gold-400 shadow-royal-card hover:border-gold-500 hover:shadow-gold-glow overflow-hidden p-5 sm:p-9 text-center transition-all duration-300 transform-gpu"
           style={{
             background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F3EAE0 100%)',
           }}
@@ -554,18 +564,7 @@ export const SectionDateReveal = () => {
             </AnimatePresence>
           </div>
 
-          {/* Venue & Location snippet */}
-          <div className="mt-5 pt-4 border-t border-gold-300/50 flex flex-col sm:flex-row items-center justify-between gap-2 text-burgundy-900 text-xs">
-            <div className="flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5 text-gold-600 shrink-0" />
-              <span>{event.timeDetail}</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-gold-600 shrink-0" />
-              <span>{event.venue}, {event.city}</span>
-            </div>
-          </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

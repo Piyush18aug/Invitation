@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-export const PetalCanvas = ({ density = 'normal', isCelebration = false }) => {
+export const PetalCanvas = ({ density = 'normal', isCelebration = false, active = true }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -8,6 +8,11 @@ export const PetalCanvas = ({ density = 'normal', isCelebration = false }) => {
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     let animationFrameId;
+
+    if (!active) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      return;
+    }
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
@@ -207,13 +212,14 @@ export const PetalCanvas = ({ density = 'normal', isCelebration = false }) => {
       window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(animationFrameId);
     };
-  }, [density, isCelebration]);
+  }, [density, isCelebration, active]);
 
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-20 w-full h-full"
-      style={{ opacity: 0.88 }}
+      className={`pointer-events-none fixed inset-0 z-20 w-full h-full transition-opacity duration-700 ${
+        active ? 'opacity-90' : 'opacity-0'
+      }`}
     />
   );
 };

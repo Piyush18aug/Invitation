@@ -28,7 +28,13 @@ export const FloatingNavigation = () => {
   return (
     <>
       {/* Floating Menu Button with Safe-area and Touch optimizations */}
-      <div className="fixed top-4 right-4 sm:top-6 sm:right-6 pt-safe z-50">
+      <div
+        className="fixed z-50 pointer-events-auto"
+        style={{
+          top: 'max(22px, calc(env(safe-area-inset-top, 0px) + 16px))',
+          right: 'max(20px, calc(env(safe-area-inset-right, 0px) + 16px))',
+        }}
+      >
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle navigation menu"

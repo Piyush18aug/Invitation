@@ -1,8 +1,16 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Heart, Sparkles } from 'lucide-react';
 import { DivineGanesha } from './DivineGanesha';
 import { FloralDivider } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
+import {
+  TextStagger,
+  RiseAndSettle,
+  OrnamentReveal,
+  RoyalFlyIn,
+  CINEMATIC_EASE,
+} from './motion/CinematicMotion';
 
 export const SectionFinal = ({ onTriggerCelebration }) => {
   const { event, couple } = invitationData;
@@ -25,88 +33,110 @@ export const SectionFinal = ({ onTriggerCelebration }) => {
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto relative z-10 text-center space-y-6 sm:space-y-8 p-4 sm:p-12">
+      <div className="max-w-3xl mx-auto relative z-10 text-center space-y-6 sm:space-y-8 p-4 sm:p-12 transform-gpu">
         {/* Divine Ganesh Medallion */}
         <div className="flex justify-center">
-          <DivineGanesha variant="medallion" />
+          <OrnamentReveal type="scale-rotate" delay={0.1}>
+            <DivineGanesha variant="medallion" />
+          </OrnamentReveal>
         </div>
 
         {/* Sanskrit Conclusion Shloka */}
-        <div className="space-y-1">
-          <span className="font-sanskrit text-gold-300 text-sm sm:text-xl tracking-widest block font-semibold">
-            ॥ शुभं भवतु • मंगलम् भूयात् ॥
-          </span>
-          <p className="font-serif italic text-[11px] sm:text-sm text-gold-200/80 uppercase tracking-widest">
-            "May auspiciousness prevail and happiness multiply"
-          </p>
-        </div>
+        <RiseAndSettle delay={0.2}>
+          <div className="space-y-1">
+            <span className="font-sanskrit text-gold-300 text-sm sm:text-xl tracking-widest block font-semibold">
+              ॥ शुभं भवतु • मंगलम् भूयात् ॥
+            </span>
+            <p className="font-serif italic text-[11px] sm:text-sm text-gold-200/80 uppercase tracking-widest">
+              "May auspiciousness prevail and happiness multiply"
+            </p>
+          </div>
+        </RiseAndSettle>
 
         <FloralDivider className="my-2 sm:my-4" />
 
-        {/* Core Emotion */}
+        {/* Core Emotion with Text Stagger */}
         <div className="space-y-2 sm:space-y-4 px-2">
-          <h2 className="font-royal text-xl sm:text-4xl md:text-5xl font-bold gold-gradient-text leading-tight">
-            Your Presence Will Make Our Celebration Truly Special
-          </h2>
-          <p className="font-serif italic text-ivory-200/90 text-xs sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed">
-            We eagerly look forward to welcoming you with folded hands, warm smiles, and joyful hearts.
-          </p>
+          <TextStagger
+            text="Your Presence Will Make Our Celebration Truly Special"
+            tag="h2"
+            className="font-serif text-2xl sm:text-4xl md:text-5xl font-bold gold-gradient-text leading-tight tracking-wide"
+            delay={0.25}
+          />
+          <RiseAndSettle delay={0.35}>
+            <p className="font-serif italic text-ivory-200/90 text-xs sm:text-base md:text-lg max-w-xl mx-auto leading-relaxed">
+              We eagerly look forward to welcoming you with folded hands, warm smiles, and joyful hearts.
+            </p>
+          </RiseAndSettle>
         </div>
 
-        {/* Couple Names Headline: Prathamesh & Revati */}
-        <div className="py-2 sm:py-4 space-y-1 sm:space-y-2">
-          <h3 className="font-royal text-3xl sm:text-6xl md:text-7xl font-bold tracking-wider gold-gradient-text">
-            {couple.groom.name}
-          </h3>
-          <div className="flex items-center justify-center gap-2.5 sm:gap-3">
-            <span className="w-8 sm:w-12 h-[1px] bg-gold-400/50" />
-            <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-roseGold-400 fill-roseGold-400 animate-pulse" />
-            <span className="w-8 sm:w-12 h-[1px] bg-gold-400/50" />
+        {/* Couple Names Headline: Prathamesh & Revati (Horizontal Convergence) */}
+        <div className="py-2 sm:py-4 space-y-2">
+          <RoyalFlyIn direction="left" distance={60} delay={0.3}>
+            <h3 className="font-royal text-3xl sm:text-6xl md:text-7xl font-bold tracking-wider gold-gradient-text">
+              {couple.groom.name}
+            </h3>
+          </RoyalFlyIn>
+
+          <div className="flex items-center justify-center gap-2.5 sm:gap-3 py-1">
+            <span className="w-8 sm:w-16 h-[1px] bg-gold-400/50" />
+            <OrnamentReveal type="scale-rotate" delay={0.4}>
+              <Heart className="w-5 h-5 sm:w-7 sm:h-7 text-roseGold-400 fill-roseGold-400 animate-pulse" />
+            </OrnamentReveal>
+            <span className="w-8 sm:w-16 h-[1px] bg-gold-400/50" />
           </div>
-          <h3 className="font-royal text-3xl sm:text-6xl md:text-7xl font-bold tracking-wider gold-gradient-text">
-            {couple.bride.name}
-          </h3>
+
+          <RoyalFlyIn direction="right" distance={60} delay={0.35}>
+            <h3 className="font-royal text-3xl sm:text-6xl md:text-7xl font-bold tracking-wider gold-gradient-text">
+              {couple.bride.name}
+            </h3>
+          </RoyalFlyIn>
         </div>
 
         {/* Event Summary Stamp with Deep Burgundy Gradient */}
-        <div
-          className="inline-block p-4 sm:p-6 rounded-2xl border border-gold-400/50 shadow-gold-glow max-w-md mx-auto"
-          style={{
-            background: 'linear-gradient(135deg, rgba(61, 10, 20, 0.92) 0%, rgba(32, 3, 8, 0.95) 100%)',
-          }}
-        >
-          <p className="font-royal text-base sm:text-xl font-bold text-gold-200">
-            {event.displayDate} • {event.time}
-          </p>
-          <p className="font-serif text-xs sm:text-sm text-ivory-200/90 mt-1">
-            {event.venue}, {event.city}
-          </p>
-        </div>
+        <RiseAndSettle delay={0.45}>
+          <div
+            className="inline-block p-4 sm:p-6 rounded-2xl border border-gold-400/50 shadow-gold-glow max-w-md mx-auto hover:scale-105 transition-transform"
+            style={{
+              background: 'linear-gradient(135deg, rgba(61, 10, 20, 0.92) 0%, rgba(32, 3, 8, 0.95) 100%)',
+            }}
+          >
+            <p className="font-royal text-base sm:text-xl font-bold text-gold-200">
+              {event.displayDate} • {event.time}
+            </p>
+            <p className="font-serif text-xs sm:text-sm text-ivory-200/90 mt-1">
+              {event.venue}, {event.city}
+            </p>
+          </div>
+        </RiseAndSettle>
 
         {/* Celebration Button with Metallic Gold Gradient */}
         <div className="pt-2 sm:pt-4 w-full max-w-xs sm:max-w-none mx-auto">
-          <button
-            onClick={onTriggerCelebration}
-            className="group relative w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-10 py-3.5 sm:py-4 rounded-full text-burgundy-950 font-royal font-bold text-xs sm:text-base tracking-widest shadow-gold-glow hover:shadow-gold-glow-lg active:scale-95 transition-all duration-300 touch-manipulation min-h-[48px]"
-            style={{
-              background: 'linear-gradient(135deg, #C59B27 0%, #ECC872 30%, #FFF0BD 50%, #D4AF37 75%, #AA8232 100%)',
-            }}
-          >
-            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-burgundy-950 mr-2 animate-spin-slow" />
-            <span>SHOWER BLESSINGS & CELEBRATE ✨</span>
-          </button>
+          <OrnamentReveal type="fade-glow" delay={0.5}>
+            <button
+              onClick={onTriggerCelebration}
+              className="group relative w-full sm:w-auto inline-flex items-center justify-center px-6 sm:px-10 py-3.5 sm:py-4 rounded-full text-burgundy-950 font-royal font-bold text-xs sm:text-base tracking-widest shadow-gold-glow hover:shadow-gold-glow-lg active:scale-95 transition-all duration-300 touch-manipulation min-h-[48px]"
+              style={{
+                background: 'linear-gradient(135deg, #C59B27 0%, #ECC872 30%, #FFF0BD 50%, #D4AF37 75%, #AA8232 100%)',
+              }}
+            >
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-burgundy-950 mr-2 animate-spin-slow" />
+              <span>SHOWER BLESSINGS & CELEBRATE ✨</span>
+            </button>
+          </OrnamentReveal>
         </div>
 
         {/* Signoff */}
-        <div className="pt-6 sm:pt-8 border-t border-gold-500/20 text-center space-y-1">
-          <p className="font-script text-2xl sm:text-4xl text-gold-300">
-            With Love,
-          </p>
-          <p className="font-royal text-sm sm:text-lg text-gold-200 font-bold tracking-widest uppercase">
-            Prathamesh & Revati
-          </p>
-
-        </div>
+        <RiseAndSettle delay={0.55}>
+          <div className="pt-6 sm:pt-8 border-t border-gold-500/20 text-center space-y-1">
+            <p className="font-script text-2xl sm:text-4xl text-gold-300">
+              With Love,
+            </p>
+            <p className="font-royal text-sm sm:text-lg text-gold-200 font-bold tracking-widest uppercase">
+              Navangul Family & Erande Family
+            </p>
+          </div>
+        </RiseAndSettle>
       </div>
     </section>
   );
