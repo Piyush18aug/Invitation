@@ -152,21 +152,46 @@ export const OpeningScreen = ({ onOpenInvitation }) => {
           <div className="absolute inset-0 shadow-[inset_30px_0_50px_rgba(0,0,0,0.6)] pointer-events-none" />
         </div>
 
-        {/* Curtain Text Prompt */}
+        {/* Curtain Central Content & Royal Seal */}
         <div 
           className={`absolute inset-0 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-700 ${
             stage === 'curtains_closed' ? 'opacity-100' : 'opacity-0'
           }`}
         >
-          {/* Subtle dark backdrop to ensure text readability */}
-          <div className="absolute inset-0 bg-black/30 pointer-events-none" />
-          <div className="relative z-10 flex flex-col items-center">
-            <h2 className="font-royal text-3xl sm:text-5xl text-gold-200 tracking-wider drop-shadow-xl text-center px-4">
+          {/* Subtle dark backdrop to ensure high contrast */}
+          <div className="absolute inset-0 bg-black/40 pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col items-center text-center px-4 max-w-lg mx-auto">
+            {/* Auspicious Rotating Golden Shree Mandala Seal */}
+            <div className="relative mb-5 group cursor-pointer pointer-events-auto" onClick={handleOpenCurtains}>
+              {/* Outer Radiant Glow */}
+              <div className="absolute -inset-4 sm:-inset-6 rounded-full bg-gradient-to-r from-gold-400/40 via-amber-400/60 to-gold-600/40 blur-2xl animate-pulse" />
+              
+              {/* Ornate Gold Frame with Rotating Mandala */}
+              <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-56 md:h-56 rounded-full p-1.5 sm:p-2 bg-gradient-to-tr from-gold-600 via-amber-300 to-gold-700 shadow-[0_0_50px_rgba(212,175,55,0.7)] border-2 border-gold-300 transform transition-transform duration-500 hover:scale-105 active:scale-95">
+                <img
+                  src="/assets/images/mandala_bg.jpg"
+                  alt="Sacred Shree Mandala"
+                  className="w-full h-full object-cover rounded-full animate-spin-mandala shadow-inner"
+                />
+                {/* Golden Sheen Overlay */}
+                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/20 to-transparent pointer-events-none" />
+              </div>
+            </div>
+
+            <h2 className="font-royal text-2xl sm:text-4xl md:text-5xl text-gold-200 tracking-wider drop-shadow-[0_4px_16px_rgba(0,0,0,0.9)] font-bold">
               Something Beautiful Awaits...
             </h2>
-            <p className="mt-6 font-serif italic text-lg sm:text-xl text-gold-300 drop-shadow-md animate-pulse">
-              Tap to Reveal the Invitation
-            </p>
+            
+            <div 
+              onClick={handleOpenCurtains}
+              className="mt-5 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full border border-gold-400/80 bg-burgundy-950/85 backdrop-blur-md shadow-gold-glow animate-pulse cursor-pointer pointer-events-auto flex items-center gap-2 hover:bg-burgundy-900 transition-colors"
+            >
+              <span className="font-serif italic text-xs sm:text-base text-gold-200 font-semibold tracking-wide">
+                Tap to Reveal the Auspicious Invitation
+              </span>
+              <ArrowRight className="w-4 h-4 text-gold-300" />
+            </div>
           </div>
         </div>
 

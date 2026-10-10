@@ -45,10 +45,16 @@ export const SectionCountdown = () => {
     <section
       className="relative py-14 sm:py-24 px-3 sm:px-6 md:px-12 text-ivory-100 overflow-hidden bg-burgundy-texture"
     >
-      {/* Background Rotating Gold Mandala */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-15 pointer-events-none">
-        <div className="w-[450px] sm:w-[600px] md:w-[800px] h-[450px] sm:h-[600px] md:h-[800px] rounded-full border border-gold-400/30 animate-spin-mandala flex items-center justify-center">
-          <div className="w-[85%] h-[85%] rounded-full border border-dashed border-gold-300/20 animate-spin-mandala-rev" />
+      {/* Background Rotating Gold Shree Mandala & Ambient Glow */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+        <div className="relative w-[500px] sm:w-[700px] md:w-[900px] h-[500px] sm:h-[700px] md:h-[900px] opacity-25 flex items-center justify-center">
+          <img
+            src="/assets/images/mandala_bg.jpg"
+            alt="Gold Shree Mandala Background"
+            className="w-full h-full object-cover rounded-full animate-spin-mandala filter contrast-125 drop-shadow-[0_0_50px_rgba(212,175,55,0.4)]"
+          />
+          {/* Radial mask to blend naturally with dark burgundy */}
+          <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,_transparent_45%,_rgba(21,2,5,0.85)_80%,_#150205_100%)] pointer-events-none" />
         </div>
       </div>
 

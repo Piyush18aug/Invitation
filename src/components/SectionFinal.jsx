@@ -11,11 +11,17 @@ export const SectionFinal = ({ onTriggerCelebration }) => {
     <section
       className="relative min-h-screen py-14 sm:py-24 px-3 sm:px-6 md:px-12 text-ivory-100 flex items-center justify-center overflow-hidden bg-royal-jaali-dark"
     >
-      {/* Background Rotating Gold Mandala & Ambient Radiance */}
-      <div className="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
-        <div className="absolute w-[400px] sm:w-[650px] h-[400px] sm:h-[650px] rounded-full bg-gold-400/10 blur-3xl animate-pulse" />
-        <div className="w-[500px] sm:w-[700px] md:w-[1000px] h-[500px] sm:h-[700px] md:h-[1000px] rounded-full border-[1.5px] border-gold-400/40 animate-spin-mandala flex items-center justify-center">
-          <div className="w-[80%] h-[80%] rounded-full border border-dashed border-gold-300/30 animate-spin-mandala-rev" />
+      {/* Background Rotating Gold Shree Mandala & Ambient Radiance */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
+        <div className="absolute w-[400px] sm:w-[650px] h-[400px] sm:h-[650px] rounded-full bg-gold-400/15 blur-3xl animate-pulse" />
+        <div className="relative w-[500px] sm:w-[700px] md:w-[1000px] h-[500px] sm:h-[700px] md:h-[1000px] opacity-25 flex items-center justify-center">
+          <img
+            src="/assets/images/mandala_bg.jpg"
+            alt="Gold Shree Mandala Background"
+            className="w-full h-full object-cover rounded-full animate-spin-mandala filter contrast-125 drop-shadow-[0_0_60px_rgba(212,175,55,0.45)]"
+          />
+          {/* Radial dark gradient mask */}
+          <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,_transparent_40%,_rgba(26,2,7,0.85)_75%,_#1A0207_100%)] pointer-events-none" />
         </div>
       </div>
 

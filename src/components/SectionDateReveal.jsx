@@ -493,25 +493,14 @@ export const SectionDateReveal = () => {
             )}
           </div>
 
-          {/* Reveal Status / Progress & Immediate Button */}
+          {/* Reveal Status / Progress */}
           <div className="mt-4 flex flex-col items-center justify-center gap-3">
             {!isRevealed ? (
-              <div className="flex flex-col items-center gap-2">
-                {scratchPercent > 5 && (
-                  <div className="text-xs font-serif text-gold-800 font-semibold">
-                    {scratchPercent}% Scratched ✨
-                  </div>
-                )}
-                <button
-                  onClick={triggerFullReveal}
-                  className="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-serif font-bold text-burgundy-950 border border-gold-500/60 shadow-md active:scale-95 transition-all hover:bg-gold-100 cursor-pointer"
-                  style={{
-                    background: 'linear-gradient(135deg, #ECC872 0%, #D4AF37 50%, #FFF0BD 100%)',
-                  }}
-                >
-                  ✨ Reveal Date Immediately
-                </button>
-              </div>
+              scratchPercent > 5 && (
+                <div className="text-xs font-serif text-gold-800 font-semibold">
+                  {scratchPercent}% Scratched ✨
+                </div>
+              )
             ) : (
               <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 pt-1">
                 <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-emerald-950/20 border border-emerald-600/40 text-emerald-800 text-xs font-semibold">

@@ -57,7 +57,7 @@ export const FloatingNavigation = () => {
             <div className="text-left">
               <span className="font-sanskrit text-gold-400 text-xs sm:text-sm tracking-widest block">॥ श्री गणेशाय नमः ॥</span>
               <h3 className="font-royal text-lg sm:text-xl text-gold-200 mt-0.5">Prathamesh & Revati</h3>
-              <p className="text-[10px] sm:text-xs text-gold-400/70 uppercase tracking-widest mt-0.5">October 2026 • Sangli</p>
+              <p className="text-[10px] sm:text-xs text-gold-400/70 uppercase tracking-widest mt-0.5">Sangli</p>
             </div>
             <button
               onClick={() => setIsOpen(false)}

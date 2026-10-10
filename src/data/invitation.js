@@ -44,7 +44,7 @@ export const invitationData = {
     month: "OCTOBER",
     year: "2026",
     time: "11:00 AM",
-    timeDetail: "11:00 AM IST onwards (शुभ मुहूर्त)",
+    timeDetail: "11:00 AM IST (शुभ मुहूर्त)",
     venue: "Royal Palace",
     venueImage: "/assets/images/royal_palace_venue.jpg",
     city: "Sangli, Maharashtra",

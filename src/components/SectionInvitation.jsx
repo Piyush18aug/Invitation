@@ -18,8 +18,13 @@ export const SectionInvitation = () => {
           alt=""
           className="absolute inset-0 w-full h-full object-cover opacity-[0.035] mix-blend-multiply filter contrast-125"
         />
-        <div className="w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] md:w-[950px] md:h-[950px] rounded-full border-[1.5px] border-gold-400/20 animate-spin-mandala flex items-center justify-center">
-          <div className="w-[80%] h-[80%] rounded-full border border-dashed border-gold-400/15 animate-spin-mandala-rev" />
+        {/* Slow Rotating Golden Shree Mandala Watermark */}
+        <div className="relative w-[500px] h-[500px] sm:w-[700px] sm:h-[700px] md:w-[950px] md:h-[950px] opacity-[0.08] mix-blend-multiply flex items-center justify-center">
+          <img
+            src="/assets/images/mandala_bg.jpg"
+            alt=""
+            className="w-full h-full object-cover rounded-full animate-spin-mandala"
+          />
         </div>
       </div>
 
@@ -48,9 +53,13 @@ export const SectionInvitation = () => {
           background: 'linear-gradient(135deg, #FFFDF9 0%, #FAF5EC 50%, #F3EAE0 100%)',
         }}
       >
-        {/* Subtle Background Mandala Watermark */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-5 pointer-events-none">
-          <div className="w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] rounded-full border-[20px] sm:border-[30px] border-gold-600 animate-spin-mandala" />
+        {/* Subtle Background Shree Mandala Watermark inside card */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.045] pointer-events-none">
+          <img
+            src="/assets/images/mandala_bg.jpg"
+            alt=""
+            className="w-[350px] sm:w-[520px] h-[350px] sm:h-[520px] rounded-full object-cover animate-spin-mandala"
+          />
         </div>
 
         {/* Four Corner Ornaments */}
@@ -122,7 +131,7 @@ export const SectionInvitation = () => {
             <DiyaIcon className="w-7 h-7 sm:w-8 sm:h-8" />
             <div className="flex items-center gap-1.5 sm:gap-2 text-gold-700 text-[11px] sm:text-xs font-serif italic">
               <LotusIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span>शुभ मुहूर्त • ११:०० वा.</span>
+              <span>शुभ मुहूर्त</span>
               <LotusIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </div>
             <DiyaIcon className="w-7 h-7 sm:w-8 sm:h-8" />

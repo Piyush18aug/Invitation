@@ -26,7 +26,16 @@ export const DivineGanesha = ({ variant = 'full', className = '' }) => {
     return (
       <div className={`relative flex flex-col items-center ${className}`}>
         {/* Outer Radiant Glow */}
-        <div className="absolute -inset-4 rounded-full bg-gradient-to-r from-gold-400/25 via-amber-400/35 to-gold-600/25 blur-xl animate-pulse pointer-events-none" />
+        <div className="absolute -inset-6 rounded-full bg-gradient-to-r from-gold-400/30 via-amber-400/40 to-gold-600/30 blur-xl animate-pulse pointer-events-none" />
+        
+        {/* Rotating Sacred Golden Shree Mandala Backdrop */}
+        <div className="absolute -inset-8 sm:-inset-10 rounded-full opacity-50 pointer-events-none animate-spin-mandala">
+          <img
+            src="/assets/images/mandala_bg.jpg"
+            alt=""
+            className="w-full h-full object-cover rounded-full filter contrast-125 drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]"
+          />
+        </div>
         
         {/* Ornate Gold Ring Frame */}
         <div className="relative p-1.5 rounded-full border-2 border-gold-400/80 shadow-[0_0_25px_rgba(212,175,55,0.45)] bg-gradient-to-br from-gold-300 via-amber-500 to-gold-700">
@@ -50,6 +59,14 @@ export const DivineGanesha = ({ variant = 'full', className = '' }) => {
 
       {/* Decorative Hanging Temple Lamps on Left & Right */}
       <div className="relative w-full max-w-lg flex items-center justify-center px-4">
+        {/* Rotating Sacred Golden Shree Mandala Halo behind Ganpati Shrine */}
+        <div className="absolute -top-8 sm:-top-12 w-52 h-52 sm:w-72 sm:h-72 rounded-full opacity-40 pointer-events-none animate-spin-mandala flex items-center justify-center">
+          <img
+            src="/assets/images/mandala_bg.jpg"
+            alt=""
+            className="w-full h-full object-cover rounded-full filter contrast-125"
+          />
+        </div>
         {/* Left Hanging Brass Diya Lamp */}
         <div className="hidden sm:flex flex-col items-center absolute -left-2 top-0 pointer-events-none">
           {/* Chain */}
