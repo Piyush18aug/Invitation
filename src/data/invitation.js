@@ -311,11 +311,17 @@ export const invitationData = {
     heading: "With the Love & Blessings of",
     groomFamily: {
       title: "Groom's Family",
+      brother: "Piyush Navangul",
+      brotherRole: "Brother",
+      brotherImage: "/assets/images/brother_piyush.jpg",
       names: ["Navangul Family", "Relatives & Well-Wishers"],
       image: "/assets/images/navangul_family.png"
     },
     brideFamily: {
       title: "Bride's Family",
+      brother: "Amit Erande",
+      brotherRole: "Brother",
+      brotherImage: "/assets/images/brother_amit.jpg",
       names: ["Erande Family", "Relatives & Well-Wishers"],
       image: "/assets/images/erande_family_new.jpg"
     },

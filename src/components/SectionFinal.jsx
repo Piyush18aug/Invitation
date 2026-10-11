@@ -13,7 +13,7 @@ import {
 } from './motion/CinematicMotion';
 
 export const SectionFinal = ({ onTriggerCelebration }) => {
-  const { event, couple } = invitationData;
+  const { event, couple, family } = invitationData;
 
   return (
     <section
@@ -128,7 +128,7 @@ export const SectionFinal = ({ onTriggerCelebration }) => {
 
         {/* Signoff */}
         <RiseAndSettle delay={0.55}>
-          <div className="pt-6 sm:pt-8 border-t border-gold-500/20 text-center space-y-1">
+          <div className="pt-6 sm:pt-8 border-t border-gold-500/20 text-center space-y-2">
             <p className="font-script text-2xl sm:text-4xl text-gold-300">
               With Love,
             </p>
