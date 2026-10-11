@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { MessageCircle } from 'lucide-react';
 import { FloralDivider, LotusIcon, DiyaIcon } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
 import {
@@ -13,7 +14,7 @@ import {
 } from './motion/CinematicMotion';
 
 export const SectionFamily = () => {
-  const { family } = invitationData;
+  const { family, rsvp, event } = invitationData;
   const [selectedBrother, setSelectedBrother] = useState(null);
 
   return (
@@ -142,6 +143,20 @@ export const SectionFamily = () => {
                       </p>
                     ))}
                   </div>
+
+                  <div className="pt-2">
+                    <a
+                      href={`https://wa.me/919405069816?text=${encodeURIComponent(
+                        `Hello Navangul Family! Heartiest congratulations and warm wishes on Prathamesh & Revati's Engagement Ceremony!\n\nVenue: Royal Palace, Sangli\nGoogle Maps: ${event.mapUrl}`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full border border-gold-400/90 bg-gradient-to-r from-amber-50 to-amber-100/70 hover:from-gold-100 hover:to-gold-200 text-burgundy-950 font-royal text-xs font-bold shadow-xs hover:shadow-gold-glow active:scale-95 transition-all"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 text-emerald-700 fill-emerald-700/20" />
+                      <span>Message Groom's Family</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </Layered3DCard>
@@ -229,6 +244,20 @@ export const SectionFamily = () => {
                         {name}
                       </p>
                     ))}
+                  </div>
+
+                  <div className="pt-2">
+                    <a
+                      href={`https://wa.me/917620028829?text=${encodeURIComponent(
+                        `Hello Erande Family! Heartiest congratulations and warm wishes on Revati & Prathamesh's Engagement Ceremony!\n\nVenue: Royal Palace, Sangli\nGoogle Maps: ${event.mapUrl}`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full border border-gold-400/90 bg-gradient-to-r from-amber-50 to-amber-100/70 hover:from-gold-100 hover:to-gold-200 text-burgundy-950 font-royal text-xs font-bold shadow-xs hover:shadow-gold-glow active:scale-95 transition-all"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5 text-emerald-700 fill-emerald-700/20" />
+                      <span>Message Bride's Family</span>
+                    </a>
                   </div>
                 </div>
               </div>

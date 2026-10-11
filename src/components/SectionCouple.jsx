@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, Heart } from 'lucide-react';
 import { DiyaIcon, GoldenEngagementRings, CornerOrnament } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
 import { introFrames } from '../data/introFrames';
@@ -475,10 +475,14 @@ export const SectionCouple = () => {
             }}
             className="flex flex-col items-center justify-center gap-1.5 sm:gap-2 text-gold-300 transform-gpu"
           >
-            <div className="flex items-center justify-center gap-2 sm:gap-4">
+            <div className="flex items-center justify-center gap-2 sm:gap-3">
               <DiyaIcon className="w-4 h-4 sm:w-5 sm:h-5" />
               <span className="font-royal text-xs sm:text-base font-bold tracking-widest gold-gradient-text">
-                PRATHAMESH ❤️ REVATI
+                {groomName}
+              </span>
+              <Heart className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-rose-500 fill-rose-500 animate-pulse drop-shadow-sm flex-shrink-0" />
+              <span className="font-royal text-xs sm:text-base font-bold tracking-widest gold-gradient-text">
+                {brideName}
               </span>
               <DiyaIcon className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>

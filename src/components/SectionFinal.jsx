@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Sparkles } from 'lucide-react';
+import { Heart, Sparkles, MapPin } from 'lucide-react';
 import { DivineGanesha } from './DivineGanesha';
 import { FloralDivider } from './OrnamentalIcons';
 import { invitationData } from '../data/invitation';
@@ -104,9 +104,15 @@ export const SectionFinal = ({ onTriggerCelebration }) => {
             <p className="font-royal text-base sm:text-xl font-bold text-gold-200">
               {event.displayDate} • {event.time}
             </p>
-            <p className="font-serif text-xs sm:text-sm text-ivory-200/90 mt-1">
-              {event.venue}, {event.city}
-            </p>
+            <a
+              href={event.mapUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-serif text-xs sm:text-sm text-ivory-200/90 hover:text-gold-200 mt-1.5 transition-colors underline decoration-gold-400/50 hover:decoration-gold-300"
+            >
+              <MapPin className="w-3.5 h-3.5 text-gold-400 shrink-0" />
+              <span>{event.venue}, {event.city} — View on Google Maps</span>
+            </a>
           </div>
         </RiseAndSettle>
 
@@ -121,7 +127,8 @@ export const SectionFinal = ({ onTriggerCelebration }) => {
               }}
             >
               <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-burgundy-950 mr-2 animate-spin-slow" />
-              <span>SHOWER BLESSINGS & CELEBRATE ✨</span>
+              <span>SHOWER BLESSINGS & CELEBRATE</span>
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-burgundy-950 ml-2 animate-bounce" />
             </button>
           </OrnamentReveal>
         </div>

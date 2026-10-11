@@ -46,11 +46,11 @@ export default {
         }
       },
       fontFamily: {
-        royal: ['"Cinzel Decorative"', '"Cinzel"', 'serif'],
-        serif: ['"Playfair Display"', '"Cormorant Garamond"', 'serif'],
+        royal: ['"Cinzel Decorative"', '"Cinzel"', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Noto Color Emoji"', 'serif'],
+        serif: ['"Playfair Display"', '"Cormorant Garamond"', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Noto Color Emoji"', 'serif'],
         sanskrit: ['"Rozha One"', '"Gotu"', '"Yatra One"', 'serif'],
         script: ['"Great Vibes"', '"Alex Brush"', 'cursive'],
-        sans: ['"Plus Jakarta Sans"', '"Outfit"', 'sans-serif'],
+        sans: ['"Plus Jakarta Sans"', '"Outfit"', '"Apple Color Emoji"', '"Segoe UI Emoji"', '"Noto Color Emoji"', 'sans-serif'],
       },
       backgroundImage: {
         'gold-metallic': 'linear-gradient(135deg, #ECC872 0%, #D4AF37 25%, #FFF0BD 50%, #AA8232 75%, #D4AF37 100%)',

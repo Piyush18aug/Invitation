@@ -498,7 +498,7 @@ export const SectionDateReveal = () => {
                 className="absolute bottom-2 inset-x-0 mx-auto w-max px-3.5 py-1 rounded-full bg-burgundy-950/90 border border-gold-400/80 backdrop-blur-md text-[11px] font-serif text-gold-200 pointer-events-none z-30 shadow-xl flex items-center gap-1.5"
               >
                 <Hand className="w-3.5 h-3.5 text-gold-400 animate-bounce" />
-                <span>Rub or Scratch Card 👆</span>
+                <span>Rub or Scratch to Reveal</span>
               </motion.div>
             )}
           </div>
@@ -507,8 +507,9 @@ export const SectionDateReveal = () => {
           <div className="mt-4 flex flex-col items-center justify-center gap-3">
             {!isRevealed ? (
               scratchPercent > 5 && (
-                <div className="text-xs font-serif text-gold-800 font-semibold">
-                  {scratchPercent}% Scratched ✨
+                <div className="text-xs font-serif text-gold-800 font-semibold inline-flex items-center gap-1.5">
+                  <span>{scratchPercent}% Scratched</span>
+                  <Sparkles className="w-3.5 h-3.5 text-gold-600" />
                 </div>
               )
             ) : (

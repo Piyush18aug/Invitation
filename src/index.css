@@ -16,6 +16,20 @@
 html, body {
   width: 100%;
   -webkit-tap-highlight-color: transparent;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+@supports (font-variant-emoji: emoji) {
+  html, body {
+    font-variant-emoji: emoji;
+  }
+}
+
+.emoji, [data-emoji] {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Android Emoji", sans-serif !important;
+  font-style: normal !important;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 @supports (padding-top: env(safe-area-inset-top)) {

@@ -50,7 +50,7 @@ export const invitationData = {
     city: "Sangli, Maharashtra",
     address: "Haripur Road, Near CV Steel, Haripur, Sangli, Maharashtra 416416, India",
     landmark: "Near CV Steel, Haripur Road",
-    mapUrl: "https://maps.google.com/?q=Royal+Palace+Haripur+Road+Near+CV+Steel+Haripur+Sangli+Maharashtra+416416",
+    mapUrl: "https://maps.google.com/?q=Royal+Palace+Haripur+Road+Sangli",
     dressCode: "Traditional Indian / Royal Festive Attire"
   },
 
@@ -356,9 +356,19 @@ export const invitationData = {
   ],
 
   rsvp: {
-    phone: "+919975257350",
-    whatsappDisplay: "+91 99752 57350",
+    groom: {
+      phone: "+919405069816",
+      display: "+91 94050 69816",
+      name: "Groom's Family",
+      surname: "Navangul Family"
+    },
+    bride: {
+      phone: "+917620028829",
+      display: "+91 76200 28829",
+      name: "Bride's Family",
+      surname: "Erande Family"
+    },
     email: "piyushnavangul12@gmail.com",
-    whatsappMessage: "Hello Prathamesh & Revati! Heartiest congratulations! I/We will be delighted to attend your Engagement Ceremony on 24 October 2026 at Royal Palace, Sangli."
+    whatsappMessage: "Hello! Heartiest congratulations to the couple and family on Prathamesh & Revati's Engagement Ceremony! Wishing them a lifetime of love and joy.\n\nVenue: Royal Palace, Sangli\nGoogle Maps: https://maps.google.com/?q=Royal+Palace+Haripur+Road+Sangli"
   }
 };
